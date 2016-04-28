@@ -119,7 +119,7 @@ static void display_space(int show_banknums)
 static int detect_file_type(const char *filename)
 {
     int i;
-    int len = strlen(filename);
+    int len = (int)strlen(filename);
 
     i = len - 4;
 
@@ -649,7 +649,7 @@ int main_flash_dump_all(int save_files, const char *prefix_in)
                 );
 
     if (save_files) {
-        fname = lib_malloc(strlen(prefix) + 16);
+        fname = lib_malloc((int)strlen(prefix) + 16);
 
         sprintf(fname, "%s.lst", prefix);
         if (lst_save_begin(fname) < 0) {

@@ -133,7 +133,7 @@ int util_prgfile_load(const char *filename, unsigned char *data, unsigned int ma
         goto fail;
     }
 
-    prgsize = fread(buf, 1, max_size + 3, fd);
+    prgsize = (int)fread(buf, 1, max_size + 3, fd);
 
     if (ferror(fd)) {
         util_error("problems reading file '%s'!", filename);

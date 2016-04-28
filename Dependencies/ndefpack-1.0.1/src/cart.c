@@ -45,7 +45,7 @@
 static char default_cartname[32 + 1] = PACKAGE_STRING;
 
 static const char CRT_HEADER[] = "C64 CARTRIDGE   ";
-static const char CHIP_HEADER[] = "CHIP";
+//static const char CHIP_HEADER[] = "CHIP";
 
 typedef struct crt_info_s {
     /* CRT ID (or subtype if negative). */

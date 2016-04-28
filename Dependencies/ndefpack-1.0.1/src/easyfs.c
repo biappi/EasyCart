@@ -730,7 +730,7 @@ int efs_dump_all(int show_banks, int save_files, const char *prefix)
     e = &main_flash_efs[0];
 
     if (save_files) {
-        filename = lib_malloc(strlen(prefix) + 10);
+        filename = lib_malloc((int)strlen(prefix) + 10);
     }
 
     util_message("#   HA Name              Type          Bank Offs  Size     Filename");
