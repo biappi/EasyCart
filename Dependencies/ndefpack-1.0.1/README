@@ -1,0 +1,214 @@
+ndefpack - Not Done EasyFlash tool pack
+---------------------------------------
+
+(c) 2011-2012 Hannu Nuotio <nojoopa@users.sf.net>
+
+Contains EasyLoader firmware:
+(c) 2009-2012 ALeX Kazik
+
+Contains EasyAPI firmware:
+(c) 2009-2010 Thomas 'skoe' Giesel
+
+
+1. Intro
+--------
+
+ndefpack is a pack of tools for creating EasyFlash cartridge images.
+EasyFlash is a cartridge for the Commodore 64/128/GS computers.
+
+ndefpack consists of:
+ - "ndeft", command line toolset. See README_tool.
+
+ - "ndefgui", GUI toolset. See README_gui.
+
+ndefpack is mostly GPL, see COPYING.
+The files in src/fw/ use the zlib license, see COPYING_fw.
+The tools contain EasyLoader firmware by ALeX Kazik.
+The tools contain EAPI firmware by Thomas Giesel.
+
+ndefpack homepage:
+http://ndefpack.sf.net/
+
+For more info on EasyFlash, see:
+http://skoe.de/easyflash/
+
+To see what's new in this version, see NEWS.
+For building instructions, see INSTALL.
+
+Thanks to ALeX for testing, feedback and EasyLoader.
+Thanks to skoe for EasyFlash itself and EasyAPI.
+
+
+2. Why?
+-------
+
+There already exists a similar tool called Draco Cart Maker:
+http://www.sascha-bader.de/html/dcm.html
+
+It... (version 1.0.1)
+ - requires Java
+ - doesn't support EasyFlash xbank cartridges
+ - incorrectly sets reserved EasyFS flag bits to 0
+ - has bugs related to 16kB Ultimax cartridges
+ - doesn't have the source available.
+
+ndefpack...
+ - is Free software (mostly GPL, zlib for firmware)
+ - has minimal dependencies (no Java)
+ - supports EasyFlash xbank cartridges
+ - uses the newer EasyFS2 definition
+ - can try to update old EasyFS cartridges
+ - has uglier GUI.
+
+The original EasyLoader firmware was written in Kick Assembler, a closed source
+assembler written in Java. Furthermore, a specific (old) version is required to
+assemble EasyLoader. ndefpack includes EasyLoader source that has been
+translated to ACME format. ACME is Free software written in C:
+http://www.esw-heim.tu-clausthal.de/~marco/smorbrod/acme/
+
+
+3. Usage
+--------
+
+See the other README_* files for specific info. Common things follow...
+
+First things first: ndefpack can not load an arbitrary EasyFlash cartridge!
+The tools are meant to create and edit "multicart" cartridges that use EasyFS2.
+Cartridges that use EasyFS are converted to EasyFS2, but this may fail due to
+the incomplete information in the old EasyFS format.
+Custom non-EasyFS cartridges are rejected.
+
+
+3.1. Multicart contents
+-----------------------
+
+An EasyFlash multicart consists of:
+ - boot code; jumped to on powerup/reset, starts the loader
+ - loader; menu system for starting the contained carts/programs
+ - EasyAPI; (optional) API for flashing, abbreviated as "EAPI"
+ - EasyFS; a file system describing the actual content
+ - entries; the actual content (cartridges or programs)
+
+The boot code, loader and EasyAPI are referred to as "firmware".
+The tools contain embedded copies of the firmware, so external files are not
+needed to create new cartridges (but overriding with other code is supported).
+
+
+3.2. Normal & Ocean
+-------------------
+
+These tools produce two kinds of EasyFlash cartridges: "normal" and "Ocean".
+The difference is in the boot code and the loader (and its placement).
+If an Ocean type cartridge is included, then the produced EasyFlash cartridge
+will be of the "Ocean" type, otherwise a "normal" cartridge is made.
+An EasyFlash cartridge can contain at most one Ocean cart.
+
+
+3.3. EasyFlash xbank
+--------------------
+
+EasyFlash xbank cartridges are images of EasyFlash compatible cartridges that
+support relocation by knowing their starting bank (set and told by the loader).
+
+Since the underlying Flash chip (at least in the case of Am29F040) supports
+erasing in only 64kB blocks sizes/alignments and each bank is 8kB apart from
+the adjacent, the xbank cartridges that write to Flash should be aligned to
+64kB (8 bank) boundaries. Unfortunately, at the time of writing there is no
+established way of encoding the need for such alignment in the xbank .crt file.
+Hence, the tools support toggling the alignment flag.
+
+Note that enabling the alignment may increase the total required space of the
+entries and thus may fail of nearly full cartridges.
+
+
+3.4. Hidden
+-----------
+
+The hidden bit controls the visibility of the entry in EasyLoader.
+It is fairly useless, except for data files and... (see below)
+
+
+3.5. EasyLoader autoboot and screen saver
+-----------------------------------------
+
+When powering up the computer (but not on subsequent resets), EasyLoader
+searches for an entry with the name "!el_boot-once" and starts it (as a
+cartridge) if found.
+
+If a cartridge entry called "!el_screen-saver" exists and EasyLoader gets no
+input for a while, it is started by setting the correct bank and doing a
+"jsr $N000" where N is either 8 or A depending on the type.
+
+Both of the "!el_" entries are typically hidden.
+
+
+3.6. EF-Name
+------------
+
+EF-Name is a 16 character name of the cartridge stored between the EAPI
+and the boot code, or 0:1:1b08 (with a magic signature in 0:1:1b00).
+At the time of the writing, it's not used by any other software.
+
+
+3.7. Firmware
+-------------
+
+A working cart needs some firmware, namely boot code and a loader.
+The EasyLoader part of the EasyFlash project provides these.
+Note that the normal and Ocean carts (see 3.2. above) need different firmware.
+
+All the required firmware is embedded into the tools and should "just work".
+The following subsections may be of interest for those who want to use
+updated or customized firmware.
+
+The source for the firmware (and other parts) is included.
+Newer version may be available at:
+https://bitbucket.org/skoe/easyflash
+
+
+3.7.1. EasyLoader/boot code
+---------------------------
+
+EasyLoader uses the following names for the files:
+
+  mode   | boot code file name         | loader file name
+ --------+-----------------------------+--------------------
+  normal | easyloader_launcher_nrm.prg | easyloader_nrm.prg
+  Ocean  | easyloader_launcher_ocm.prg | easyloader_ocm.prg
+
+Although the boot files from the EasyFlash repository may have a .bin
+file extension, they have the 2 byte load address as expected in .prg files.
+
+The following is assumed of the firmware:
+
+               | normal   | Ocean
+ ------------------------------------
+  boot size    |  <= 2+1256 bytes
+  boot address |      >= $FB18
+  loader size  |  == 2+8192 bytes
+  loader addr. |   $8000  |   $A000
+  loader bank  |     0    |    1
+  loader chip  |    ROML  |   ROMH
+
+Both the boot code and EasyLoader can be replaced with custom code by
+using tool specific commands.
+
+
+3.7.2. EasyAPI
+--------------
+
+EasyAPI is included by default on new carts.
+
+The embedded EasyAPI is for the Am29F040 chip. If your cart uses an another
+chip, replace the EAPI by supplying the correct EAPI file by using the tool
+specific command.
+
+An EAPI file is a PRG file with load address $C000 and size 2+768 bytes.
+
+
+4. Future
+---------
+
+- Flash address -> entry mapping
+- P00 support
+- GUI improvements (maybe rewrite)

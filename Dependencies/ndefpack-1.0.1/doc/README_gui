@@ -1,0 +1,55 @@
+ndefgui - Not Done EasyFlash GUI
+--------------------------------
+
+(c) 2011-2012 Hannu Nuotio <nojoopa@users.sf.net>
+
+Contains EasyLoader firmware:
+(c) 2009-2012 ALeX Kazik
+
+Contains EasyAPI firmware:
+(c) 2009-2010 Thomas 'skoe' Giesel
+
+
+1. Intro
+--------
+
+ndefgui is a small utility for dealing with EasyFlash .crt images.
+It's the pointy-clicky version of ndeft.
+
+ndefgui is GPL, see COPYING. Some bits taken from VICE(minus).
+ndefgui uses FLTK. To satisfy the license:
+           ndefgui is based in part on the work of
+           the FLTK project (http://www.fltk.org).
+
+For more info on EasyFlash, see:
+http://skoe.de/easyflash/
+
+The Mac OS X specific components and the .app wrapper is
+written by ALeX Kazik (see AUTHORS).
+
+
+2. Usage
+--------
+
+
+2.1. Starting
+-------------
+
+ndefgui can be started by simply doing:
+    ndefgui
+...or via the usual UI means.
+
+To load a .crt image at start, do:
+    ndefgui my_cart.crt
+
+
+2.2. Using
+----------
+
+Most operations should be fairly obvious, albeit clunky.
+
+The 'H' and 'A' in the contents box refer to "hidden" and "64k alignment",
+respectively.
+
+To set the EF-Name, select the first line of the contents box ("# H A Name...")
+and click the Ren button or use Image->Rename item.

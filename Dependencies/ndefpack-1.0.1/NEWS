@@ -1,0 +1,7 @@
+ndefpack v1.0.1
+    - xbank: honor CRT header mode
+    - do sanity checks on cart addition
+    - gui: color system banks
+
+ndefpack v1.0
+    - first stable release

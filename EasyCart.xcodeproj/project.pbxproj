@@ -12,6 +12,22 @@
 		3F20206A1CD1929D00130FBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020671CD1929D00130FBF /* ViewController.swift */; };
 		3F20206B1CD1930000130FBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F20205E1CD1929500130FBF /* Main.storyboard */; };
 		3F20206C1CD1930E00130FBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F20205D1CD1929500130FBF /* Assets.xcassets */; };
+		3F2020921CD1AA1800130FBF /* boot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020821CD1AA1800130FBF /* boot.c */; };
+		3F2020931CD1AA1800130FBF /* cart.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020831CD1AA1800130FBF /* cart.c */; };
+		3F2020941CD1AA1800130FBF /* eapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020841CD1AA1800130FBF /* eapi.c */; };
+		3F2020951CD1AA1800130FBF /* easyfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020851CD1AA1800130FBF /* easyfs.c */; };
+		3F2020961CD1AA1800130FBF /* efname.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020861CD1AA1800130FBF /* efname.c */; };
+		3F2020971CD1AA1800130FBF /* flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020871CD1AA1800130FBF /* flash.c */; };
+		3F2020981CD1AA1800130FBF /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020881CD1AA1800130FBF /* lib.c */; };
+		3F2020991CD1AA1800130FBF /* loader.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020891CD1AA1800130FBF /* loader.c */; };
+		3F20209A1CD1AA1800130FBF /* lst.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208A1CD1AA1800130FBF /* lst.c */; };
+		3F20209B1CD1AA1800130FBF /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208B1CD1AA1800130FBF /* options.c */; };
+		3F20209C1CD1AA1800130FBF /* petscii.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208C1CD1AA1800130FBF /* petscii.c */; };
+		3F20209D1CD1AA1800130FBF /* place.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208D1CD1AA1800130FBF /* place.c */; };
+		3F20209E1CD1AA1800130FBF /* prg.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208E1CD1AA1800130FBF /* prg.c */; };
+		3F2020A01CD1AA1800130FBF /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020901CD1AA1800130FBF /* util.c */; };
+		3F2020AA1CD1AB5600130FBF /* easyfw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020A91CD1AB5600130FBF /* easyfw.c */; };
+		3F2020AC1CD1AC5A00130FBF /* NdefpackUiCallbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020AB1CD1AC5A00130FBF /* NdefpackUiCallbacks.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +38,49 @@
 		3F2020651CD1929D00130FBF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F2020661CD1929D00130FBF /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		3F2020671CD1929D00130FBF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F20206F1CD1AA1800130FBF /* EasyCart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyCart-Bridging-Header.h"; sourceTree = "<group>"; };
+		3F2020701CD1AA1800130FBF /* archdep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = archdep.h; path = "Dependencies/ndefpack-1.0.1/src/archdep.h"; sourceTree = "<group>"; };
+		3F2020711CD1AA1800130FBF /* boot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = boot.h; path = "Dependencies/ndefpack-1.0.1/src/boot.h"; sourceTree = "<group>"; };
+		3F2020721CD1AA1800130FBF /* cart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cart.h; path = "Dependencies/ndefpack-1.0.1/src/cart.h"; sourceTree = "<group>"; };
+		3F2020731CD1AA1800130FBF /* eapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eapi.h; path = "Dependencies/ndefpack-1.0.1/src/eapi.h"; sourceTree = "<group>"; };
+		3F2020741CD1AA1800130FBF /* easyfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyfs.h; path = "Dependencies/ndefpack-1.0.1/src/easyfs.h"; sourceTree = "<group>"; };
+		3F2020751CD1AA1800130FBF /* efname.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = efname.h; path = "Dependencies/ndefpack-1.0.1/src/efname.h"; sourceTree = "<group>"; };
+		3F2020761CD1AA1800130FBF /* flash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = flash.h; path = "Dependencies/ndefpack-1.0.1/src/flash.h"; sourceTree = "<group>"; };
+		3F2020771CD1AA1800130FBF /* fw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fw.h; path = "Dependencies/ndefpack-1.0.1/src/fw.h"; sourceTree = "<group>"; };
+		3F2020781CD1AA1800130FBF /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lib.h; path = "Dependencies/ndefpack-1.0.1/src/lib.h"; sourceTree = "<group>"; };
+		3F2020791CD1AA1800130FBF /* loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loader.h; path = "Dependencies/ndefpack-1.0.1/src/loader.h"; sourceTree = "<group>"; };
+		3F20207A1CD1AA1800130FBF /* lst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lst.h; path = "Dependencies/ndefpack-1.0.1/src/lst.h"; sourceTree = "<group>"; };
+		3F20207B1CD1AA1800130FBF /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = options.h; path = "Dependencies/ndefpack-1.0.1/src/options.h"; sourceTree = "<group>"; };
+		3F20207C1CD1AA1800130FBF /* petscii.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = petscii.h; path = "Dependencies/ndefpack-1.0.1/src/petscii.h"; sourceTree = "<group>"; };
+		3F20207D1CD1AA1800130FBF /* place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = place.h; path = "Dependencies/ndefpack-1.0.1/src/place.h"; sourceTree = "<group>"; };
+		3F20207E1CD1AA1800130FBF /* prg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prg.h; path = "Dependencies/ndefpack-1.0.1/src/prg.h"; sourceTree = "<group>"; };
+		3F20207F1CD1AA1800130FBF /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = "Dependencies/ndefpack-1.0.1/src/types.h"; sourceTree = "<group>"; };
+		3F2020801CD1AA1800130FBF /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui.h; path = "Dependencies/ndefpack-1.0.1/src/ui.h"; sourceTree = "<group>"; };
+		3F2020811CD1AA1800130FBF /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = "Dependencies/ndefpack-1.0.1/src/util.h"; sourceTree = "<group>"; };
+		3F2020821CD1AA1800130FBF /* boot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = boot.c; path = "Dependencies/ndefpack-1.0.1/src/boot.c"; sourceTree = "<group>"; };
+		3F2020831CD1AA1800130FBF /* cart.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cart.c; path = "Dependencies/ndefpack-1.0.1/src/cart.c"; sourceTree = "<group>"; };
+		3F2020841CD1AA1800130FBF /* eapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = eapi.c; path = "Dependencies/ndefpack-1.0.1/src/eapi.c"; sourceTree = "<group>"; };
+		3F2020851CD1AA1800130FBF /* easyfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easyfs.c; path = "Dependencies/ndefpack-1.0.1/src/easyfs.c"; sourceTree = "<group>"; };
+		3F2020861CD1AA1800130FBF /* efname.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = efname.c; path = "Dependencies/ndefpack-1.0.1/src/efname.c"; sourceTree = "<group>"; };
+		3F2020871CD1AA1800130FBF /* flash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = flash.c; path = "Dependencies/ndefpack-1.0.1/src/flash.c"; sourceTree = "<group>"; };
+		3F2020881CD1AA1800130FBF /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lib.c; path = "Dependencies/ndefpack-1.0.1/src/lib.c"; sourceTree = "<group>"; };
+		3F2020891CD1AA1800130FBF /* loader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = loader.c; path = "Dependencies/ndefpack-1.0.1/src/loader.c"; sourceTree = "<group>"; };
+		3F20208A1CD1AA1800130FBF /* lst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lst.c; path = "Dependencies/ndefpack-1.0.1/src/lst.c"; sourceTree = "<group>"; };
+		3F20208B1CD1AA1800130FBF /* options.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = options.c; path = "Dependencies/ndefpack-1.0.1/src/options.c"; sourceTree = "<group>"; };
+		3F20208C1CD1AA1800130FBF /* petscii.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = petscii.c; path = "Dependencies/ndefpack-1.0.1/src/petscii.c"; sourceTree = "<group>"; };
+		3F20208D1CD1AA1800130FBF /* place.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = place.c; path = "Dependencies/ndefpack-1.0.1/src/place.c"; sourceTree = "<group>"; };
+		3F20208E1CD1AA1800130FBF /* prg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = prg.c; path = "Dependencies/ndefpack-1.0.1/src/prg.c"; sourceTree = "<group>"; };
+		3F20208F1CD1AA1800130FBF /* ui_cmdline.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ui_cmdline.c; path = "Dependencies/ndefpack-1.0.1/src/ui_cmdline.c"; sourceTree = "<group>"; };
+		3F2020901CD1AA1800130FBF /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = util.c; path = "Dependencies/ndefpack-1.0.1/src/util.c"; sourceTree = "<group>"; };
+		3F2020911CD1AA1800130FBF /* ui_fltk.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_fltk.cc; path = "Dependencies/ndefpack-1.0.1/src/ui_fltk.cc"; sourceTree = "<group>"; };
+		3F2020A21CD1AB0300130FBF /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = "Dependencies/ndefpack-1.0.1/src/config.h"; sourceTree = "<group>"; };
+		3F2020A41CD1AB5600130FBF /* eapi_am29f040.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eapi_am29f040.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/eapi_am29f040.h"; sourceTree = "<group>"; };
+		3F2020A51CD1AB5600130FBF /* easyloader_launcher_nrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_launcher_nrm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_launcher_nrm.h"; sourceTree = "<group>"; };
+		3F2020A61CD1AB5600130FBF /* easyloader_launcher_ocm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_launcher_ocm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_launcher_ocm.h"; sourceTree = "<group>"; };
+		3F2020A71CD1AB5600130FBF /* easyloader_nrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_nrm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_nrm.h"; sourceTree = "<group>"; };
+		3F2020A81CD1AB5600130FBF /* easyloader_ocm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_ocm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_ocm.h"; sourceTree = "<group>"; };
+		3F2020A91CD1AB5600130FBF /* easyfw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easyfw.c; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyfw.c"; sourceTree = "<group>"; };
+		3F2020AB1CD1AC5A00130FBF /* NdefpackUiCallbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NdefpackUiCallbacks.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +99,7 @@
 			children = (
 				3F2020641CD1929D00130FBF /* Sources */,
 				3F20205C1CD1929500130FBF /* Resources */,
+				3F20206D1CD1A9EB00130FBF /* Dependencies */,
 				3F2020491CD1920E00130FBF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,11 +125,77 @@
 		3F2020641CD1929D00130FBF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3F20206F1CD1AA1800130FBF /* EasyCart-Bridging-Header.h */,
 				3F2020651CD1929D00130FBF /* AppDelegate.swift */,
 				3F2020661CD1929D00130FBF /* Document.swift */,
 				3F2020671CD1929D00130FBF /* ViewController.swift */,
+				3F2020AB1CD1AC5A00130FBF /* NdefpackUiCallbacks.c */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		3F20206D1CD1A9EB00130FBF /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				3F20206E1CD1A9F900130FBF /* ndefpack */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		3F20206E1CD1A9F900130FBF /* ndefpack */ = {
+			isa = PBXGroup;
+			children = (
+				3F2020A31CD1AB4200130FBF /* fw */,
+				3F2020701CD1AA1800130FBF /* archdep.h */,
+				3F2020711CD1AA1800130FBF /* boot.h */,
+				3F2020721CD1AA1800130FBF /* cart.h */,
+				3F2020A21CD1AB0300130FBF /* config.h */,
+				3F2020731CD1AA1800130FBF /* eapi.h */,
+				3F2020741CD1AA1800130FBF /* easyfs.h */,
+				3F2020751CD1AA1800130FBF /* efname.h */,
+				3F2020761CD1AA1800130FBF /* flash.h */,
+				3F2020771CD1AA1800130FBF /* fw.h */,
+				3F2020781CD1AA1800130FBF /* lib.h */,
+				3F2020791CD1AA1800130FBF /* loader.h */,
+				3F20207A1CD1AA1800130FBF /* lst.h */,
+				3F20207B1CD1AA1800130FBF /* options.h */,
+				3F20207C1CD1AA1800130FBF /* petscii.h */,
+				3F20207D1CD1AA1800130FBF /* place.h */,
+				3F20207E1CD1AA1800130FBF /* prg.h */,
+				3F20207F1CD1AA1800130FBF /* types.h */,
+				3F2020801CD1AA1800130FBF /* ui.h */,
+				3F2020811CD1AA1800130FBF /* util.h */,
+				3F2020821CD1AA1800130FBF /* boot.c */,
+				3F2020831CD1AA1800130FBF /* cart.c */,
+				3F2020841CD1AA1800130FBF /* eapi.c */,
+				3F2020851CD1AA1800130FBF /* easyfs.c */,
+				3F2020861CD1AA1800130FBF /* efname.c */,
+				3F2020871CD1AA1800130FBF /* flash.c */,
+				3F2020881CD1AA1800130FBF /* lib.c */,
+				3F2020891CD1AA1800130FBF /* loader.c */,
+				3F20208A1CD1AA1800130FBF /* lst.c */,
+				3F20208B1CD1AA1800130FBF /* options.c */,
+				3F20208C1CD1AA1800130FBF /* petscii.c */,
+				3F20208D1CD1AA1800130FBF /* place.c */,
+				3F20208E1CD1AA1800130FBF /* prg.c */,
+				3F20208F1CD1AA1800130FBF /* ui_cmdline.c */,
+				3F2020901CD1AA1800130FBF /* util.c */,
+				3F2020911CD1AA1800130FBF /* ui_fltk.cc */,
+			);
+			name = ndefpack;
+			sourceTree = "<group>";
+		};
+		3F2020A31CD1AB4200130FBF /* fw */ = {
+			isa = PBXGroup;
+			children = (
+				3F2020A41CD1AB5600130FBF /* eapi_am29f040.h */,
+				3F2020A51CD1AB5600130FBF /* easyloader_launcher_nrm.h */,
+				3F2020A61CD1AB5600130FBF /* easyloader_launcher_ocm.h */,
+				3F2020A71CD1AB5600130FBF /* easyloader_nrm.h */,
+				3F2020A81CD1AB5600130FBF /* easyloader_ocm.h */,
+				3F2020A91CD1AB5600130FBF /* easyfw.c */,
+			);
+			name = fw;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,9 +268,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2020991CD1AA1800130FBF /* loader.c in Sources */,
+				3F2020941CD1AA1800130FBF /* eapi.c in Sources */,
+				3F20209B1CD1AA1800130FBF /* options.c in Sources */,
+				3F20209C1CD1AA1800130FBF /* petscii.c in Sources */,
+				3F2020931CD1AA1800130FBF /* cart.c in Sources */,
 				3F20206A1CD1929D00130FBF /* ViewController.swift in Sources */,
+				3F2020981CD1AA1800130FBF /* lib.c in Sources */,
+				3F2020971CD1AA1800130FBF /* flash.c in Sources */,
 				3F2020691CD1929D00130FBF /* Document.swift in Sources */,
 				3F2020681CD1929D00130FBF /* AppDelegate.swift in Sources */,
+				3F2020961CD1AA1800130FBF /* efname.c in Sources */,
+				3F2020AC1CD1AC5A00130FBF /* NdefpackUiCallbacks.c in Sources */,
+				3F20209A1CD1AA1800130FBF /* lst.c in Sources */,
+				3F20209D1CD1AA1800130FBF /* place.c in Sources */,
+				3F2020951CD1AA1800130FBF /* easyfs.c in Sources */,
+				3F2020921CD1AA1800130FBF /* boot.c in Sources */,
+				3F2020AA1CD1AB5600130FBF /* easyfw.c in Sources */,
+				3F20209E1CD1AA1800130FBF /* prg.c in Sources */,
+				3F2020A01CD1AA1800130FBF /* util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,11 +390,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = name.malara.antonio.EasyCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/EasyCart-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -260,11 +405,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = name.malara.antonio.EasyCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/EasyCart-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -1,0 +1,114 @@
+ndefpack project coding guidelines
+==================================
+
+This document is intended to set some guidelines for people wanting to
+contribute code to the ndefpack project.
+
+
+Cosmetic guidelines for all code
+--------------------------------
+
+To keep the code easy to follow please read the following statements:
+
+- No variable declarations after the first line of code, some compilers
+  just can't handle it.
+
+- Use 4 spaces for indentation. Never use tabs.
+
+- Always use braces for builtins ("if", "for", "while", ...).
+  The one exception is that "} else if (...) {" is an allowed construct.
+
+- Use one space between builtin words such as "if" and "for" and
+  the following '('.
+
+- Don't use spaces between a function name and the following '('.
+
+- Function implementations have the starting '{' on it's own line.
+  Arrays/structs have it on the same line.
+
+- Some examples:
+
+static BYTE odd_table[TABLE_SIZE] = {
+    1, 2, 3, 7, 8,
+    ...
+};
+
+int my_function(char *foo, BYTE bar)
+{
+    int i;
+
+    ...
+
+    if (foo) {
+        do_stuff(foo);
+    } else if (bar == 4) {
+        foo = SOME_CONSTANT;
+    } else {
+        odd_table[j + baz] = bar;
+    }
+
+    for (i = 0; i < 255; i++) {
+        ...
+    }
+
+    ...
+}
+
+- To give the code a consistent look use specifiers named with prefixes
+  like in the following examples:
+
+    struct foobar_s {
+        ...
+    };
+
+    typedef ... foobar_t;
+
+    enum stuff_e {
+        ...
+    };
+
+    union many_u {
+        ...
+    };
+
+  Of course combinations may be used:
+
+    typedef struct foobar_s {
+        ...
+    } foobar_t;
+
+  Exceptions are basic type like BYTE, WORD, DWORD and code that follows a
+  coding style of a certain architecture, e.g. UI code.
+
+- Preprocessor macros which define constants or enumeration values should
+  be written in capital letters.
+
+   #define FORTYTWO 42
+
+   typedef numbers_e {
+       NUM_ZERO,
+       NUM_ONE
+   } numbers_t;
+
+- Variables and functions use lowercase names and '_' for space.
+
+
+Common code guidelines
+----------------------
+
+Many different compilers are used to compile the common code parts.
+
+- When using headers which are tested for in configure.ac don't assume they
+  exist, use the #ifdef HAVE_*_H instead.
+
+- Don't use C++ style comments (// comment), use C-style comments instead
+  (/* comment */).
+
+- When adding header files use *_H as shown in the following example:
+
+#ifndef UTIL_H
+#define UTIL_H
+
+...code...
+
+#endif

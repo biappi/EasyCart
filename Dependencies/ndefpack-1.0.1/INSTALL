@@ -1,0 +1,67 @@
+ndefpack - Not Done EasyFlash tool pack
+---------------------------------------
+
+(c) 2011-2012 Hannu Nuotio <nojoopa@users.sf.net>
+
+Contains EasyLoader firmware:
+(c) 2009-2012 ALeX Kazik
+
+Contains EasyAPI firmware:
+(c) 2009-2010 Thomas 'skoe' Giesel
+
+
+1. Requirements
+---------------
+
+You'll need the usual toolchain (make, GCC, ...).
+
+ndeft just needs a C compiler.
+
+ndefgui needs a C++ compiler and FLTK v1.1.x / v1.3.x:
+http://www.fltk.org/
+
+If FLTK (or a C++ compiler) is not found, ndefgui is not built.
+Use --without-gui to disable.
+
+The EasyLoader and EAPI firmware need PHP and the cross assembler ACME:
+http://www.esw-heim.tu-clausthal.de/~marco/smorbrod/acme/
+
+Note: neither ACME nor PHP is not required for building the tools.
+If ACME or PHP is not found, the firmware is not built; prebuilt .prg files are
+distributed with the source code package in order to avoid this dependency.
+
+Note: building the firmware from outside the source tree is currently broken.
+This means that "mkdir build && cd build && ../configure && make" will fail
+if the firmware files are touched.
+
+Use --without-firmware to disable firmware building.
+
+
+2. Building
+-----------
+
+A simple
+    ./configure && make
+...should build everything.
+
+You can try
+    ./configure --host=mingw32 && make
+...to cross compile for win32, but likely it won't be that easy.
+
+
+3. Installing
+-------------
+
+On *nix-ish systems, a
+    make install
+...should do it.
+
+On win32, just copy the .exes in src/ whereever you want. You can also use
+    make bindist
+...to build a handy .zip, but this needs "unix2dos" and possibly other
+tools in order to work.
+
+On Mac OS X systems, a
+    make bindist
+...builds a handy .zip file with a ndefgui.app and ndeft (cli) inside.
+

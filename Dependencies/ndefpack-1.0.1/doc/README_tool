@@ -1,0 +1,190 @@
+ndeft - Not Done EasyFlash tool
+-------------------------------
+
+(c) 2011-2012 Hannu Nuotio <nojoopa@users.sf.net>
+
+Contains EasyLoader firmware:
+(c) 2009-2012 ALeX Kazik
+
+Contains EasyAPI firmware:
+(c) 2009-2010 Thomas 'skoe' Giesel
+
+
+1. Intro
+--------
+
+ndeft is a small utility for dealing with EasyFlash .crt images.
+
+ndeft is GPL, see COPYING. Some bits taken from VICE(minus).
+
+For more info on EasyFlash, see:
+http://skoe.de/easyflash/
+
+
+2. Usage
+--------
+
+Below is the output of "ndeft -h":
+
+--< snip >--
+Usage: ndeft [OPTION]* COMMAND ARGS
+
+Available COMMANDs:
+
+    Creating new EasyFlash .crt files
+
+  make LST
+Makes a new EasyFlash .crt based on the given LST file.
+
+  build [INITEM]*
+Builds a new EasyFlash .crt from the given INITEMs.
+
+
+    Operations on existing .crt files
+
+  list INEFCRT
+List the EasyFlash .crt contents.
+
+  dump INEFCRT [PREFIX]
+Dumps the EasyFlash .crt contents.
+Outputs PRG, CRT files and a LST file.
+Filenames start with PREFIX if given (also in the LST).
+
+  ext INEFCRT ID OUTFILE
+Dumps entry ID from the EasyFlash .crt.
+
+  add EFCRT [INITEM]*
+Add INITEMs to the EasyFlash .crt.
+
+  del EFCRT ID
+Delete the entry ID from the EasyFlash .crt.
+
+  ren EFCRT ID NAME
+Renames the entry ID in the EasyFlash .crt to NAME.
+
+  hide EFCRT ID
+Hides the entry ID in the EasyFlash .crt.
+
+  unhide EFCRT ID
+Unhides the entry ID in the EasyFlash .crt.
+
+  align EFCRT ID
+Aligns the entry ID in the EasyFlash .crt to 64k.
+Only valid for xbank entries.
+
+  unalign EFCRT ID
+Unaligns the entry ID in the EasyFlash .crt from 64k.
+Only valid for xbank entries.
+
+  swap EFCRT ID ID
+Swap the items with the given IDs.
+
+  sort EFCRT
+Sorts the EasyFlash .crt menu.
+
+  touch EFCRT
+Loads and saves the EasyFlash .crt.
+
+Notes on ARGS:
+
+  EFCRT
+EasyFlash .crt file. (CRT ID 32)
+
+  LST
+A text file consisting of ITEMs. (see -h for more info)
+
+  ITEM
+Input item description. Format:
+  FILE[,NAME[,TYPE]]
+    FILE - CRT or PRG file:
+      CRT
+        A cartridge .crt file.
+        The following cart types are supported:
+          * generic (CRT ID 0; 8k, 16k, Ultimax)
+          * Ocean (CRT ID 5)
+          * EasyFlash xbank (CRT ID 33)
+      PRG
+        Normal .prg file.
+    NAME - name on EasyFS, shown by loader (cleaned up FILE if omitted)
+    TYPE - type of entry; one of the following:
+      t - normal (default if omitted)
+      h - hidden, not shown by loader
+      a - force 64k alignment (only valid for xbank carts)
+      e - EAPI; file is 2+768 B, load address $C000 and "eapi" signature
+      o - Ocean boot code; file is <= 2+1256 B, load address >= $FB18
+      O - Ocean loader; file is 2+8192 B, load address = $A000
+      n - normal boot code; file is <= 2+1256 B, load address >= $FB18
+      N - normal loader; file is 2+8192 B, load address = $8000
+
+  PREFIX
+A prefix to add to the output files. Defaults to "ndefdump" is not given.
+
+  ID
+Either the index number or the name of an entry.
+
+
+Available OPTIONs:
+  -h           Show more help.
+  -o OUTEFCRT  Save EasyFlash .crt to file OUTEFCRT. (default = use INEFCRT)
+  -e NAME      Set EF-Name to NAME.
+  -d           Don't add default EAPI.
+  -q           Be quieter.
+  -Q           Be noisier.
+--< snip >--
+
+
+3. Examples
+-----------
+
+Convert an old EasyFlash .crt to use EasyFS2, saving to a new file:
+    ndeft -o efs2_ef.crt touch old_ef.crt
+
+List contents of an existing EasyFlash .crt:
+    ndeft list some_ef.crt
+
+Delete item 3 from an existing EasyFlash .crt:
+    ndeft del some_ef.crt 3
+
+Add a cart and a program to an existing EasyFlash .crt, saving to a new file:
+    ndeft -o new_ef.crt add old_ef.crt somecart.crt someprog.prg
+
+Add a program and set the name:
+    ndeft add some_ef.crt "someprog.prg,This has spaces"
+
+Build a normal EasyFlash .crt:
+    ndeft -o new_ef.crt build at_least_one_item.prg
+
+Build an Ocean EasyFlash .crt:
+    ndeft -o new_ef.crt build some_ocean.crt
+
+Build an EasyFlash .crt without EAPI:
+    ndeft -d -o new_ef.crt build at_least_one_item.prg
+
+Add an xbank cart and align it to 64k:
+    ndeft add some_ef.crt "somexbankcart.crt,Neat cart name,a"
+
+Force 64k alignment on item 5:
+    ndeft align some_ef.crt 5
+
+Disable 64k alignment on item "Neat cart name":
+    ndeft unalign some_ef.crt "Neat cart name"
+
+Dump an existing EasyFlash .crt to mydump_* and mydump.lst:
+    ndeft dump some_ef.crt mydump
+
+Build a new EasyFlash .crt from a .lst file (and the files is refers to):
+    ndeft -o ef_from_lst.crt make mydump.lst
+
+Update the boot and loader firmware, saving to a new file:
+    ndeft -o updated_ef.crt add some_ef.crt \
+                                easyloader_launcher_ocm.prg,x,o \
+                                easyloader_ocm.prg,z,O \
+                                easyloader_launcher_nrm.prg,x,n \
+                                easyloader_nrm.prg,z,N
+
+Change the EAPI firmware, saving to a new file:
+    ndeft -o other_eapi_ef.crt add some_ef.crt \
+                                   eapi-xxxxxxxx-yy,z,e
+
+Change the EF-Name of an EasyFlash .crt:
+    ndeft -e "new name" touch some_ef.crt
