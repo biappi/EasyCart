@@ -670,6 +670,9 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <connections>
+                                        <action selector="add:" target="6f7-a7-6o1" id="zky-he-raS"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="FDFAA0E7-E906-4329-9166-76A618332723" label="" paletteLabel="" id="vkI-Jf-GVA">
                                     <nil key="toolTip"/>
@@ -743,7 +746,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="Ejh-J5-2VE" id="BOl-SN-fLi">
-                                            <rect key="frame" x="0.0" y="0.0" width="478" height="196"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="478" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -759,11 +762,15 @@
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <connections>
-                                                            <binding destination="jUM-zw-jBz" name="value" keyPath="arrangedObjects" id="tFK-C5-Ztw"/>
-                                                        </connections>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="jUM-zw-jBz" name="value" keyPath="arrangedObjects.idx" id="BYc-e0-dNJ">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn editable="NO" width="142" minWidth="40" maxWidth="1000" id="gs2-Rm-681">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
@@ -819,6 +826,13 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="jUM-zw-jBz" name="value" keyPath="arrangedObjects.bank" id="AtV-ci-QTG">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" editable="NO" width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="lOG-mG-7o0">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Offset">
@@ -832,6 +846,13 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="jUM-zw-jBz" name="value" keyPath="arrangedObjects.offset" id="a3o-Cu-sqI">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" editable="NO" width="68" minWidth="10" maxWidth="3.4028234663852886e+38" id="zqE-oK-gUd">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Size">
@@ -845,6 +866,13 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="jUM-zw-jBz" name="value" keyPath="arrangedObjects.size" id="zSs-2H-7vJ">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                         </tableView>
@@ -860,7 +888,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="Ejh-J5-2VE">
-                                    <rect key="frame" x="0.0" y="0.0" width="478" height="17"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="478" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -879,6 +907,7 @@
                     </view>
                     <connections>
                         <outlet property="arrayController" destination="jUM-zw-jBz" id="nh7-4r-DSu"/>
+                        <outlet property="spaceIndicator" destination="kt8-9o-a2y" id="bmm-Lz-ISE"/>
                     </connections>
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

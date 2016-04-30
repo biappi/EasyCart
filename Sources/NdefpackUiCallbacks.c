@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "types.h"
+#include "flash.h"
 
 void ui_message(const char *msg)
 {
@@ -31,4 +32,20 @@ void ui_display_bank_used(bank_used_t bank_used, int show_banknums)
 
 void usage(int show_helptext)
 {
+}
+
+/* - */
+
+efs_entry_t main_flash_efs_entry(int i) {
+    if (i < EFS_ENTRIES_MAX + 1)
+        return main_flash_efs[i];
+    else
+        return  (efs_entry_t) { 0 };
+}
+
+char * main_flash_efs_entry_menuname(int i) {
+    if (i < EFS_ENTRIES_MAX + 1)
+        return main_flash_efs[i].menuname;
+    else
+        return NULL;
 }
