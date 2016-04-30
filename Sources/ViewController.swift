@@ -49,7 +49,7 @@ func buildEntriesList() -> [Entry] {
     return list
 }
 
-class ViewController: NSViewController, NSTableViewDataSource {
+class ViewController : NSObject, NSTableViewDataSource {
     @IBOutlet      var arrayController: NSArrayController!
     @IBOutlet weak var spaceIndicator:  NSLevelIndicator!
     @IBOutlet weak var entriesTable:    NSTableView!
@@ -59,12 +59,6 @@ class ViewController: NSViewController, NSTableViewDataSource {
         entriesTable.registerForDraggedTypes([RowPasteboardType])
         main_flash_init()
         refreshUI()
-    }
-    
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
     }
     
     func refreshUI() {

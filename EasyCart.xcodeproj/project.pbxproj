@@ -7,84 +7,85 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F2020681CD1929D00130FBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020651CD1929D00130FBF /* AppDelegate.swift */; };
-		3F2020691CD1929D00130FBF /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020661CD1929D00130FBF /* Document.swift */; };
-		3F20206A1CD1929D00130FBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020671CD1929D00130FBF /* ViewController.swift */; };
-		3F20206B1CD1930000130FBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F20205E1CD1929500130FBF /* Main.storyboard */; };
-		3F20206C1CD1930E00130FBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F20205D1CD1929500130FBF /* Assets.xcassets */; };
-		3F2020921CD1AA1800130FBF /* boot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020821CD1AA1800130FBF /* boot.c */; };
-		3F2020931CD1AA1800130FBF /* cart.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020831CD1AA1800130FBF /* cart.c */; };
-		3F2020941CD1AA1800130FBF /* eapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020841CD1AA1800130FBF /* eapi.c */; };
-		3F2020951CD1AA1800130FBF /* easyfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020851CD1AA1800130FBF /* easyfs.c */; };
-		3F2020961CD1AA1800130FBF /* efname.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020861CD1AA1800130FBF /* efname.c */; };
-		3F2020971CD1AA1800130FBF /* flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020871CD1AA1800130FBF /* flash.c */; };
-		3F2020981CD1AA1800130FBF /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020881CD1AA1800130FBF /* lib.c */; };
-		3F2020991CD1AA1800130FBF /* loader.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020891CD1AA1800130FBF /* loader.c */; };
-		3F20209A1CD1AA1800130FBF /* lst.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208A1CD1AA1800130FBF /* lst.c */; };
-		3F20209B1CD1AA1800130FBF /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208B1CD1AA1800130FBF /* options.c */; };
-		3F20209C1CD1AA1800130FBF /* petscii.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208C1CD1AA1800130FBF /* petscii.c */; };
-		3F20209D1CD1AA1800130FBF /* place.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208D1CD1AA1800130FBF /* place.c */; };
-		3F20209E1CD1AA1800130FBF /* prg.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F20208E1CD1AA1800130FBF /* prg.c */; };
-		3F2020A01CD1AA1800130FBF /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020901CD1AA1800130FBF /* util.c */; };
-		3F2020AA1CD1AB5600130FBF /* easyfw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020A91CD1AB5600130FBF /* easyfw.c */; };
-		3F2020AC1CD1AC5A00130FBF /* NdefpackUiCallbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F2020AB1CD1AC5A00130FBF /* NdefpackUiCallbacks.c */; };
+		3F1552A71CD556A90013F166 /* NdefpackUiCallbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */; };
+		3F1552A91CD557030013F166 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1552A81CD557030013F166 /* ViewController.swift */; };
+		3F333A571CD5574100422F41 /* boot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F3339FA1CD5574100422F41 /* boot.c */; };
+		3F333A581CD5574100422F41 /* cart.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F3339FC1CD5574100422F41 /* cart.c */; };
+		3F333A5A1CD5574100422F41 /* eapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A001CD5574100422F41 /* eapi.c */; };
+		3F333A5B1CD5574100422F41 /* easyfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A021CD5574100422F41 /* easyfs.c */; };
+		3F333A5C1CD5574100422F41 /* efname.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A041CD5574100422F41 /* efname.c */; };
+		3F333A5D1CD5574100422F41 /* flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A061CD5574100422F41 /* flash.c */; };
+		3F333A631CD5574100422F41 /* easyfw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A0F1CD5574100422F41 /* easyfw.c */; };
+		3F333A791CD5574100422F41 /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A2A1CD5574100422F41 /* lib.c */; };
+		3F333A7A1CD5574100422F41 /* loader.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A2C1CD5574100422F41 /* loader.c */; };
+		3F333A7B1CD5574100422F41 /* lst.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A2E1CD5574100422F41 /* lst.c */; };
+		3F333A7C1CD5574100422F41 /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A301CD5574100422F41 /* options.c */; };
+		3F333A7D1CD5574100422F41 /* petscii.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A321CD5574100422F41 /* petscii.c */; };
+		3F333A7E1CD5574100422F41 /* place.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A341CD5574100422F41 /* place.c */; };
+		3F333A7F1CD5574100422F41 /* prg.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A361CD5574100422F41 /* prg.c */; };
+		3F333A821CD5574100422F41 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F333A3C1CD5574100422F41 /* util.c */; };
+		3FF554C11CD54ED300BA8460 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF554BF1CD54ED300BA8460 /* Document.xib */; };
+		3FF554C31CD54ED300BA8460 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF554C21CD54ED300BA8460 /* Assets.xcassets */; };
+		3FF554C61CD54ED300BA8460 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF554C41CD54ED300BA8460 /* MainMenu.xib */; };
+		3FF554D01CD54F1D00BA8460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF554CE1CD54F1D00BA8460 /* AppDelegate.swift */; };
+		3FF554D11CD54F1D00BA8460 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF554CF1CD54F1D00BA8460 /* Document.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F2020481CD1920E00130FBF /* EasyCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F20205D1CD1929500130FBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3F20205F1CD1929500130FBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3F2020601CD1929500130FBF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F2020651CD1929D00130FBF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3F2020661CD1929D00130FBF /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		3F2020671CD1929D00130FBF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3F20206F1CD1AA1800130FBF /* EasyCart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyCart-Bridging-Header.h"; sourceTree = "<group>"; };
-		3F2020701CD1AA1800130FBF /* archdep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = archdep.h; path = "Dependencies/ndefpack-1.0.1/src/archdep.h"; sourceTree = "<group>"; };
-		3F2020711CD1AA1800130FBF /* boot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = boot.h; path = "Dependencies/ndefpack-1.0.1/src/boot.h"; sourceTree = "<group>"; };
-		3F2020721CD1AA1800130FBF /* cart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cart.h; path = "Dependencies/ndefpack-1.0.1/src/cart.h"; sourceTree = "<group>"; };
-		3F2020731CD1AA1800130FBF /* eapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eapi.h; path = "Dependencies/ndefpack-1.0.1/src/eapi.h"; sourceTree = "<group>"; };
-		3F2020741CD1AA1800130FBF /* easyfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyfs.h; path = "Dependencies/ndefpack-1.0.1/src/easyfs.h"; sourceTree = "<group>"; };
-		3F2020751CD1AA1800130FBF /* efname.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = efname.h; path = "Dependencies/ndefpack-1.0.1/src/efname.h"; sourceTree = "<group>"; };
-		3F2020761CD1AA1800130FBF /* flash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = flash.h; path = "Dependencies/ndefpack-1.0.1/src/flash.h"; sourceTree = "<group>"; };
-		3F2020771CD1AA1800130FBF /* fw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fw.h; path = "Dependencies/ndefpack-1.0.1/src/fw.h"; sourceTree = "<group>"; };
-		3F2020781CD1AA1800130FBF /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lib.h; path = "Dependencies/ndefpack-1.0.1/src/lib.h"; sourceTree = "<group>"; };
-		3F2020791CD1AA1800130FBF /* loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loader.h; path = "Dependencies/ndefpack-1.0.1/src/loader.h"; sourceTree = "<group>"; };
-		3F20207A1CD1AA1800130FBF /* lst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lst.h; path = "Dependencies/ndefpack-1.0.1/src/lst.h"; sourceTree = "<group>"; };
-		3F20207B1CD1AA1800130FBF /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = options.h; path = "Dependencies/ndefpack-1.0.1/src/options.h"; sourceTree = "<group>"; };
-		3F20207C1CD1AA1800130FBF /* petscii.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = petscii.h; path = "Dependencies/ndefpack-1.0.1/src/petscii.h"; sourceTree = "<group>"; };
-		3F20207D1CD1AA1800130FBF /* place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = place.h; path = "Dependencies/ndefpack-1.0.1/src/place.h"; sourceTree = "<group>"; };
-		3F20207E1CD1AA1800130FBF /* prg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prg.h; path = "Dependencies/ndefpack-1.0.1/src/prg.h"; sourceTree = "<group>"; };
-		3F20207F1CD1AA1800130FBF /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = "Dependencies/ndefpack-1.0.1/src/types.h"; sourceTree = "<group>"; };
-		3F2020801CD1AA1800130FBF /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui.h; path = "Dependencies/ndefpack-1.0.1/src/ui.h"; sourceTree = "<group>"; };
-		3F2020811CD1AA1800130FBF /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = "Dependencies/ndefpack-1.0.1/src/util.h"; sourceTree = "<group>"; };
-		3F2020821CD1AA1800130FBF /* boot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = boot.c; path = "Dependencies/ndefpack-1.0.1/src/boot.c"; sourceTree = "<group>"; };
-		3F2020831CD1AA1800130FBF /* cart.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cart.c; path = "Dependencies/ndefpack-1.0.1/src/cart.c"; sourceTree = "<group>"; };
-		3F2020841CD1AA1800130FBF /* eapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = eapi.c; path = "Dependencies/ndefpack-1.0.1/src/eapi.c"; sourceTree = "<group>"; };
-		3F2020851CD1AA1800130FBF /* easyfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easyfs.c; path = "Dependencies/ndefpack-1.0.1/src/easyfs.c"; sourceTree = "<group>"; };
-		3F2020861CD1AA1800130FBF /* efname.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = efname.c; path = "Dependencies/ndefpack-1.0.1/src/efname.c"; sourceTree = "<group>"; };
-		3F2020871CD1AA1800130FBF /* flash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = flash.c; path = "Dependencies/ndefpack-1.0.1/src/flash.c"; sourceTree = "<group>"; };
-		3F2020881CD1AA1800130FBF /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lib.c; path = "Dependencies/ndefpack-1.0.1/src/lib.c"; sourceTree = "<group>"; };
-		3F2020891CD1AA1800130FBF /* loader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = loader.c; path = "Dependencies/ndefpack-1.0.1/src/loader.c"; sourceTree = "<group>"; };
-		3F20208A1CD1AA1800130FBF /* lst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lst.c; path = "Dependencies/ndefpack-1.0.1/src/lst.c"; sourceTree = "<group>"; };
-		3F20208B1CD1AA1800130FBF /* options.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = options.c; path = "Dependencies/ndefpack-1.0.1/src/options.c"; sourceTree = "<group>"; };
-		3F20208C1CD1AA1800130FBF /* petscii.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = petscii.c; path = "Dependencies/ndefpack-1.0.1/src/petscii.c"; sourceTree = "<group>"; };
-		3F20208D1CD1AA1800130FBF /* place.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = place.c; path = "Dependencies/ndefpack-1.0.1/src/place.c"; sourceTree = "<group>"; };
-		3F20208E1CD1AA1800130FBF /* prg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = prg.c; path = "Dependencies/ndefpack-1.0.1/src/prg.c"; sourceTree = "<group>"; };
-		3F20208F1CD1AA1800130FBF /* ui_cmdline.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ui_cmdline.c; path = "Dependencies/ndefpack-1.0.1/src/ui_cmdline.c"; sourceTree = "<group>"; };
-		3F2020901CD1AA1800130FBF /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = util.c; path = "Dependencies/ndefpack-1.0.1/src/util.c"; sourceTree = "<group>"; };
-		3F2020911CD1AA1800130FBF /* ui_fltk.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_fltk.cc; path = "Dependencies/ndefpack-1.0.1/src/ui_fltk.cc"; sourceTree = "<group>"; };
-		3F2020A21CD1AB0300130FBF /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = "Dependencies/ndefpack-1.0.1/src/config.h"; sourceTree = "<group>"; };
-		3F2020A41CD1AB5600130FBF /* eapi_am29f040.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eapi_am29f040.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/eapi_am29f040.h"; sourceTree = "<group>"; };
-		3F2020A51CD1AB5600130FBF /* easyloader_launcher_nrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_launcher_nrm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_launcher_nrm.h"; sourceTree = "<group>"; };
-		3F2020A61CD1AB5600130FBF /* easyloader_launcher_ocm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_launcher_ocm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_launcher_ocm.h"; sourceTree = "<group>"; };
-		3F2020A71CD1AB5600130FBF /* easyloader_nrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_nrm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_nrm.h"; sourceTree = "<group>"; };
-		3F2020A81CD1AB5600130FBF /* easyloader_ocm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easyloader_ocm.h; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyloader_ocm.h"; sourceTree = "<group>"; };
-		3F2020A91CD1AB5600130FBF /* easyfw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easyfw.c; path = "../../Downloads/ndefpack/ndefpack-1.0.1/src/fw/easyfw.c"; sourceTree = "<group>"; };
-		3F2020AB1CD1AC5A00130FBF /* NdefpackUiCallbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NdefpackUiCallbacks.c; sourceTree = "<group>"; };
+		3F1552A51CD556990013F166 /* EasyCart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyCart-Bridging-Header.h"; sourceTree = "<group>"; };
+		3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NdefpackUiCallbacks.c; sourceTree = "<group>"; };
+		3F1552A81CD557030013F166 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F3339F91CD5574100422F41 /* archdep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = archdep.h; sourceTree = "<group>"; };
+		3F3339FA1CD5574100422F41 /* boot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = boot.c; sourceTree = "<group>"; };
+		3F3339FB1CD5574100422F41 /* boot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boot.h; sourceTree = "<group>"; };
+		3F3339FC1CD5574100422F41 /* cart.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cart.c; sourceTree = "<group>"; };
+		3F3339FD1CD5574100422F41 /* cart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cart.h; sourceTree = "<group>"; };
+		3F3339FE1CD5574100422F41 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		3F333A001CD5574100422F41 /* eapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = eapi.c; sourceTree = "<group>"; };
+		3F333A011CD5574100422F41 /* eapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eapi.h; sourceTree = "<group>"; };
+		3F333A021CD5574100422F41 /* easyfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = easyfs.c; sourceTree = "<group>"; };
+		3F333A031CD5574100422F41 /* easyfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easyfs.h; sourceTree = "<group>"; };
+		3F333A041CD5574100422F41 /* efname.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = efname.c; sourceTree = "<group>"; };
+		3F333A051CD5574100422F41 /* efname.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = efname.h; sourceTree = "<group>"; };
+		3F333A061CD5574100422F41 /* flash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = flash.c; sourceTree = "<group>"; };
+		3F333A071CD5574100422F41 /* flash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = flash.h; sourceTree = "<group>"; };
+		3F333A0C1CD5574100422F41 /* eapi_am29f040.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eapi_am29f040.h; sourceTree = "<group>"; };
+		3F333A0F1CD5574100422F41 /* easyfw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = easyfw.c; sourceTree = "<group>"; };
+		3F333A161CD5574100422F41 /* easyloader_launcher_nrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easyloader_launcher_nrm.h; sourceTree = "<group>"; };
+		3F333A191CD5574100422F41 /* easyloader_launcher_ocm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easyloader_launcher_ocm.h; sourceTree = "<group>"; };
+		3F333A1C1CD5574100422F41 /* easyloader_nrm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easyloader_nrm.h; sourceTree = "<group>"; };
+		3F333A1F1CD5574100422F41 /* easyloader_ocm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easyloader_ocm.h; sourceTree = "<group>"; };
+		3F333A291CD5574100422F41 /* fw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fw.h; sourceTree = "<group>"; };
+		3F333A2A1CD5574100422F41 /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lib.c; sourceTree = "<group>"; };
+		3F333A2B1CD5574100422F41 /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lib.h; sourceTree = "<group>"; };
+		3F333A2C1CD5574100422F41 /* loader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = loader.c; sourceTree = "<group>"; };
+		3F333A2D1CD5574100422F41 /* loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loader.h; sourceTree = "<group>"; };
+		3F333A2E1CD5574100422F41 /* lst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lst.c; sourceTree = "<group>"; };
+		3F333A2F1CD5574100422F41 /* lst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lst.h; sourceTree = "<group>"; };
+		3F333A301CD5574100422F41 /* options.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = options.c; sourceTree = "<group>"; };
+		3F333A311CD5574100422F41 /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
+		3F333A321CD5574100422F41 /* petscii.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = petscii.c; sourceTree = "<group>"; };
+		3F333A331CD5574100422F41 /* petscii.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = petscii.h; sourceTree = "<group>"; };
+		3F333A341CD5574100422F41 /* place.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = place.c; sourceTree = "<group>"; };
+		3F333A351CD5574100422F41 /* place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = place.h; sourceTree = "<group>"; };
+		3F333A361CD5574100422F41 /* prg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prg.c; sourceTree = "<group>"; };
+		3F333A371CD5574100422F41 /* prg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prg.h; sourceTree = "<group>"; };
+		3F333A381CD5574100422F41 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		3F333A391CD5574100422F41 /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui.h; sourceTree = "<group>"; };
+		3F333A3B1CD5574100422F41 /* ui_fltk.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ui_fltk.cc; sourceTree = "<group>"; };
+		3F333A3C1CD5574100422F41 /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		3F333A3D1CD5574100422F41 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		3FF554B81CD54ED300BA8460 /* EasyCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FF554C01CD54ED300BA8460 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		3FF554C21CD54ED300BA8460 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3FF554C51CD54ED300BA8460 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		3FF554C71CD54ED300BA8460 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FF554CE1CD54F1D00BA8460 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3FF554CF1CD54F1D00BA8460 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3F2020451CD1920E00130FBF /* Frameworks */ = {
+		3FF554B51CD54ED300BA8460 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -94,120 +95,128 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3F20203F1CD1920E00130FBF = {
+		3F3339DC1CD5574100422F41 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				3F2020641CD1929D00130FBF /* Sources */,
-				3F20205C1CD1929500130FBF /* Resources */,
-				3F20206D1CD1A9EB00130FBF /* Dependencies */,
-				3F2020491CD1920E00130FBF /* Products */,
+				3F3339DD1CD5574100422F41 /* ndefpack-1.0.1 */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		3F3339DD1CD5574100422F41 /* ndefpack-1.0.1 */ = {
+			isa = PBXGroup;
+			children = (
+				3F3339F61CD5574100422F41 /* src */,
+			);
+			path = "ndefpack-1.0.1";
+			sourceTree = "<group>";
+		};
+		3F3339F61CD5574100422F41 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3F333A081CD5574100422F41 /* fw */,
+				3F3339F91CD5574100422F41 /* archdep.h */,
+				3F3339FA1CD5574100422F41 /* boot.c */,
+				3F3339FB1CD5574100422F41 /* boot.h */,
+				3F3339FC1CD5574100422F41 /* cart.c */,
+				3F3339FD1CD5574100422F41 /* cart.h */,
+				3F3339FE1CD5574100422F41 /* config.h */,
+				3F333A001CD5574100422F41 /* eapi.c */,
+				3F333A011CD5574100422F41 /* eapi.h */,
+				3F333A021CD5574100422F41 /* easyfs.c */,
+				3F333A031CD5574100422F41 /* easyfs.h */,
+				3F333A041CD5574100422F41 /* efname.c */,
+				3F333A051CD5574100422F41 /* efname.h */,
+				3F333A061CD5574100422F41 /* flash.c */,
+				3F333A071CD5574100422F41 /* flash.h */,
+				3F333A291CD5574100422F41 /* fw.h */,
+				3F333A2A1CD5574100422F41 /* lib.c */,
+				3F333A2B1CD5574100422F41 /* lib.h */,
+				3F333A2C1CD5574100422F41 /* loader.c */,
+				3F333A2D1CD5574100422F41 /* loader.h */,
+				3F333A2E1CD5574100422F41 /* lst.c */,
+				3F333A2F1CD5574100422F41 /* lst.h */,
+				3F333A301CD5574100422F41 /* options.c */,
+				3F333A311CD5574100422F41 /* options.h */,
+				3F333A321CD5574100422F41 /* petscii.c */,
+				3F333A331CD5574100422F41 /* petscii.h */,
+				3F333A341CD5574100422F41 /* place.c */,
+				3F333A351CD5574100422F41 /* place.h */,
+				3F333A361CD5574100422F41 /* prg.c */,
+				3F333A371CD5574100422F41 /* prg.h */,
+				3F333A381CD5574100422F41 /* types.h */,
+				3F333A391CD5574100422F41 /* ui.h */,
+				3F333A3B1CD5574100422F41 /* ui_fltk.cc */,
+				3F333A3C1CD5574100422F41 /* util.c */,
+				3F333A3D1CD5574100422F41 /* util.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		3F333A081CD5574100422F41 /* fw */ = {
+			isa = PBXGroup;
+			children = (
+				3F333A0C1CD5574100422F41 /* eapi_am29f040.h */,
+				3F333A0F1CD5574100422F41 /* easyfw.c */,
+				3F333A161CD5574100422F41 /* easyloader_launcher_nrm.h */,
+				3F333A191CD5574100422F41 /* easyloader_launcher_ocm.h */,
+				3F333A1C1CD5574100422F41 /* easyloader_nrm.h */,
+				3F333A1F1CD5574100422F41 /* easyloader_ocm.h */,
+			);
+			path = fw;
+			sourceTree = "<group>";
+		};
+		3FF554AF1CD54ED300BA8460 = {
+			isa = PBXGroup;
+			children = (
+				3FF554CD1CD54F1D00BA8460 /* Sources */,
+				3FF554BA1CD54ED300BA8460 /* Resources */,
+				3F3339DC1CD5574100422F41 /* Dependencies */,
+				3FF554B91CD54ED300BA8460 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		3F2020491CD1920E00130FBF /* Products */ = {
+		3FF554B91CD54ED300BA8460 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F2020481CD1920E00130FBF /* EasyCart.app */,
+				3FF554B81CD54ED300BA8460 /* EasyCart.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3F20205C1CD1929500130FBF /* Resources */ = {
+		3FF554BA1CD54ED300BA8460 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3F20205D1CD1929500130FBF /* Assets.xcassets */,
-				3F20205E1CD1929500130FBF /* Main.storyboard */,
-				3F2020601CD1929500130FBF /* Info.plist */,
+				3FF554BF1CD54ED300BA8460 /* Document.xib */,
+				3FF554C41CD54ED300BA8460 /* MainMenu.xib */,
+				3FF554C21CD54ED300BA8460 /* Assets.xcassets */,
+				3FF554C71CD54ED300BA8460 /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		3F2020641CD1929D00130FBF /* Sources */ = {
+		3FF554CD1CD54F1D00BA8460 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				3F20206F1CD1AA1800130FBF /* EasyCart-Bridging-Header.h */,
-				3F2020651CD1929D00130FBF /* AppDelegate.swift */,
-				3F2020661CD1929D00130FBF /* Document.swift */,
-				3F2020671CD1929D00130FBF /* ViewController.swift */,
-				3F2020AB1CD1AC5A00130FBF /* NdefpackUiCallbacks.c */,
+				3F1552A51CD556990013F166 /* EasyCart-Bridging-Header.h */,
+				3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */,
+				3FF554CE1CD54F1D00BA8460 /* AppDelegate.swift */,
+				3FF554CF1CD54F1D00BA8460 /* Document.swift */,
+				3F1552A81CD557030013F166 /* ViewController.swift */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		3F20206D1CD1A9EB00130FBF /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				3F20206E1CD1A9F900130FBF /* ndefpack */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		3F20206E1CD1A9F900130FBF /* ndefpack */ = {
-			isa = PBXGroup;
-			children = (
-				3F2020A31CD1AB4200130FBF /* fw */,
-				3F2020701CD1AA1800130FBF /* archdep.h */,
-				3F2020711CD1AA1800130FBF /* boot.h */,
-				3F2020721CD1AA1800130FBF /* cart.h */,
-				3F2020A21CD1AB0300130FBF /* config.h */,
-				3F2020731CD1AA1800130FBF /* eapi.h */,
-				3F2020741CD1AA1800130FBF /* easyfs.h */,
-				3F2020751CD1AA1800130FBF /* efname.h */,
-				3F2020761CD1AA1800130FBF /* flash.h */,
-				3F2020771CD1AA1800130FBF /* fw.h */,
-				3F2020781CD1AA1800130FBF /* lib.h */,
-				3F2020791CD1AA1800130FBF /* loader.h */,
-				3F20207A1CD1AA1800130FBF /* lst.h */,
-				3F20207B1CD1AA1800130FBF /* options.h */,
-				3F20207C1CD1AA1800130FBF /* petscii.h */,
-				3F20207D1CD1AA1800130FBF /* place.h */,
-				3F20207E1CD1AA1800130FBF /* prg.h */,
-				3F20207F1CD1AA1800130FBF /* types.h */,
-				3F2020801CD1AA1800130FBF /* ui.h */,
-				3F2020811CD1AA1800130FBF /* util.h */,
-				3F2020821CD1AA1800130FBF /* boot.c */,
-				3F2020831CD1AA1800130FBF /* cart.c */,
-				3F2020841CD1AA1800130FBF /* eapi.c */,
-				3F2020851CD1AA1800130FBF /* easyfs.c */,
-				3F2020861CD1AA1800130FBF /* efname.c */,
-				3F2020871CD1AA1800130FBF /* flash.c */,
-				3F2020881CD1AA1800130FBF /* lib.c */,
-				3F2020891CD1AA1800130FBF /* loader.c */,
-				3F20208A1CD1AA1800130FBF /* lst.c */,
-				3F20208B1CD1AA1800130FBF /* options.c */,
-				3F20208C1CD1AA1800130FBF /* petscii.c */,
-				3F20208D1CD1AA1800130FBF /* place.c */,
-				3F20208E1CD1AA1800130FBF /* prg.c */,
-				3F20208F1CD1AA1800130FBF /* ui_cmdline.c */,
-				3F2020901CD1AA1800130FBF /* util.c */,
-				3F2020911CD1AA1800130FBF /* ui_fltk.cc */,
-			);
-			name = ndefpack;
-			sourceTree = "<group>";
-		};
-		3F2020A31CD1AB4200130FBF /* fw */ = {
-			isa = PBXGroup;
-			children = (
-				3F2020A41CD1AB5600130FBF /* eapi_am29f040.h */,
-				3F2020A51CD1AB5600130FBF /* easyloader_launcher_nrm.h */,
-				3F2020A61CD1AB5600130FBF /* easyloader_launcher_ocm.h */,
-				3F2020A71CD1AB5600130FBF /* easyloader_nrm.h */,
-				3F2020A81CD1AB5600130FBF /* easyloader_ocm.h */,
-				3F2020A91CD1AB5600130FBF /* easyfw.c */,
-			);
-			name = fw;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3F2020471CD1920E00130FBF /* EasyCart */ = {
+		3FF554B71CD54ED300BA8460 /* EasyCart */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3F2020591CD1920E00130FBF /* Build configuration list for PBXNativeTarget "EasyCart" */;
+			buildConfigurationList = 3FF554CA1CD54ED300BA8460 /* Build configuration list for PBXNativeTarget "EasyCart" */;
 			buildPhases = (
-				3F2020441CD1920E00130FBF /* Sources */,
-				3F2020451CD1920E00130FBF /* Frameworks */,
-				3F2020461CD1920E00130FBF /* Resources */,
+				3FF554B41CD54ED300BA8460 /* Sources */,
+				3FF554B51CD54ED300BA8460 /* Frameworks */,
+				3FF554B61CD54ED300BA8460 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -215,25 +224,25 @@
 			);
 			name = EasyCart;
 			productName = EasyCart;
-			productReference = 3F2020481CD1920E00130FBF /* EasyCart.app */;
+			productReference = 3FF554B81CD54ED300BA8460 /* EasyCart.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3F2020401CD1920E00130FBF /* Project object */ = {
+		3FF554B01CD54ED300BA8460 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Antonio Malara";
 				TargetAttributes = {
-					3F2020471CD1920E00130FBF = {
+					3FF554B71CD54ED300BA8460 = {
 						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
-			buildConfigurationList = 3F2020431CD1920E00130FBF /* Build configuration list for PBXProject "EasyCart" */;
+			buildConfigurationList = 3FF554B31CD54ED300BA8460 /* Build configuration list for PBXProject "EasyCart" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -241,70 +250,79 @@
 				en,
 				Base,
 			);
-			mainGroup = 3F20203F1CD1920E00130FBF;
-			productRefGroup = 3F2020491CD1920E00130FBF /* Products */;
+			mainGroup = 3FF554AF1CD54ED300BA8460;
+			productRefGroup = 3FF554B91CD54ED300BA8460 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3F2020471CD1920E00130FBF /* EasyCart */,
+				3FF554B71CD54ED300BA8460 /* EasyCart */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3F2020461CD1920E00130FBF /* Resources */ = {
+		3FF554B61CD54ED300BA8460 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F20206C1CD1930E00130FBF /* Assets.xcassets in Resources */,
-				3F20206B1CD1930000130FBF /* Main.storyboard in Resources */,
+				3FF554C31CD54ED300BA8460 /* Assets.xcassets in Resources */,
+				3FF554C11CD54ED300BA8460 /* Document.xib in Resources */,
+				3FF554C61CD54ED300BA8460 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3F2020441CD1920E00130FBF /* Sources */ = {
+		3FF554B41CD54ED300BA8460 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F2020991CD1AA1800130FBF /* loader.c in Sources */,
-				3F2020941CD1AA1800130FBF /* eapi.c in Sources */,
-				3F20209B1CD1AA1800130FBF /* options.c in Sources */,
-				3F20209C1CD1AA1800130FBF /* petscii.c in Sources */,
-				3F2020931CD1AA1800130FBF /* cart.c in Sources */,
-				3F20206A1CD1929D00130FBF /* ViewController.swift in Sources */,
-				3F2020981CD1AA1800130FBF /* lib.c in Sources */,
-				3F2020971CD1AA1800130FBF /* flash.c in Sources */,
-				3F2020691CD1929D00130FBF /* Document.swift in Sources */,
-				3F2020681CD1929D00130FBF /* AppDelegate.swift in Sources */,
-				3F2020961CD1AA1800130FBF /* efname.c in Sources */,
-				3F2020AC1CD1AC5A00130FBF /* NdefpackUiCallbacks.c in Sources */,
-				3F20209A1CD1AA1800130FBF /* lst.c in Sources */,
-				3F20209D1CD1AA1800130FBF /* place.c in Sources */,
-				3F2020951CD1AA1800130FBF /* easyfs.c in Sources */,
-				3F2020921CD1AA1800130FBF /* boot.c in Sources */,
-				3F2020AA1CD1AB5600130FBF /* easyfw.c in Sources */,
-				3F20209E1CD1AA1800130FBF /* prg.c in Sources */,
-				3F2020A01CD1AA1800130FBF /* util.c in Sources */,
+				3F333A7A1CD5574100422F41 /* loader.c in Sources */,
+				3F333A7E1CD5574100422F41 /* place.c in Sources */,
+				3F333A821CD5574100422F41 /* util.c in Sources */,
+				3F333A571CD5574100422F41 /* boot.c in Sources */,
+				3F333A581CD5574100422F41 /* cart.c in Sources */,
+				3F333A631CD5574100422F41 /* easyfw.c in Sources */,
+				3F333A5D1CD5574100422F41 /* flash.c in Sources */,
+				3F333A5A1CD5574100422F41 /* eapi.c in Sources */,
+				3FF554D11CD54F1D00BA8460 /* Document.swift in Sources */,
+				3F333A7F1CD5574100422F41 /* prg.c in Sources */,
+				3F333A7B1CD5574100422F41 /* lst.c in Sources */,
+				3F333A5C1CD5574100422F41 /* efname.c in Sources */,
+				3F333A5B1CD5574100422F41 /* easyfs.c in Sources */,
+				3F333A7D1CD5574100422F41 /* petscii.c in Sources */,
+				3F1552A71CD556A90013F166 /* NdefpackUiCallbacks.c in Sources */,
+				3F1552A91CD557030013F166 /* ViewController.swift in Sources */,
+				3F333A791CD5574100422F41 /* lib.c in Sources */,
+				3F333A7C1CD5574100422F41 /* options.c in Sources */,
+				3FF554D01CD54F1D00BA8460 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3F20205E1CD1929500130FBF /* Main.storyboard */ = {
+		3FF554BF1CD54ED300BA8460 /* Document.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3F20205F1CD1929500130FBF /* Base */,
+				3FF554C01CD54ED300BA8460 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		3FF554C41CD54ED300BA8460 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FF554C51CD54ED300BA8460 /* Base */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3F2020571CD1920E00130FBF /* Debug */ = {
+		3FF554C81CD54ED300BA8460 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -349,7 +367,7 @@
 			};
 			name = Debug;
 		};
-		3F2020581CD1920E00130FBF /* Release */ = {
+		3FF554C91CD54ED300BA8460 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -386,13 +404,13 @@
 			};
 			name = Release;
 		};
-		3F20205A1CD1920E00130FBF /* Debug */ = {
+		3FF554CB1CD54ED300BA8460 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = name.malara.antonio.EasyCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,13 +419,13 @@
 			};
 			name = Debug;
 		};
-		3F20205B1CD1920E00130FBF /* Release */ = {
+		3FF554CC1CD54ED300BA8460 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = name.malara.antonio.EasyCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,24 +436,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F2020431CD1920E00130FBF /* Build configuration list for PBXProject "EasyCart" */ = {
+		3FF554B31CD54ED300BA8460 /* Build configuration list for PBXProject "EasyCart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F2020571CD1920E00130FBF /* Debug */,
-				3F2020581CD1920E00130FBF /* Release */,
+				3FF554C81CD54ED300BA8460 /* Debug */,
+				3FF554C91CD54ED300BA8460 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3F2020591CD1920E00130FBF /* Build configuration list for PBXNativeTarget "EasyCart" */ = {
+		3FF554CA1CD54ED300BA8460 /* Build configuration list for PBXNativeTarget "EasyCart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F20205A1CD1920E00130FBF /* Debug */,
-				3F20205B1CD1920E00130FBF /* Release */,
+				3FF554CB1CD54ED300BA8460 /* Debug */,
+				3FF554CC1CD54ED300BA8460 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3F2020401CD1920E00130FBF /* Project object */;
+	rootObject = 3FF554B01CD54ED300BA8460 /* Project object */;
 }

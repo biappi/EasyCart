@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F2020471CD1920E00130FBF"
+               BlueprintIdentifier = "3FF554B71CD54ED300BA8460"
                BuildableName = "EasyCart.app"
                BlueprintName = "EasyCart"
                ReferencedContainer = "container:EasyCart.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F2020471CD1920E00130FBF"
+            BlueprintIdentifier = "3FF554B71CD54ED300BA8460"
             BuildableName = "EasyCart.app"
             BlueprintName = "EasyCart"
             ReferencedContainer = "container:EasyCart.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F2020471CD1920E00130FBF"
+            BlueprintIdentifier = "3FF554B71CD54ED300BA8460"
             BuildableName = "EasyCart.app"
             BlueprintName = "EasyCart"
             ReferencedContainer = "container:EasyCart.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F2020471CD1920E00130FBF"
+            BlueprintIdentifier = "3FF554B71CD54ED300BA8460"
             BuildableName = "EasyCart.app"
             BlueprintName = "EasyCart"
             ReferencedContainer = "container:EasyCart.xcodeproj">
