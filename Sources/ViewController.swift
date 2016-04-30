@@ -96,6 +96,13 @@ class ViewController : NSObject, NSTableViewDataSource {
         }
     }
     
+    @IBAction func remove(sender: AnyObject) {
+        main_flash_del_entry(Int32(arrayController.selectionIndex))
+        refreshUI()
+    }
+    
+    // - //
+    
     func tableView(aTableView: NSTableView,
                    writeRowsWithIndexes rowIndexes: NSIndexSet,
                    toPasteboard pboard: NSPasteboard) -> Bool

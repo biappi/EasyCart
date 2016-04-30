@@ -237,7 +237,13 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <binding destination="HxU-N8-MGk" name="enabled" keyPath="selectedObjects.@count" id="7AF-U7-GTX"/>
+                            </connections>
                         </button>
+                        <connections>
+                            <action selector="remove:" target="574-r2-obr" id="LwP-mU-72h"/>
+                        </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="bwQ-SJ-h7o"/>
                     <toolbarItem implicitItemIdentifier="1EA5D089-5576-4F01-95ED-E8A1F6275CAD" label="Custom View" paletteLabel="Custom View" id="r9n-Zh-8yZ">
