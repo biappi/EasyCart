@@ -875,6 +875,9 @@
                                                     </connections>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="5gI-5U-AMq" id="TaY-nc-dUy"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -907,6 +910,7 @@
                     </view>
                     <connections>
                         <outlet property="arrayController" destination="jUM-zw-jBz" id="nh7-4r-DSu"/>
+                        <outlet property="entriesTable" destination="BOl-SN-fLi" id="OcM-0h-EoU"/>
                         <outlet property="spaceIndicator" destination="kt8-9o-a2y" id="bmm-Lz-ISE"/>
                     </connections>
                 </viewController>

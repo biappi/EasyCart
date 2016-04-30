@@ -10,6 +10,8 @@ import Cocoa
 
 let EasyFlashSize = 1024 * 1024 // EASYFLASH_SIZE
 
+let RowPasteboardType = "name.malara.antonio.CartRowPboardType"
+
 class Entry : NSObject {
     var idx    : Int
     var name   : String 
@@ -47,13 +49,14 @@ func buildEntriesList() -> [Entry] {
     return list
 }
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSTableViewDataSource {
     @IBOutlet      var arrayController: NSArrayController!
     @IBOutlet weak var spaceIndicator:  NSLevelIndicator!
+    @IBOutlet weak var entriesTable:    NSTableView!
     
     override func awakeFromNib() {
-        self.spaceIndicator.maxValue = Double(EasyFlashSize)
-        
+        spaceIndicator.maxValue = Double(EasyFlashSize)
+        entriesTable.registerForDraggedTypes([RowPasteboardType])
         main_flash_init()
         refreshUI()
     }
@@ -65,8 +68,8 @@ class ViewController: NSViewController {
     }
     
     func refreshUI() {
-        self.arrayController.content = buildEntriesList()
-        self.spaceIndicator.intValue = Int32(EasyFlashSize) - main_flash_space.total
+        arrayController.content = buildEntriesList()
+        spaceIndicator.intValue = Int32(EasyFlashSize) - main_flash_space.total
     }
     
     @IBAction func add(sender: AnyObject) {
@@ -98,5 +101,44 @@ class ViewController: NSViewController {
             }
         }
     }
-}
+    
+    func tableView(aTableView: NSTableView,
+                   writeRowsWithIndexes rowIndexes: NSIndexSet,
+                   toPasteboard pboard: NSPasteboard) -> Bool
+    {
+        pboard.setData(NSKeyedArchiver.archivedDataWithRootObject(rowIndexes),
+                       forType: RowPasteboardType)
+        return true
+    }
+    
+    func tableView(tableView: NSTableView,
+                   acceptDrop info: NSDraggingInfo,
+                   row: Int,
+                   dropOperation: NSTableViewDropOperation) -> Bool
+    {
+        let data : NSData = info.draggingPasteboard().dataForType(RowPasteboardType)!
+        let rowIndexes : NSIndexSet = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSIndexSet
+        
+        let from  : Int32 = Int32(rowIndexes.firstIndex)
+        var to    : Int32 = Int32(row)
+        
+        if to > from { to -= 1 }
+        
+        main_flash_entry_swap(from, to)
+        
+        refreshUI()
+        arrayController.setSelectionIndex(Int(to))
+        
+        return true
+    }
+    
+    func tableView(aTableView: NSTableView,
+                   validateDrop info: NSDraggingInfo,
+                   proposedRow row: Int,
+                   proposedDropOperation operation: NSTableViewDropOperation) -> NSDragOperation
+    {
+        aTableView.setDropRow(row, dropOperation:.Above)
+        return .Move
+    }
 
+}
