@@ -57,7 +57,6 @@ class ViewController : NSObject, NSTableViewDataSource {
     override func awakeFromNib() {
         spaceIndicator.maxValue = Double(EasyFlashSize)
         entriesTable.registerForDraggedTypes([RowPasteboardType])
-        main_flash_init()
         refreshUI()
     }
     
