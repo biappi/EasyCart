@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>libftdi.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3F0192521CD6A42D00499869</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3FF554B71CD54ED300BA8460</key>
 		<dict>
 			<key>primary</key>

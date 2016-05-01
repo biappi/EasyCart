@@ -8,6 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		3F018FEC1CD61FCD00499869 /* Cart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F018FEB1CD61FCD00499869 /* Cart.m */; };
+		3F0193AC1CD6A45500499869 /* ftdi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0192A21CD6A45500499869 /* ftdi.c */; };
+		3F0193AD1CD6A45500499869 /* ftdi.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0192A31CD6A45500499869 /* ftdi.h */; };
+		3F0193BC1CD6A45500499869 /* core.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0192E31CD6A45500499869 /* core.c */; };
+		3F0193BD1CD6A45500499869 /* descriptor.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0192E41CD6A45500499869 /* descriptor.c */; };
+		3F0193BE1CD6A45500499869 /* hotplug.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0192E51CD6A45500499869 /* hotplug.c */; };
+		3F0193BF1CD6A45500499869 /* hotplug.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0192E61CD6A45500499869 /* hotplug.h */; };
+		3F0193C01CD6A45500499869 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0192E71CD6A45500499869 /* io.c */; };
+		3F0193C11CD6A45500499869 /* libusb.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0192EA1CD6A45500499869 /* libusb.h */; };
+		3F0193C21CD6A45500499869 /* libusbi.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0192EB1CD6A45500499869 /* libusbi.h */; };
+		3F0193C31CD6A45500499869 /* darwin_usb.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0192ED1CD6A45500499869 /* darwin_usb.c */; };
+		3F0193C41CD6A45500499869 /* darwin_usb.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0192EE1CD6A45500499869 /* darwin_usb.h */; };
+		3F0193D01CD6A45500499869 /* poll_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01930D1CD6A45500499869 /* poll_posix.c */; };
+		3F0193D11CD6A45500499869 /* poll_posix.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F01930E1CD6A45500499869 /* poll_posix.h */; };
+		3F0193D41CD6A45500499869 /* threads_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0193111CD6A45500499869 /* threads_posix.c */; };
+		3F0193D51CD6A45500499869 /* threads_posix.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0193121CD6A45500499869 /* threads_posix.h */; };
+		3F0193DD1CD6A45500499869 /* strerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01931A1CD6A45500499869 /* strerror.c */; };
+		3F0193DE1CD6A45500499869 /* sync.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01931B1CD6A45500499869 /* sync.c */; };
+		3F0193DF1CD6A45500499869 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F01931C1CD6A45500499869 /* version.h */; };
+		3F0193E01CD6A45500499869 /* version_nano.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F01931D1CD6A45500499869 /* version_nano.h */; };
+		3F0193EC1CD6A45500499869 /* core.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0193931CD6A45500499869 /* core.c */; };
+		3F0193ED1CD6A45500499869 /* usb.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0193941CD6A45500499869 /* usb.h */; };
+		3F0193EE1CD6A45500499869 /* usbi.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0193951CD6A45500499869 /* usbi.h */; };
+		3F0194031CD6A4B000499869 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0194021CD6A4B000499869 /* config.h */; };
+		3F0194051CD6A4C100499869 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0194041CD6A4C100499869 /* config.h */; };
 		3F1552A71CD556A90013F166 /* NdefpackUiCallbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */; };
 		3F1552A91CD557030013F166 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1552A81CD557030013F166 /* ViewController.swift */; };
 		3F333A571CD5574100422F41 /* boot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F3339FA1CD5574100422F41 /* boot.c */; };
@@ -35,6 +59,31 @@
 /* Begin PBXFileReference section */
 		3F018FEA1CD61FCD00499869 /* Cart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart.h; sourceTree = "<group>"; };
 		3F018FEB1CD61FCD00499869 /* Cart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart.m; sourceTree = "<group>"; };
+		3F0192531CD6A42D00499869 /* liblibftdi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibftdi.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F0192A21CD6A45500499869 /* ftdi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ftdi.c; sourceTree = "<group>"; };
+		3F0192A31CD6A45500499869 /* ftdi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftdi.h; sourceTree = "<group>"; };
+		3F0192E31CD6A45500499869 /* core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = core.c; sourceTree = "<group>"; };
+		3F0192E41CD6A45500499869 /* descriptor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = descriptor.c; sourceTree = "<group>"; };
+		3F0192E51CD6A45500499869 /* hotplug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hotplug.c; sourceTree = "<group>"; };
+		3F0192E61CD6A45500499869 /* hotplug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotplug.h; sourceTree = "<group>"; };
+		3F0192E71CD6A45500499869 /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
+		3F0192EA1CD6A45500499869 /* libusb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusb.h; sourceTree = "<group>"; };
+		3F0192EB1CD6A45500499869 /* libusbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusbi.h; sourceTree = "<group>"; };
+		3F0192ED1CD6A45500499869 /* darwin_usb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = darwin_usb.c; sourceTree = "<group>"; };
+		3F0192EE1CD6A45500499869 /* darwin_usb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = darwin_usb.h; sourceTree = "<group>"; };
+		3F01930D1CD6A45500499869 /* poll_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = poll_posix.c; sourceTree = "<group>"; };
+		3F01930E1CD6A45500499869 /* poll_posix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poll_posix.h; sourceTree = "<group>"; };
+		3F0193111CD6A45500499869 /* threads_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = threads_posix.c; sourceTree = "<group>"; };
+		3F0193121CD6A45500499869 /* threads_posix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads_posix.h; sourceTree = "<group>"; };
+		3F01931A1CD6A45500499869 /* strerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strerror.c; sourceTree = "<group>"; };
+		3F01931B1CD6A45500499869 /* sync.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sync.c; sourceTree = "<group>"; };
+		3F01931C1CD6A45500499869 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		3F01931D1CD6A45500499869 /* version_nano.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version_nano.h; sourceTree = "<group>"; };
+		3F0193931CD6A45500499869 /* core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = core.c; sourceTree = "<group>"; };
+		3F0193941CD6A45500499869 /* usb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usb.h; sourceTree = "<group>"; };
+		3F0193951CD6A45500499869 /* usbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usbi.h; sourceTree = "<group>"; };
+		3F0194021CD6A4B000499869 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		3F0194041CD6A4C100499869 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		3F1552A51CD556990013F166 /* EasyCart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyCart-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NdefpackUiCallbacks.c; sourceTree = "<group>"; };
 		3F1552A81CD557030013F166 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +137,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3F0192501CD6A42D00499869 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3FF554B51CD54ED300BA8460 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -98,9 +154,89 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F01925C1CD6A45500499869 /* libftdi-0.20 */ = {
+			isa = PBXGroup;
+			children = (
+				3F01929E1CD6A45500499869 /* src */,
+			);
+			path = "libftdi-0.20";
+			sourceTree = "<group>";
+		};
+		3F01929E1CD6A45500499869 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3F0192A21CD6A45500499869 /* ftdi.c */,
+				3F0192A31CD6A45500499869 /* ftdi.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		3F0192A41CD6A45500499869 /* libusb-1.0.20 */ = {
+			isa = PBXGroup;
+			children = (
+				3F0192E01CD6A45500499869 /* libusb */,
+			);
+			path = "libusb-1.0.20";
+			sourceTree = "<group>";
+		};
+		3F0192E01CD6A45500499869 /* libusb */ = {
+			isa = PBXGroup;
+			children = (
+				3F0194021CD6A4B000499869 /* config.h */,
+				3F0192E31CD6A45500499869 /* core.c */,
+				3F0192E41CD6A45500499869 /* descriptor.c */,
+				3F0192E51CD6A45500499869 /* hotplug.c */,
+				3F0192E61CD6A45500499869 /* hotplug.h */,
+				3F0192E71CD6A45500499869 /* io.c */,
+				3F0192EA1CD6A45500499869 /* libusb.h */,
+				3F0192EB1CD6A45500499869 /* libusbi.h */,
+				3F0192EC1CD6A45500499869 /* os */,
+				3F01931A1CD6A45500499869 /* strerror.c */,
+				3F01931B1CD6A45500499869 /* sync.c */,
+				3F01931C1CD6A45500499869 /* version.h */,
+				3F01931D1CD6A45500499869 /* version_nano.h */,
+			);
+			path = libusb;
+			sourceTree = "<group>";
+		};
+		3F0192EC1CD6A45500499869 /* os */ = {
+			isa = PBXGroup;
+			children = (
+				3F0192ED1CD6A45500499869 /* darwin_usb.c */,
+				3F0192EE1CD6A45500499869 /* darwin_usb.h */,
+				3F01930D1CD6A45500499869 /* poll_posix.c */,
+				3F01930E1CD6A45500499869 /* poll_posix.h */,
+				3F0193111CD6A45500499869 /* threads_posix.c */,
+				3F0193121CD6A45500499869 /* threads_posix.h */,
+			);
+			path = os;
+			sourceTree = "<group>";
+		};
+		3F0193781CD6A45500499869 /* libusb-compat-0.1.5 */ = {
+			isa = PBXGroup;
+			children = (
+				3F0193901CD6A45500499869 /* libusb */,
+			);
+			path = "libusb-compat-0.1.5";
+			sourceTree = "<group>";
+		};
+		3F0193901CD6A45500499869 /* libusb */ = {
+			isa = PBXGroup;
+			children = (
+				3F0194041CD6A4C100499869 /* config.h */,
+				3F0193931CD6A45500499869 /* core.c */,
+				3F0193941CD6A45500499869 /* usb.h */,
+				3F0193951CD6A45500499869 /* usbi.h */,
+			);
+			path = libusb;
+			sourceTree = "<group>";
+		};
 		3F3339DC1CD5574100422F41 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				3F01925C1CD6A45500499869 /* libftdi-0.20 */,
+				3F0192A41CD6A45500499869 /* libusb-1.0.20 */,
+				3F0193781CD6A45500499869 /* libusb-compat-0.1.5 */,
 				3F3339DD1CD5574100422F41 /* ndefpack-1.0.1 */,
 			);
 			path = Dependencies;
@@ -183,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				3FF554B81CD54ED300BA8460 /* EasyCart.app */,
+				3F0192531CD6A42D00499869 /* liblibftdi.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,7 +351,47 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		3F0192511CD6A42D00499869 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F0193D51CD6A45500499869 /* threads_posix.h in Headers */,
+				3F0193C21CD6A45500499869 /* libusbi.h in Headers */,
+				3F0193BF1CD6A45500499869 /* hotplug.h in Headers */,
+				3F0193ED1CD6A45500499869 /* usb.h in Headers */,
+				3F0193DF1CD6A45500499869 /* version.h in Headers */,
+				3F0193EE1CD6A45500499869 /* usbi.h in Headers */,
+				3F0193AD1CD6A45500499869 /* ftdi.h in Headers */,
+				3F0193C41CD6A45500499869 /* darwin_usb.h in Headers */,
+				3F0194031CD6A4B000499869 /* config.h in Headers */,
+				3F0194051CD6A4C100499869 /* config.h in Headers */,
+				3F0193E01CD6A45500499869 /* version_nano.h in Headers */,
+				3F0193D11CD6A45500499869 /* poll_posix.h in Headers */,
+				3F0193C11CD6A45500499869 /* libusb.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		3F0192521CD6A42D00499869 /* libftdi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F01925B1CD6A42D00499869 /* Build configuration list for PBXNativeTarget "libftdi" */;
+			buildPhases = (
+				3F01924F1CD6A42D00499869 /* Sources */,
+				3F0192501CD6A42D00499869 /* Frameworks */,
+				3F0192511CD6A42D00499869 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libftdi;
+			productName = libftdi;
+			productReference = 3F0192531CD6A42D00499869 /* liblibftdi.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		3FF554B71CD54ED300BA8460 /* EasyCart */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FF554CA1CD54ED300BA8460 /* Build configuration list for PBXNativeTarget "EasyCart" */;
@@ -242,6 +419,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Antonio Malara";
 				TargetAttributes = {
+					3F0192521CD6A42D00499869 = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					3FF554B71CD54ED300BA8460 = {
 						CreatedOnToolsVersion = 7.3;
 					};
@@ -261,6 +441,7 @@
 			projectRoot = "";
 			targets = (
 				3FF554B71CD54ED300BA8460 /* EasyCart */,
+				3F0192521CD6A42D00499869 /* libftdi */,
 			);
 		};
 /* End PBXProject section */
@@ -279,6 +460,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3F01924F1CD6A42D00499869 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F0193C31CD6A45500499869 /* darwin_usb.c in Sources */,
+				3F0193C01CD6A45500499869 /* io.c in Sources */,
+				3F0193EC1CD6A45500499869 /* core.c in Sources */,
+				3F0193AC1CD6A45500499869 /* ftdi.c in Sources */,
+				3F0193DD1CD6A45500499869 /* strerror.c in Sources */,
+				3F0193DE1CD6A45500499869 /* sync.c in Sources */,
+				3F0193BC1CD6A45500499869 /* core.c in Sources */,
+				3F0193BD1CD6A45500499869 /* descriptor.c in Sources */,
+				3F0193BE1CD6A45500499869 /* hotplug.c in Sources */,
+				3F0193D01CD6A45500499869 /* poll_posix.c in Sources */,
+				3F0193D41CD6A45500499869 /* threads_posix.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3FF554B41CD54ED300BA8460 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,6 +527,22 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3F0192591CD6A42D00499869 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3F01925A1CD6A42D00499869 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		3FF554C81CD54ED300BA8460 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -442,6 +657,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3F01925B1CD6A42D00499869 /* Build configuration list for PBXNativeTarget "libftdi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F0192591CD6A42D00499869 /* Debug */,
+				3F01925A1CD6A42D00499869 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		3FF554B31CD54ED300BA8460 /* Build configuration list for PBXProject "EasyCart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

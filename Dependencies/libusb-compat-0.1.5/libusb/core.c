@@ -40,6 +40,8 @@ enum usbi_log_level {
 	LOG_LEVEL_ERROR,
 };
 
+#define API_EXPORTED
+
 #ifdef ENABLE_LOGGING
 #define _usbi_log(level, fmt...) usbi_log(level, __FUNCTION__, fmt)
 #else
