@@ -49,6 +49,17 @@ func buildEntriesList(cart : Cart) -> [Entry] {
     return list
 }
 
+func getViceAppUrl() -> NSURL? {
+    let maybePaths = LSCopyApplicationURLsForBundleIdentifier("org.viceteam.x64", nil)
+    
+    guard let pathsCFArray = maybePaths else {
+        return nil
+    }
+    
+    let pathsArray = pathsCFArray.takeUnretainedValue() as [AnyObject]
+    return pathsArray.first as? NSURL
+}
+
 class ViewController : NSObject, NSTableViewDataSource {
     @IBOutlet      var arrayController: NSArrayController!
     @IBOutlet weak var spaceIndicator:  NSLevelIndicator!
@@ -96,6 +107,7 @@ class ViewController : NSObject, NSTableViewDataSource {
             }
             else {
                 self.refreshUI()
+                self.document.updateChangeCount(.ChangeDone)
             }
         }
     }
@@ -103,6 +115,44 @@ class ViewController : NSObject, NSTableViewDataSource {
     @IBAction func remove(sender: AnyObject) {
         document.cart.removeEntryAt(arrayController.selectionIndex)
         refreshUI()
+        self.document.updateChangeCount(.ChangeDone)
+    }
+   
+    @IBAction func test(sender: AnyObject) {
+        guard let viceUrl = getViceAppUrl() else {
+            let alert = NSAlert()
+            alert.messageText = "Cannot find VICE"
+            alert.informativeText = "Make sure you have the VICE C64 emulator"
+            alert.runModal()
+            return
+        }
+        
+        document.autosaveWithImplicitCancellability(false) { (error) in
+            if let error = error {
+                let alert = NSAlert()
+                alert.messageText = "Error saving a preview file"
+                alert.informativeText = error.description
+                alert.runModal()
+                return
+            }
+            
+            guard let autosavedUrl = self.document.autosavedContentsFileURL else {
+                let alert = NSAlert()
+                alert.messageText = "Error saving a preview file"
+                alert.informativeText = "Couldn't get the autosaved file location"
+                alert.runModal()
+                return
+            }
+            
+            let vicePath = (viceUrl.path! as NSString).stringByAppendingPathComponent("Contents/MacOS/x64")
+            let command = "\(vicePath) -cartcrt \"\(autosavedUrl.path!)\""
+            
+            command.withCString { system($0) }
+        }
+    }
+
+    @IBAction func flash(sender: AnyObject) {
+        
     }
     
     // - //
@@ -133,6 +183,7 @@ class ViewController : NSObject, NSTableViewDataSource {
         
         refreshUI()
         arrayController.setSelectionIndex(Int(to))
+        self.document.updateChangeCount(.ChangeDone)
         
         return true
     }

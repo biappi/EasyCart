@@ -13,6 +13,7 @@ class Document: NSDocument {
     
     override init() {
         super.init()
+        updateChangeCount(.ChangeDone)
     }
     
     override class func autosavesInPlace() -> Bool {

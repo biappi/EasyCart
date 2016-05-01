@@ -25,20 +25,20 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="vh6-Dl-66y">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="250"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="291"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="BuH-0b-iZ4">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="250"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="291"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YH1-5T-AUK">
-                        <rect key="frame" x="-1" y="45" width="482" height="205"/>
+                        <rect key="frame" x="-1" y="74" width="482" height="217"/>
                         <clipView key="contentView" id="TIU-wU-TKg">
-                            <rect key="frame" x="1" y="0.0" width="480" height="204"/>
+                            <rect key="frame" x="1" y="0.0" width="480" height="216"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="jeP-mu-vLR" id="JGl-19-DOF">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="181"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="193"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -177,7 +177,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="wkT-fc-5aH">
-                            <rect key="frame" x="465" y="23" width="16" height="0.0"/>
+                            <rect key="frame" x="466" y="23" width="15" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="jeP-mu-vLR">
@@ -186,27 +186,51 @@
                         </tableHeaderView>
                     </scrollView>
                     <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LeH-uR-LRD">
-                        <rect key="frame" x="95" y="20" width="365" height="16"/>
+                        <rect key="frame" x="95" y="49" width="365" height="16"/>
                         <levelIndicatorCell key="cell" alignment="left" maxValue="63" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="aa5-4P-mkw"/>
                     </levelIndicator>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rPU-mb-sty">
-                        <rect key="frame" x="18" y="20" width="71" height="17"/>
+                        <rect key="frame" x="18" y="49" width="71" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Free space" id="bSF-Ca-Unu">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9bb-g8-02h">
+                        <rect key="frame" x="222" y="13" width="131" height="32"/>
+                        <buttonCell key="cell" type="push" title="Flash EasyCart" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tSZ-zt-haY">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="flash:" target="574-r2-obr" id="78J-Fz-Rgj"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ea8-KO-xgN">
+                        <rect key="frame" x="353" y="13" width="113" height="32"/>
+                        <buttonCell key="cell" type="push" title="Test in VICE" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VQi-eY-u0z">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="test:" target="574-r2-obr" id="B8u-Pe-8jK"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rPU-mb-sty" firstAttribute="leading" secondItem="BuH-0b-iZ4" secondAttribute="leading" constant="20" id="34z-U0-okz"/>
                     <constraint firstItem="LeH-uR-LRD" firstAttribute="top" secondItem="TIU-wU-TKg" secondAttribute="bottom" constant="10" id="AaA-u5-0Dy"/>
+                    <constraint firstAttribute="trailing" secondItem="Ea8-KO-xgN" secondAttribute="trailing" constant="20" id="D2x-F9-GbL"/>
+                    <constraint firstItem="9bb-g8-02h" firstAttribute="baseline" secondItem="Ea8-KO-xgN" secondAttribute="baseline" id="GMz-td-md9"/>
                     <constraint firstAttribute="trailing" secondItem="LeH-uR-LRD" secondAttribute="trailing" constant="20" id="MoN-q6-SBE"/>
                     <constraint firstItem="YH1-5T-AUK" firstAttribute="leading" secondItem="BuH-0b-iZ4" secondAttribute="leading" constant="-1" id="PeN-wz-5rd"/>
                     <constraint firstItem="YH1-5T-AUK" firstAttribute="top" secondItem="BuH-0b-iZ4" secondAttribute="top" id="PyK-M9-BAn"/>
-                    <constraint firstAttribute="bottom" secondItem="LeH-uR-LRD" secondAttribute="bottom" constant="20" id="b4p-b2-ioF"/>
+                    <constraint firstItem="Ea8-KO-xgN" firstAttribute="leading" secondItem="9bb-g8-02h" secondAttribute="trailing" constant="12" id="Zv0-5Q-DJE"/>
+                    <constraint firstItem="Ea8-KO-xgN" firstAttribute="top" secondItem="LeH-uR-LRD" secondAttribute="bottom" constant="8" id="dK5-ME-uMu"/>
                     <constraint firstAttribute="trailing" secondItem="YH1-5T-AUK" secondAttribute="trailing" constant="-1" id="feE-sN-2Wy"/>
                     <constraint firstItem="LeH-uR-LRD" firstAttribute="centerY" secondItem="rPU-mb-sty" secondAttribute="centerY" id="r7i-2T-RTo"/>
+                    <constraint firstAttribute="bottom" secondItem="Ea8-KO-xgN" secondAttribute="bottom" constant="20" id="tDV-nh-xF3"/>
                     <constraint firstItem="LeH-uR-LRD" firstAttribute="leading" secondItem="rPU-mb-sty" secondAttribute="trailing" constant="8" id="vv7-ye-eCi"/>
                 </constraints>
             </view>
@@ -270,7 +294,7 @@
                     <toolbarItem reference="r9n-Zh-8yZ"/>
                 </defaultToolbarItems>
             </toolbar>
-            <point key="canvasLocation" x="442" y="570.5"/>
+            <point key="canvasLocation" x="442" y="590.5"/>
         </window>
     </objects>
 </document>
