@@ -66,6 +66,9 @@ typedef struct easyflash_cart_s {
     main_flash_space_t main_flash_space;
     
     int main_flash_state;
+    
+    /* From efname.c */
+    char efname_buf[16 + 1];
 } easyflash_cart_t;
 
 extern void main_flash_init(easyflash_cart_t * cart);

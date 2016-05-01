@@ -7,6 +7,7 @@
 //
 
 #import "Cart.h"
+#import "efname.h"
 
 @implementation Cart
 {
@@ -71,6 +72,16 @@
 - (void)swapEntriesAt:(NSInteger)a with:(NSInteger)b;
 {
     main_flash_entry_swap(&cart, (int)a, (int)b);
+}
+
+- (char *)efname;
+{
+    return (char *)efname_get(&cart);
+}
+
+- (void)setEfname:(char *)efname;
+{
+    efname_set(&cart, efname);
 }
 
 @end

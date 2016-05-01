@@ -29,8 +29,8 @@
 
 #include "flash.h"
 
-extern void efname_set(const char *name);
-extern const char *efname_get(void);
+extern void efname_set(easyflash_cart_t * cart, const char *name);
+extern const char *efname_get(easyflash_cart_t * cart);
 
 extern int efname_inject(easyflash_cart_t * cart);
 extern int efname_extract(easyflash_cart_t * cart);

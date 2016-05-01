@@ -53,7 +53,8 @@ class ViewController : NSObject, NSTableViewDataSource {
     @IBOutlet      var arrayController: NSArrayController!
     @IBOutlet weak var spaceIndicator:  NSLevelIndicator!
     @IBOutlet weak var entriesTable:    NSTableView!
-    @IBOutlet weak var document: Document!
+    @IBOutlet weak var document:        Document!
+    @IBOutlet weak var nameTextField:   NSTextField!
     
     override func awakeFromNib() {
         spaceIndicator.maxValue = Double(EasyFlashSize)
@@ -62,8 +63,11 @@ class ViewController : NSObject, NSTableViewDataSource {
     }
     
     func refreshUI() {
-        arrayController.content = buildEntriesList(document.cart)
-        spaceIndicator.intValue = Int32(EasyFlashSize) - document.cart.main_flash_space.total
+        arrayController.content   = buildEntriesList(document.cart)
+        spaceIndicator.intValue   = Int32(EasyFlashSize) - document.cart.main_flash_space.total
+        nameTextField.stringValue = String.fromCString(document.cart.efname) ?? ""
+        
+        if nameTextField.stringValue == "(no EF-Name)" { nameTextField.stringValue = "" }
     }
     
     @IBAction func add(sender: AnyObject) {
@@ -141,5 +145,4 @@ class ViewController : NSObject, NSTableViewDataSource {
         aTableView.setDropRow(row, dropOperation:.Above)
         return .Move
     }
-
 }

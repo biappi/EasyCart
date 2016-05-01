@@ -46,4 +46,6 @@ char * main_flash_efs_entry_menuname(int i);
 - (void)removeEntryAt:(NSInteger)i;
 - (void)swapEntriesAt:(NSInteger)a with:(NSInteger)b;
 
+@property char * efname;
+
 @end

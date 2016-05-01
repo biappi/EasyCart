@@ -169,8 +169,11 @@ void main_flash_init(easyflash_cart_t * cart)
     cart->main_flash_efs_num = 0;
     cart->main_flash_state &= ~MAIN_STATE_HAVE_OCEAN;
     cart->main_flash_state &= ~MAIN_STATE_HAVE_OLDEFS;
+    
     place_end_mark(cart);
     clear_placements(cart);
+    
+    strcpy(cart->efname_buf, "(no EF-Name)");
 }
 
 void main_flash_shutdown(easyflash_cart_t * cart)
@@ -285,7 +288,7 @@ int main_flash_save(easyflash_cart_t * cart, const char *filename)
     cart->main_flash_state &= ~MAIN_STATE_HAVE_OLDEFS;
 
     if (outefname != NULL) {
-        efname_set(outefname);
+        efname_set(cart, outefname);
     }
     efname_inject(cart);
 
@@ -631,7 +634,7 @@ int main_flash_dump_all(easyflash_cart_t * cart, int save_files, const char *pre
 
     util_message("%sing cart '%s'; mode %s, EAPI %s, %i entries.",
                  save_files ? "Dump" : "List",
-                 efname_get(),
+                 efname_get(cart),
                  ocean ? "Ocean" : "normal",
                  (cart->main_flash_state & MAIN_STATE_HAVE_EAPI) ? eapi_name_get() : "(none)",
                  cart->main_flash_efs_num
