@@ -152,7 +152,35 @@ class ViewController : NSObject, NSTableViewDataSource {
     }
 
     @IBAction func flash(sender: AnyObject) {
-        
+        document.autosaveWithImplicitCancellability(false) { (error) in
+            if let error = error {
+                let alert = NSAlert()
+                alert.messageText = "Error saving a preview file"
+                alert.informativeText = error.description
+                alert.runModal()
+                return
+            }
+            
+            guard let autosavedUrl = self.document.autosavedContentsFileURL else {
+                let alert = NSAlert()
+                alert.messageText = "Error saving a preview file"
+                alert.informativeText = "Couldn't get the autosaved file location"
+                alert.runModal()
+                return
+            }
+            
+            ef3xfer_set_callbacks(
+                { (str) in
+                    print(String.fromCString(str))
+                },
+                
+                { (percent, guiOnly) in
+                    print("percent \(percent)")
+                }
+            )
+            
+            autosavedUrl.path!.withCString { ef3xfer_transfer_crt($0) }
+        }
     }
     
     // - //
