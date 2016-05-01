@@ -9,12 +9,12 @@
 import Cocoa
 
 class Document: NSDocument {
-
+    var cart : Cart = Cart()
+    
     override init() {
         super.init()
-        main_flash_init()
     }
-
+    
     override class func autosavesInPlace() -> Bool {
         return true
     }
@@ -35,7 +35,7 @@ class Document: NSDocument {
         }
         
         try path.withCString {
-            let result = main_flash_save($0)
+            let result = cart.save($0)
             if result < 0 {
                 throw NSError(domain: "NdefpackSaveError", code: Int(result), userInfo: nil)
             }
@@ -52,7 +52,7 @@ class Document: NSDocument {
         }
         
         try path.withCString {
-            let result = main_flash_load($0)
+            let result = cart.load($0)
             if result < 0 {
                 throw NSError(domain: "NdefpackLoadError", code: Int(result), userInfo: nil)
             }

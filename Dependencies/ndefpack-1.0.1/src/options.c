@@ -45,13 +45,13 @@ const char *outefname = NULL;
 
 /* ------------------------------------------------------------------------- */
 
-int parse_initem(const char *s)
+int parse_initem(easyflash_cart_t * cart, const char *s)
 {
     char *e = NULL;
     unsigned long int v = strtoul(s, &e, 10);
 
     if (*e != '\0') {
-        v = main_flash_entry_find(s);
+        v = main_flash_entry_find(cart, s);
     }
 
     return (int)v;

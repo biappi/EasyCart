@@ -128,22 +128,22 @@ int efs_entry_type_other_is_romh(efs_entry_type_t type)
 
 /* ------------------------------------------------------------------------- */
 
-static void erase_banks(unsigned int bank_l, unsigned int bank_l_num, unsigned int bank_h, unsigned int bank_h_num)
+static void erase_banks(easyflash_cart_t * cart, unsigned int bank_l, unsigned int bank_l_num, unsigned int bank_h, unsigned int bank_h_num)
 {
     unsigned int i;
 
     for (i = bank_l; i < (bank_l + bank_l_num); ++i) {
-        memset(&main_flash_data[i * 0x2000], 0xff, 0x2000);
+        memset(&cart->main_flash_data[i * 0x2000], 0xff, 0x2000);
     }
 
     for (i = bank_h; i < (bank_h + bank_h_num); ++i) {
-        memset(&main_flash_data[i * 0x2000 + (1 << 19)], 0xff, 0x2000);
+        memset(&cart->main_flash_data[i * 0x2000 + (1 << 19)], 0xff, 0x2000);
     }
 }
 
 /* ------------------------------------------------------------------------- */
 
-static int efs2_entry_parse(unsigned char *data, efs_entry_t *entry_ptr, int do_extract)
+static int efs2_entry_parse(easyflash_cart_t * cart, unsigned char *data, efs_entry_t *entry_ptr, int do_extract)
 {
     unsigned char flags = data[16];
     unsigned int bank = data[17] | data[18];
@@ -198,14 +198,14 @@ static int efs2_entry_parse(unsigned char *data, efs_entry_t *entry_ptr, int do_
             );
 
     if (do_extract) {
-        return efs_entry_extract(entry_ptr);
+        return efs_entry_extract(cart, entry_ptr);
     }
 
     return 0;
 }
 
 
-static int efs_entry_parse_old(unsigned char *data, efs_entry_t *entry_ptr, int do_extract)
+static int efs_entry_parse_old(easyflash_cart_t * cart, unsigned char *data, efs_entry_t *entry_ptr, int do_extract)
 {
     unsigned char flags = data[16];
     unsigned int bank = data[17];
@@ -304,7 +304,7 @@ static int efs_entry_parse_old(unsigned char *data, efs_entry_t *entry_ptr, int 
     entry_ptr->size = size;
 
     if (do_extract) {
-        return efs_entry_extract(entry_ptr);
+        return efs_entry_extract(cart, entry_ptr);
     }
 
     return 0;
@@ -498,13 +498,13 @@ void efs_entry_shutdown(efs_entry_t *entry_ptr)
 
 /* ------------------------------------------------------------------------- */
 
-static int efs_entry_code(efs_entry_t *entry_ptr, int index)
+static int efs_entry_code(easyflash_cart_t * cart, efs_entry_t *entry_ptr, int index)
 {
     unsigned char *p;
     unsigned int offset;
     unsigned char flags;
 
-    p = &main_flash_data[EFS_OFFSET + (index * EFS_ENTRY_LEN)];
+    p = &cart->main_flash_data[EFS_OFFSET + (index * EFS_ENTRY_LEN)];
 
     if (entry_ptr->type == EF_ENTRY_END) {
         memset(p, 0xff, EFS_ENTRY_LEN);
@@ -550,7 +550,7 @@ static int efs_entry_code(efs_entry_t *entry_ptr, int index)
     return 0;
 }
 
-int efs_entry_inject(efs_entry_t *entry_ptr, int index)
+int efs_entry_inject(easyflash_cart_t * cart, efs_entry_t *entry_ptr, int index)
 {
     int rc = 0;
 
@@ -562,11 +562,11 @@ int efs_entry_inject(efs_entry_t *entry_ptr, int index)
         case EF_ENTRY_PRG:
         case EF_ENTRY_PRG_L:
         case EF_ENTRY_PRG_H:
-            rc = prg_inject(entry_ptr);
+            rc = prg_inject(cart, entry_ptr);
             break;
 
         default:
-            rc = anycart_inject(entry_ptr);
+            rc = anycart_inject(cart, entry_ptr);
             break;
     }
 
@@ -574,10 +574,10 @@ int efs_entry_inject(efs_entry_t *entry_ptr, int index)
         return rc;
     }
 
-    return efs_entry_code(entry_ptr, index);
+    return efs_entry_code(cart, entry_ptr, index);
 }
 
-int efs_entry_extract(efs_entry_t *entry_ptr)
+int efs_entry_extract(easyflash_cart_t * cart, efs_entry_t *entry_ptr)
 {
     switch (entry_ptr->type) {
         case EF_ENTRY_END:
@@ -587,7 +587,7 @@ int efs_entry_extract(efs_entry_t *entry_ptr)
         case EF_ENTRY_PRG:
         case EF_ENTRY_PRG_L:
         case EF_ENTRY_PRG_H:
-            return prg_extract(entry_ptr);
+            return prg_extract(cart, entry_ptr);
 
         case EF_ENTRY_OCEAN:
         case EF_ENTRY_OCEAN_512:
@@ -598,7 +598,7 @@ int efs_entry_extract(efs_entry_t *entry_ptr)
         case EF_ENTRY_ULTIMAX_8K:
         case EF_ENTRY_ULTIMAX_16K:
         case EF_ENTRY_16K:
-            return anycart_extract(entry_ptr);
+            return anycart_extract(cart, entry_ptr);
 
         default:
             return -1;
@@ -607,7 +607,7 @@ int efs_entry_extract(efs_entry_t *entry_ptr)
     return 0;
 }
 
-int efs_entry_save(const char *filename, efs_entry_t *entry_ptr)
+int efs_entry_save(easyflash_cart_t * cart, const char *filename, efs_entry_t *entry_ptr)
 {
     switch (entry_ptr->type) {
         case EF_ENTRY_END:
@@ -617,7 +617,7 @@ int efs_entry_save(const char *filename, efs_entry_t *entry_ptr)
         case EF_ENTRY_PRG:
         case EF_ENTRY_PRG_L:
         case EF_ENTRY_PRG_H:
-            return prg_save(filename, entry_ptr);
+            return prg_save(cart, filename, entry_ptr);
 
         case EF_ENTRY_OCEAN:
         case EF_ENTRY_OCEAN_512:
@@ -637,7 +637,7 @@ int efs_entry_save(const char *filename, efs_entry_t *entry_ptr)
     return 0;
 }
 
-void efs_entry_delete(efs_entry_t *entry_ptr)
+void efs_entry_delete(easyflash_cart_t * cart, efs_entry_t *entry_ptr)
 {
     switch (entry_ptr->type) {
         case EF_ENTRY_NONE:
@@ -672,7 +672,7 @@ void efs_entry_delete(efs_entry_t *entry_ptr)
                     roml = bank + other_bank_off;
                     roml_num = other_bank_num;
                 }
-                erase_banks(roml, roml_num, romh, romh_num);
+                erase_banks(cart, roml, roml_num, romh, romh_num);
             }
             break;
 
@@ -686,7 +686,7 @@ void efs_entry_delete(efs_entry_t *entry_ptr)
                 }
 
                 memset(entry_ptr->data, 0xff, size);
-                prg_inject(entry_ptr);
+                prg_inject(cart, entry_ptr);
             }
             break;
 
@@ -719,15 +719,15 @@ static void efs_entry_display(efs_entry_t *e, int i, int show_banks)
     }
 }
 
-int efs_dump_all(int show_banks, int save_files, const char *prefix)
+int efs_dump_all(easyflash_cart_t * cart, int show_banks, int save_files, const char *prefix)
 {
     int i;
     efs_entry_t *e;
     unsigned char *data;
     char *filename = NULL;
 
-    data = &main_flash_data[EFS_OFFSET];
-    e = &main_flash_efs[0];
+    data = &cart->main_flash_data[EFS_OFFSET];
+    e = &cart->main_flash_efs[0];
 
     if (save_files) {
         filename = lib_malloc((int)strlen(prefix) + 10);
@@ -735,14 +735,14 @@ int efs_dump_all(int show_banks, int save_files, const char *prefix)
 
     util_message("#   HA Name              Type          Bank Offs  Size     Filename");
 
-    for (i = 0; i < main_flash_efs_num; ++i, data += EFS_ENTRY_LEN, ++e) {
+    for (i = 0; i < cart->main_flash_efs_num; ++i, data += EFS_ENTRY_LEN, ++e) {
         efs_entry_display(e, i, show_banks);
         if (save_files) {
             lst_type_t lst_type = LST_TYPE_NORMAL;
 
             sprintf(filename, "%s_%03i.%s", prefix, i, efs_entry_type_prg(e->type) ? "prg" : "crt");
 
-            if (efs_entry_save(filename, e) < 0) {
+            if (efs_entry_save(cart, filename, e) < 0) {
                 util_error("problems saving entry %i", i);
                 lib_free(filename);
                 return -1;
@@ -767,11 +767,11 @@ int efs_dump_all(int show_banks, int save_files, const char *prefix)
     return 0;
 }
 
-int efs_parse_all(void)
+int efs_parse_all(easyflash_cart_t * cart)
 {
     int i, num = 0, res, is_old = -1;
-    efs_entry_t *e = &main_flash_efs[0];
-    unsigned char *data = &main_flash_data[EFS_OFFSET];
+    efs_entry_t *e = &cart->main_flash_efs[0];
+    unsigned char *data = &cart->main_flash_data[EFS_OFFSET];
 
     for (i = 0; i <= EFS_ENTRIES_MAX; ++i, data += EFS_ENTRY_LEN) {
         res = efs_check_entry(data, is_old);
@@ -794,12 +794,12 @@ int efs_parse_all(void)
         }
     }
 
-    data = &main_flash_data[EFS_OFFSET];
+    data = &cart->main_flash_data[EFS_OFFSET];
     for (i = 0; i < num; ++i, data += EFS_ENTRY_LEN, ++e) {
         if (is_old) {
-            res = efs_entry_parse_old(data, e, 1);
+            res = efs_entry_parse_old(cart, data, e, 1);
         } else {
-            res = efs2_entry_parse(data, e, 1);
+            res = efs2_entry_parse(cart, data, e, 1);
         }
         if (res < 0) {
             util_error("entry %i has errors", i);
@@ -809,7 +809,7 @@ int efs_parse_all(void)
     e->type = EF_ENTRY_END;
 
     if (is_old) {
-        main_flash_state |= MAIN_STATE_HAVE_OLDEFS;
+        cart->main_flash_state |= MAIN_STATE_HAVE_OLDEFS;
     }
 
     return num;

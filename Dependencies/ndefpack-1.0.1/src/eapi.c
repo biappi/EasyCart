@@ -55,9 +55,9 @@ static int check_header(unsigned char *data)
 
 /* -------------------------------------------------------------------------- */
 
-int eapi_detect(void)
+int eapi_detect(easyflash_cart_t * cart)
 {
-    return (check_header(&main_flash_data[EAPI_OFFSET]) == 0) ? 1 : 0;
+    return (check_header(&cart->main_flash_data[EAPI_OFFSET]) == 0) ? 1 : 0;
 }
 
 const char *eapi_name_get(void)
@@ -67,7 +67,7 @@ const char *eapi_name_get(void)
 
 /* -------------------------------------------------------------------------- */
 
-int eapi_load(const char* filename)
+int eapi_load(easyflash_cart_t * cart, const char* filename)
 {
     unsigned char buf[EAPI_SIZE + 2];
     unsigned int load_addr = 0;
@@ -90,16 +90,16 @@ int eapi_load(const char* filename)
 
     memcpy(eapi_data, buf, EAPI_SIZE);
 
-    main_flash_state |= MAIN_STATE_HAVE_EAPI;
+    cart->main_flash_state |= MAIN_STATE_HAVE_EAPI;
     return 0;
 }
 
-int eapi_save(const char *filename)
+int eapi_save(easyflash_cart_t * cart, const char *filename)
 {
     unsigned int load_addr = EAPI_FILE_LOAD_ADDR;
 
     if (check_header(eapi_data) != 0) {
-        if (eapi_extract() < 0) {
+        if (eapi_extract(cart) < 0) {
             return -1;
         }
     }
@@ -111,7 +111,7 @@ int eapi_save(const char *filename)
 
 /* -------------------------------------------------------------------------- */
 
-int eapi_inject(int custom)
+int eapi_inject(easyflash_cart_t * cart, int custom)
 {
     const unsigned char *p;
 
@@ -124,18 +124,18 @@ int eapi_inject(int custom)
         p = &eapi_am29f040_prg[2];
     }
 
-    memcpy(&main_flash_data[EAPI_OFFSET], p, EAPI_SIZE);
-    strncpy(eapi_name_buf, petscii_to_ascii((const char *)&main_flash_data[EAPI_NAME_OFFSET]), 16);
+    memcpy(&cart->main_flash_data[EAPI_OFFSET], p, EAPI_SIZE);
+    strncpy(eapi_name_buf, petscii_to_ascii((const char *)&cart->main_flash_data[EAPI_NAME_OFFSET]), 16);
     return 0;
 }
 
-int eapi_extract(void)
+int eapi_extract(easyflash_cart_t * cart)
 {
-    if (check_header(&main_flash_data[EAPI_OFFSET]) != 0) {
+    if (check_header(&cart->main_flash_data[EAPI_OFFSET]) != 0) {
         return -1;
     }
 
-    memcpy(eapi_data, &main_flash_data[EAPI_OFFSET], EAPI_SIZE);
-    strncpy(eapi_name_buf, petscii_to_ascii((const char *)&main_flash_data[EAPI_NAME_OFFSET]), 16);
+    memcpy(eapi_data, &cart->main_flash_data[EAPI_OFFSET], EAPI_SIZE);
+    strncpy(eapi_name_buf, petscii_to_ascii((const char *)&cart->main_flash_data[EAPI_NAME_OFFSET]), 16);
     return 0;
 }

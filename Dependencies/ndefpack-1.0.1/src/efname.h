@@ -27,10 +27,12 @@
 #ifndef EFNAME_H
 #define EFNAME_H
 
+#include "flash.h"
+
 extern void efname_set(const char *name);
 extern const char *efname_get(void);
 
-extern int efname_inject(void);
-extern int efname_extract(void);
+extern int efname_inject(easyflash_cart_t * cart);
+extern int efname_extract(easyflash_cart_t * cart);
 
 #endif

@@ -44,9 +44,9 @@ static unsigned char boot_data_ocm[BOOT_SIZE];
 
 /* -------------------------------------------------------------------------- */
 
-static int boot_check(int ocean)
+static int boot_check(easyflash_cart_t * cart, int ocean)
 {
-    if (main_flash_state & (ocean ? MAIN_STATE_HAVE_BOOTO : MAIN_STATE_HAVE_BOOTN)) {
+    if (cart->main_flash_state & (ocean ? MAIN_STATE_HAVE_BOOTO : MAIN_STATE_HAVE_BOOTN)) {
         return 0;
     }
 
@@ -56,7 +56,7 @@ static int boot_check(int ocean)
 
 /* -------------------------------------------------------------------------- */
 
-int boot_load(const char* filename, int ocean)
+int boot_load(easyflash_cart_t * cart, const char* filename, int ocean)
 {
     unsigned char buf[BOOT_SIZE + 2];
     unsigned int load_addr = 0;
@@ -69,15 +69,15 @@ int boot_load(const char* filename, int ocean)
 
     memcpy(ocean ? boot_data_ocm : boot_data_nrm, buf, BOOT_SIZE);
 
-    main_flash_state |= (ocean ? MAIN_STATE_HAVE_BOOTO : MAIN_STATE_HAVE_BOOTN);
+    cart->main_flash_state |= (ocean ? MAIN_STATE_HAVE_BOOTO : MAIN_STATE_HAVE_BOOTN);
     return 0;
 }
 
-int boot_save(const char *filename, int ocean)
+int boot_save(easyflash_cart_t * cart, const char *filename, int ocean)
 {
     unsigned int load_addr = BOOT_ADDR;
 
-    if (boot_check(ocean)) {
+    if (boot_check(cart, ocean)) {
         return -1;
     }
 
@@ -88,12 +88,12 @@ int boot_save(const char *filename, int ocean)
 
 /* -------------------------------------------------------------------------- */
 
-int boot_inject(int ocean, int custom)
+int boot_inject(easyflash_cart_t * cart, int ocean, int custom)
 {
     unsigned char *p;
 
     if (custom) {
-        if (boot_check(ocean)) {
+        if (boot_check(cart, ocean)) {
             return -1;
         }
         p = ocean ? boot_data_ocm : boot_data_nrm;
@@ -108,7 +108,7 @@ int boot_inject(int ocean, int custom)
         memcpy(p + start_addr - BOOT_ADDR, &q[2], 0xffff - start_addr + 1);
     }
 
-    memcpy(&main_flash_data[BOOT_OFFSET], p, BOOT_SIZE);
+    memcpy(&cart->main_flash_data[BOOT_OFFSET], p, BOOT_SIZE);
 
     if (!custom) {
         lib_free(p);
@@ -117,12 +117,12 @@ int boot_inject(int ocean, int custom)
     return 0;
 }
 
-int boot_extract(int ocean)
+int boot_extract(easyflash_cart_t * cart, int ocean)
 {
-    if (boot_check(ocean)) {
+    if (boot_check(cart, ocean)) {
         return -1;
     }
 
-    memcpy(ocean ? boot_data_ocm : boot_data_nrm, &main_flash_data[BOOT_OFFSET], BOOT_SIZE);
+    memcpy(ocean ? boot_data_ocm : boot_data_nrm, &cart->main_flash_data[BOOT_OFFSET], BOOT_SIZE);
     return 0;
 }

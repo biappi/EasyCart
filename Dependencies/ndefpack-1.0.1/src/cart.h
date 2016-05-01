@@ -45,16 +45,18 @@
 #define MODE_8K     2
 #define MODE_OFF    3
 
-extern int efcart_load(const char *filename);
-extern int efcart_save(const char *filename);
+#include "flash.h"
+
+extern int efcart_load(easyflash_cart_t * cart, const char *filename);
+extern int efcart_save(easyflash_cart_t * cart, const char *filename);
 
 extern int detect_cart_type(const char *filename, int *crt_id_out, const char **cart_name);
 
 struct efs_entry_s;
-extern int anycart_load(const char *filename, struct efs_entry_s *entry_ptr);
+extern int anycart_load(easyflash_cart_t * cart, const char *filename, struct efs_entry_s *entry_ptr);
 extern int anycart_save(const char *filename, struct efs_entry_s *entry_ptr);
 
-extern int anycart_inject(struct efs_entry_s *entry_ptr);
-extern int anycart_extract(struct efs_entry_s *entry_ptr);
+extern int anycart_inject(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr);
+extern int anycart_extract(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr);
 
 #endif

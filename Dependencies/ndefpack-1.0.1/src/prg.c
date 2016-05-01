@@ -59,10 +59,10 @@ int prg_load(const char* filename, struct efs_entry_s *entry_ptr)
     return 0;
 }
 
-int prg_save(const char *filename, struct efs_entry_s *entry_ptr)
+int prg_save(easyflash_cart_t * cart, const char *filename, struct efs_entry_s *entry_ptr)
 {
     if (entry_ptr->data == NULL) {
-        if (prg_extract(entry_ptr) < 0) {
+        if (prg_extract(cart, entry_ptr) < 0) {
             return -1;
         }
     }
@@ -74,7 +74,7 @@ int prg_save(const char *filename, struct efs_entry_s *entry_ptr)
 
 /* -------------------------------------------------------------------------- */
 
-static int prg_copydata(efs_entry_t *entry_ptr, const int inject)
+static int prg_copydata(easyflash_cart_t * cart, efs_entry_t *entry_ptr, const int inject)
 {
     unsigned int addr, bytes_left;
     unsigned char *p;
@@ -95,9 +95,9 @@ static int prg_copydata(efs_entry_t *entry_ptr, const int inject)
         }
 
         if (inject) {
-            memcpy(&main_flash_data[addr], p, len_in_bank);
+            memcpy(&cart->main_flash_data[addr], p, len_in_bank);
         } else {
-            memcpy(p, &main_flash_data[addr], len_in_bank);
+            memcpy(p, &cart->main_flash_data[addr], len_in_bank);
         }
 
         p += len_in_bank;
@@ -123,14 +123,14 @@ static int prg_copydata(efs_entry_t *entry_ptr, const int inject)
     return 0;
 }
 
-int prg_inject(struct efs_entry_s *entry_ptr)
+int prg_inject(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr)
 {
-    return prg_copydata(entry_ptr, 1);
+    return prg_copydata(cart, entry_ptr, 1);
 }
 
-int prg_extract(struct efs_entry_s *entry_ptr)
+int prg_extract(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr)
 {
     entry_ptr->data = lib_realloc(entry_ptr->data, entry_ptr->size);
 
-    return prg_copydata(entry_ptr, 0);
+    return prg_copydata(cart, entry_ptr, 0);
 }

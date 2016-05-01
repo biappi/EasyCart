@@ -27,7 +27,9 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-extern int parse_initem(const char *s);
+#include "flash.h"
+
+extern int parse_initem(easyflash_cart_t * cart, const char *s);
 extern int parse_options(int *argcptr, char **argv, int *i_out);
 extern void usage_ef_options(void);
 

@@ -35,7 +35,7 @@ void usage(int show_helptext)
 }
 
 /* - */
-
+/*
 efs_entry_t main_flash_efs_entry(int i) {
     if (i < EFS_ENTRIES_MAX + 1)
         return main_flash_efs[i];
@@ -49,3 +49,4 @@ char * main_flash_efs_entry_menuname(int i) {
     else
         return NULL;
 }
+*/

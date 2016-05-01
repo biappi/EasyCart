@@ -42,9 +42,9 @@ static char efname_buf[16 + 1] = "(no EF-Name)";
 
 /* -------------------------------------------------------------------------- */
 
-static int efname_detect(void)
+static int efname_detect(easyflash_cart_t * cart)
 {
-    return (memcmp((char *)&main_flash_data[EFNAME_MAGIC_OFFSET], efname_magic, 8) == 0);
+    return (memcmp((char *)&cart->main_flash_data[EFNAME_MAGIC_OFFSET], efname_magic, 8) == 0);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -59,19 +59,19 @@ const char *efname_get(void)
     return (const char *)efname_buf;
 }
 
-int efname_inject(void)
+int efname_inject(easyflash_cart_t * cart)
 {
-    memcpy((char *)&main_flash_data[EFNAME_MAGIC_OFFSET], efname_magic, 8);
-    strncpy((char *)&main_flash_data[EFNAME_OFFSET], ascii_to_petscii(efname_buf), 16);
+    memcpy((char *)&cart->main_flash_data[EFNAME_MAGIC_OFFSET], efname_magic, 8);
+    strncpy((char *)&cart->main_flash_data[EFNAME_OFFSET], ascii_to_petscii(efname_buf), 16);
     return 0;
 }
 
-int efname_extract(void)
+int efname_extract(easyflash_cart_t * cart)
 {
-    if (!efname_detect()) {
+    if (!efname_detect(cart)) {
         return -1;
     }
 
-    strncpy(efname_buf, petscii_to_ascii((const char *)&main_flash_data[EFNAME_OFFSET]), 16);
+    strncpy(efname_buf, petscii_to_ascii((const char *)&cart->main_flash_data[EFNAME_OFFSET]), 16);
     return 0;
 }

@@ -45,43 +45,32 @@
 
 /* -------------------------------------------------------------------------- */
 
-unsigned char main_flash_data[EASYFLASH_SIZE];
-
-efs_entry_t main_flash_efs[EFS_ENTRIES_MAX + 1];
-int main_flash_efs_num;
-
-int main_flash_state = 0;
-
-main_flash_space_t main_flash_space;
-
-/* -------------------------------------------------------------------------- */
-
-static void place_end_mark(void)
+static void place_end_mark(easyflash_cart_t * cart)
 {
-    efs_entry_init(&main_flash_efs[main_flash_efs_num]);
-    main_flash_efs[main_flash_efs_num].type = EF_ENTRY_END;
-    efs_entry_inject(&main_flash_efs[main_flash_efs_num], main_flash_efs_num);
+    efs_entry_init(&cart->main_flash_efs[cart->main_flash_efs_num]);
+    cart->main_flash_efs[cart->main_flash_efs_num].type = EF_ENTRY_END;
+    efs_entry_inject(cart, &cart->main_flash_efs[cart->main_flash_efs_num], cart->main_flash_efs_num);
 }
 
-static void add_to_menu_last(efs_entry_t *e)
+static void add_to_menu_last(easyflash_cart_t * cart, efs_entry_t *e)
 {
-    memcpy(&main_flash_efs[main_flash_efs_num], e, sizeof(efs_entry_t));
-    ++main_flash_efs_num;
-    place_end_mark();
+    memcpy(&cart->main_flash_efs[cart->main_flash_efs_num], e, sizeof(efs_entry_t));
+    ++cart->main_flash_efs_num;
+    place_end_mark(cart);
 }
 
-static void del_from_menu_last(void)
+static void del_from_menu_last(easyflash_cart_t * cart)
 {
-    --main_flash_efs_num;
-    efs_entry_delete(&main_flash_efs[main_flash_efs_num]);
-    place_end_mark();
+    --cart->main_flash_efs_num;
+    efs_entry_delete(cart, &cart->main_flash_efs[cart->main_flash_efs_num]);
+    place_end_mark(cart);
 }
 
 /* -------------------------------------------------------------------------- */
 
-static int check_index(int i)
+static int check_index(easyflash_cart_t * cart, int i)
 {
-    if ((i < 0) || (i >= main_flash_efs_num)) {
+    if ((i < 0) || (i >= cart->main_flash_efs_num)) {
         util_error("invalid index %i", i);
         return -1;
     }
@@ -89,26 +78,26 @@ static int check_index(int i)
     return 0;
 }
 
-static void swap_entry(int i, int j)
+static void swap_entry(easyflash_cart_t * cart, int i, int j)
 {
     efs_entry_t e;
 
-    memcpy(&e, &main_flash_efs[i], sizeof(efs_entry_t));
-    memcpy(&main_flash_efs[i], &main_flash_efs[j], sizeof(efs_entry_t));
-    memcpy(&main_flash_efs[j], &e, sizeof(efs_entry_t));
+    memcpy(&e, &cart->main_flash_efs[i], sizeof(efs_entry_t));
+    memcpy(&cart->main_flash_efs[i], &cart->main_flash_efs[j], sizeof(efs_entry_t));
+    memcpy(&cart->main_flash_efs[j], &e, sizeof(efs_entry_t));
 }
 
 /* -------------------------------------------------------------------------- */
 
-static void display_space(int show_banknums)
+static void display_space(easyflash_cart_t * cart, int show_banknums)
 {
-    util_display_space(main_flash_space.total,
-                       main_flash_space.top,
-                       main_flash_space.rom_16k,
-                       main_flash_space.rom_8k,
-                       main_flash_space.rom_u8k);
+    util_display_space(cart->main_flash_space.total,
+                       cart->main_flash_space.top,
+                       cart->main_flash_space.rom_16k,
+                       cart->main_flash_space.rom_8k,
+                       cart->main_flash_space.rom_u8k);
 
-    util_display_bank_used(main_flash_space.bank_used, show_banknums);
+    util_display_bank_used(cart->main_flash_space.bank_used, show_banknums);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -139,25 +128,25 @@ static int detect_file_type(const char *filename)
 
 /* -------------------------------------------------------------------------- */
 
-static void main_flash_data_init(void)
+static void main_flash_data_init(easyflash_cart_t * cart)
 {
-    memset(main_flash_data, 0xff, EASYFLASH_SIZE);
+    memset(cart->main_flash_data, 0xff, EASYFLASH_SIZE);
 }
 
 static void main_flash_data_shutdown(void)
 {
 }
 
-static void main_flash_space_init(void)
+static void main_flash_space_init(easyflash_cart_t * cart)
 {
-    memset(main_flash_space.bank_used, 0, sizeof(main_flash_space.bank_used));
-    main_flash_space.bank_used[0][0] = 0x2000;
-    main_flash_space.bank_used[1][0] = 0x2000;
-    main_flash_space.total = EASYFLASH_SIZE - (2 * 0x2000);
-    main_flash_space.top = EASYFLASH_SIZE - (2 * 0x2000);
-    main_flash_space.rom_16k = EASYFLASH_N_BANKS - 1;
-    main_flash_space.rom_8k = EASYFLASH_N_BANKS - 1;
-    main_flash_space.rom_u8k = EASYFLASH_N_BANKS - 1;
+    memset(cart->main_flash_space.bank_used, 0, sizeof(cart->main_flash_space.bank_used));
+    cart->main_flash_space.bank_used[0][0] = 0x2000;
+    cart->main_flash_space.bank_used[1][0] = 0x2000;
+    cart->main_flash_space.total = EASYFLASH_SIZE - (2 * 0x2000);
+    cart->main_flash_space.top = EASYFLASH_SIZE - (2 * 0x2000);
+    cart->main_flash_space.rom_16k = EASYFLASH_N_BANKS - 1;
+    cart->main_flash_space.rom_8k = EASYFLASH_N_BANKS - 1;
+    cart->main_flash_space.rom_u8k = EASYFLASH_N_BANKS - 1;
 }
 
 static void main_flash_space_shutdown(void)
@@ -166,25 +155,25 @@ static void main_flash_space_shutdown(void)
 
 /* -------------------------------------------------------------------------- */
 
-void main_flash_init(void)
+void main_flash_init(easyflash_cart_t * cart)
 {
     int i;
 
-    main_flash_data_init();
-    main_flash_space_init();
+    main_flash_data_init(cart);
+    main_flash_space_init(cart);
 
     for (i = 0; i <= EFS_ENTRIES_MAX; ++i) {
-        efs_entry_init(&main_flash_efs[i]);
+        efs_entry_init(&cart->main_flash_efs[i]);
     }
 
-    main_flash_efs_num = 0;
-    main_flash_state &= ~MAIN_STATE_HAVE_OCEAN;
-    main_flash_state &= ~MAIN_STATE_HAVE_OLDEFS;
-    place_end_mark();
-    clear_placements();
+    cart->main_flash_efs_num = 0;
+    cart->main_flash_state &= ~MAIN_STATE_HAVE_OCEAN;
+    cart->main_flash_state &= ~MAIN_STATE_HAVE_OLDEFS;
+    place_end_mark(cart);
+    clear_placements(cart);
 }
 
-void main_flash_shutdown(void)
+void main_flash_shutdown(easyflash_cart_t * cart)
 {
     int i;
 
@@ -192,121 +181,121 @@ void main_flash_shutdown(void)
     main_flash_space_shutdown();
 
     for (i = 0; i <= EFS_ENTRIES_MAX; ++i) {
-        efs_entry_shutdown(&main_flash_efs[i]);
+        efs_entry_shutdown(&cart->main_flash_efs[i]);
     }
 }
 
 /* -------------------------------------------------------------------------- */
 
-int main_flash_load(const char *filename)
+int main_flash_load(easyflash_cart_t * cart, const char *filename)
 {
     int i, res, have_ocean = 0;
 
-    main_flash_shutdown();
-    main_flash_init();
+    main_flash_shutdown(cart);
+    main_flash_init(cart);
 
-    if ((res = efcart_load(filename)) < 0) {
+    if ((res = efcart_load(cart, filename)) < 0) {
         return res;
     }
 
-    if ((res = efs_parse_all()) < 0) {
+    if ((res = efs_parse_all(cart)) < 0) {
         return res;
     }
 
-    main_flash_efs_num = res;
-    place_end_mark();
+    cart->main_flash_efs_num = res;
+    place_end_mark(cart);
 
     /* detect if we have an Ocean cartridge */
     for (i = 0; i < res; ++i) {
-        if (efs_entry_type_ocean(main_flash_efs[i].type)) {
+        if (efs_entry_type_ocean(cart->main_flash_efs[i].type)) {
             have_ocean = 1;
-            main_flash_state |= MAIN_STATE_HAVE_OCEAN;
+            cart->main_flash_state |= MAIN_STATE_HAVE_OCEAN;
             break;
         }
     }
 
-    clear_placements();
-    mark_places_of_old_entries();
+    clear_placements(cart);
+    mark_places_of_old_entries(cart);
 
-    if (eapi_detect()) {
-        main_flash_state |= MAIN_STATE_HAVE_EAPI;
-        eapi_extract();
+    if (eapi_detect(cart)) {
+        cart->main_flash_state |= MAIN_STATE_HAVE_EAPI;
+        eapi_extract(cart);
     }
 
     /* old EasyFS, do not extract obsolete boot & loader */
-    if (main_flash_state & MAIN_STATE_HAVE_OLDEFS) {
+    if (cart->main_flash_state & MAIN_STATE_HAVE_OLDEFS) {
         return 0;
     }
 
-    if (efname_extract() < 0) {
+    if (efname_extract(cart) < 0) {
         util_warning("cart has no EF-Name");
     }
 
     /* assume that we have boot & loader */
     if (have_ocean) {
-        main_flash_state |= MAIN_STATE_HAVE_BOOTO;
-        main_flash_state |= MAIN_STATE_HAVE_LOADERO;
+        cart->main_flash_state |= MAIN_STATE_HAVE_BOOTO;
+        cart->main_flash_state |= MAIN_STATE_HAVE_LOADERO;
     } else {
-        main_flash_state |= MAIN_STATE_HAVE_BOOTN;
-        main_flash_state |= MAIN_STATE_HAVE_LOADERN;
+        cart->main_flash_state |= MAIN_STATE_HAVE_BOOTN;
+        cart->main_flash_state |= MAIN_STATE_HAVE_LOADERN;
     }
 
-    return boot_extract(have_ocean) || loader_extract(have_ocean);
+    return boot_extract(cart, have_ocean) || loader_extract(cart, have_ocean);
 }
 
-int main_flash_save(const char *filename)
+int main_flash_save(easyflash_cart_t * cart, const char *filename)
 {
     int i, res;
-    int ocean = main_flash_state & MAIN_STATE_HAVE_OCEAN;
+    int ocean = cart->main_flash_state & MAIN_STATE_HAVE_OCEAN;
     int custom_e;
     int custom_b;
     int custom_l;
 
-    custom_e = main_flash_state & MAIN_STATE_HAVE_EAPI;
+    custom_e = cart->main_flash_state & MAIN_STATE_HAVE_EAPI;
 
     if (ocean) {
-        custom_b = main_flash_state & MAIN_STATE_HAVE_BOOTO;
-        custom_l = main_flash_state & MAIN_STATE_HAVE_LOADERO;
+        custom_b = cart->main_flash_state & MAIN_STATE_HAVE_BOOTO;
+        custom_l = cart->main_flash_state & MAIN_STATE_HAVE_LOADERO;
     } else {
-        custom_b = main_flash_state & MAIN_STATE_HAVE_BOOTN;
-        custom_l = main_flash_state & MAIN_STATE_HAVE_LOADERN;
+        custom_b = cart->main_flash_state & MAIN_STATE_HAVE_BOOTN;
+        custom_l = cart->main_flash_state & MAIN_STATE_HAVE_LOADERN;
     }
 
-    if ((res = place_entries()) < 0) {
+    if ((res = place_entries(cart)) < 0) {
         return res;
     }
 
-    display_space(1);
+    display_space(cart, 1);
 
     /* clear Flash data of any leftover cruft */
-    main_flash_data_init();
+    main_flash_data_init(cart);
 
     if (add_eapi || custom_e) {
-        eapi_inject(custom_e);
+        eapi_inject(cart, custom_e);
     }
 
-    if ((res = boot_inject(ocean, custom_b)) < 0) {
+    if ((res = boot_inject(cart, ocean, custom_b)) < 0) {
         return res;
     }
 
-    if ((res = loader_inject(ocean, custom_l)) < 0) {
+    if ((res = loader_inject(cart, ocean, custom_l)) < 0) {
         return res;
     }
 
-    main_flash_state &= ~MAIN_STATE_HAVE_OLDEFS;
+    cart->main_flash_state &= ~MAIN_STATE_HAVE_OLDEFS;
 
     if (outefname != NULL) {
         efname_set(outefname);
     }
-    efname_inject();
+    efname_inject(cart);
 
-    for (i = 0; i <= main_flash_efs_num; ++i) {
-        if ((res = efs_entry_inject(&main_flash_efs[i], i)) < 0) {
+    for (i = 0; i <= cart->main_flash_efs_num; ++i) {
+        if ((res = efs_entry_inject(cart, &cart->main_flash_efs[i], i)) < 0) {
             return res;
         }
     }
 
-    if ((res = efcart_save(filename)) < 0) {
+    if ((res = efcart_save(cart, filename)) < 0) {
         return res;
     }
 
@@ -326,7 +315,7 @@ static int efs_name_cmp(const void *p1, const void *p2)
 
 /* -------------------------------------------------------------------------- */
 
-int main_flash_entry_find(const char *name)
+int main_flash_entry_find(easyflash_cart_t * cart, const char *name)
 {
     int i;
 
@@ -334,8 +323,8 @@ int main_flash_entry_find(const char *name)
         util_warning("name longer than %i chars, truncating", EFS_NAME_LEN);
     }
 
-    for (i = 0; i < main_flash_efs_num; ++i) {
-        if (strncmp(main_flash_efs[i].menuname, name, EFS_NAME_LEN) == 0) {
+    for (i = 0; i < cart->main_flash_efs_num; ++i) {
+        if (strncmp(cart->main_flash_efs[i].menuname, name, EFS_NAME_LEN) == 0) {
             return i;
         }
     }
@@ -343,23 +332,23 @@ int main_flash_entry_find(const char *name)
     return -1;
 }
 
-int main_flash_entry_sort(void)
+int main_flash_entry_sort(easyflash_cart_t * cart)
 {
-    if (main_flash_efs_num < 2) {
+    if (cart->main_flash_efs_num < 2) {
         return 0;
     }
 
     util_message("Sorting entries...");
 
     /* sort the (table pointing to the) entries */
-    qsort(main_flash_efs, main_flash_efs_num, sizeof(efs_entry_t), efs_name_cmp);
+    qsort(cart->main_flash_efs, cart->main_flash_efs_num, sizeof(efs_entry_t), efs_name_cmp);
 
     return 0;
 }
 
-int main_flash_entry_swap(int i, int j)
+int main_flash_entry_swap(easyflash_cart_t * cart, int i, int j)
 {
-    if (check_index(i) || check_index(j)) {
+    if (check_index(cart, i) || check_index(cart, j)) {
         return -1;
     }
 
@@ -369,16 +358,16 @@ int main_flash_entry_swap(int i, int j)
 
     util_message("Swapping entries %i and %i...", i, j);
 
-    swap_entry(i, j);
+    swap_entry(cart, i, j);
 
     return 0;
 }
 
-int main_flash_entry_name(int i, const char *menuname)
+int main_flash_entry_name(easyflash_cart_t * cart, int i, const char *menuname)
 {
     char buf[EFS_NAME_LEN + 1];
 
-    if (check_index(i)) {
+    if (check_index(cart, i)) {
         return -1;
     }
 
@@ -390,65 +379,65 @@ int main_flash_entry_name(int i, const char *menuname)
     buf[EFS_NAME_LEN] = 0;
 
     util_message("Renaming entry %i to '%s'...", i, buf);
-    strcpy(main_flash_efs[i].menuname, buf);
+    strcpy(cart->main_flash_efs[i].menuname, buf);
 
     return 0;
 }
 
-int main_flash_entry_hide(int i, int hidden)
+int main_flash_entry_hide(easyflash_cart_t * cart, int i, int hidden)
 {
-    if (check_index(i)) {
+    if (check_index(cart, i)) {
         return -1;
     }
 
-    util_message("Setting entry %i '%s' hidden bit %s...", i, main_flash_efs[i].menuname, hidden ? "on" : "off");
+    util_message("Setting entry %i '%s' hidden bit %s...", i, cart->main_flash_efs[i].menuname, hidden ? "on" : "off");
 
     if (hidden) {
-        main_flash_efs[i].flags |= EFS_FLAG_HIDDEN;
+        cart->main_flash_efs[i].flags |= EFS_FLAG_HIDDEN;
     } else {
-        main_flash_efs[i].flags &= ~EFS_FLAG_HIDDEN;
+        cart->main_flash_efs[i].flags &= ~EFS_FLAG_HIDDEN;
     }
 
     return 0;
 }
 
-int main_flash_entry_a64k(int i, int align)
+int main_flash_entry_a64k(easyflash_cart_t * cart, int i, int align)
 {
     int old_align;
 
-    if (check_index(i)) {
+    if (check_index(cart, i)) {
         return -1;
     }
 
-    if (!efs_entry_type_xbank(main_flash_efs[i].type)) {
+    if (!efs_entry_type_xbank(cart->main_flash_efs[i].type)) {
         util_error("tried to set 64k alignment for non-xbank entry!");
         return -1;
     }
 
-    util_message("Setting entry %i '%s' 64k alignment %s...", i, main_flash_efs[i].menuname, align ? "on" : "off");
+    util_message("Setting entry %i '%s' 64k alignment %s...", i, cart->main_flash_efs[i].menuname, align ? "on" : "off");
 
-    old_align = (main_flash_efs[i].flags & EFS_FLAG_ALIGN64K) ? 1 : 0;
+    old_align = (cart->main_flash_efs[i].flags & EFS_FLAG_ALIGN64K) ? 1 : 0;
 
     if (align) {
-        main_flash_efs[i].flags |= EFS_FLAG_ALIGN64K;
+        cart->main_flash_efs[i].flags |= EFS_FLAG_ALIGN64K;
     } else {
-        main_flash_efs[i].flags &= ~EFS_FLAG_ALIGN64K;
+        cart->main_flash_efs[i].flags &= ~EFS_FLAG_ALIGN64K;
     }
 
     if (align ^ old_align) {
         util_message("64k alignment changed, replacing...");
 
-        if (clear_and_place_entries() < 0) {
+        if (clear_and_place_entries(cart) < 0) {
             util_error("placement failed, reverting 64k alignment!");
 
             /* revert to the old setting and place again */
             if (old_align) {
-                main_flash_efs[i].flags |= EFS_FLAG_ALIGN64K;
+                cart->main_flash_efs[i].flags |= EFS_FLAG_ALIGN64K;
             } else {
-                main_flash_efs[i].flags &= ~EFS_FLAG_ALIGN64K;
+                cart->main_flash_efs[i].flags &= ~EFS_FLAG_ALIGN64K;
             }
 
-            if (clear_and_place_entries() < 0) {
+            if (clear_and_place_entries(cart) < 0) {
                 util_error("reverting failed?!");
                 /* should never happen */
                 return -2;
@@ -463,12 +452,12 @@ int main_flash_entry_a64k(int i, int align)
 
 /* -------------------------------------------------------------------------- */
 
-int main_flash_add_file(const char *filename, const char *menuname, int hidden, int force_align, int place_now)
+int main_flash_add_file(easyflash_cart_t * cart, const char *filename, const char *menuname, int hidden, int force_align, int place_now)
 {
     efs_entry_t e;
     int ftype, res = -1;
 
-    if (main_flash_efs_num >= EFS_ENTRIES_MAX) {
+    if (cart->main_flash_efs_num >= EFS_ENTRIES_MAX) {
         util_error("all %i EasyFS entries already used!", EFS_ENTRIES_MAX);
         return -1;
     }
@@ -478,7 +467,7 @@ int main_flash_add_file(const char *filename, const char *menuname, int hidden, 
     ftype = detect_file_type(filename);
 
     if (ftype == FILE_TYPE_CRT) {
-        res = anycart_load(filename, &e);
+        res = anycart_load(cart, filename, &e);
     } else if (ftype == FILE_TYPE_PRG) {
         res = prg_load(filename, &e);
     }
@@ -512,8 +501,8 @@ int main_flash_add_file(const char *filename, const char *menuname, int hidden, 
         e.flags |= EFS_FLAG_ALIGN64K;
     }
 
-    if (e.size > main_flash_space.total) {
-        util_error("size $%06x exceeds total free space $%06x!", e.size, main_flash_space.total);
+    if (e.size > cart->main_flash_space.total) {
+        util_error("size $%06x exceeds total free space $%06x!", e.size, cart->main_flash_space.total);
         res = -6;
         goto fail;
     }
@@ -526,13 +515,13 @@ int main_flash_add_file(const char *filename, const char *menuname, int hidden, 
 
         case EF_ENTRY_OCEAN:
         case EF_ENTRY_OCEAN_512:
-            if (main_flash_state & MAIN_STATE_HAVE_OCEAN) {
+            if (cart->main_flash_state & MAIN_STATE_HAVE_OCEAN) {
                 util_error("only one Ocean cart per EasyFlash .crt supported!");
                 res = -2;
                 goto fail;
             }
 
-            main_flash_state |= MAIN_STATE_HAVE_OCEAN;
+            cart->main_flash_state |= MAIN_STATE_HAVE_OCEAN;
 
             /* FALL THROUGH */
 
@@ -552,18 +541,18 @@ int main_flash_add_file(const char *filename, const char *menuname, int hidden, 
             goto fail;
     }
 
-    add_to_menu_last(&e);
+    add_to_menu_last(cart, &e);
 
     if (!place_now) {
         /* try to keep track of available space */
-        main_flash_space.total -= e.size;
+        cart->main_flash_space.total -= e.size;
         /* place later */
         return 0;
     }
 
     /* place on menu */
-    if (clear_and_place_entries() < 0) {
-        del_from_menu_last();
+    if (clear_and_place_entries(cart) < 0) {
+        del_from_menu_last(cart);
         return -1;
     }
 
@@ -574,12 +563,12 @@ fail:
     return res;
 }
 
-int main_flash_place_entries(void)
+int main_flash_place_entries(easyflash_cart_t * cart)
 {
-    if (clear_and_place_entries() < 0) {
+    if (clear_and_place_entries(cart) < 0) {
         util_warning("placement failed, clearing all entries");
-        while (main_flash_efs_num > 0) {
-            del_from_menu_last();
+        while (cart->main_flash_efs_num > 0) {
+            del_from_menu_last(cart);
         }
         return -1;
     }
@@ -587,65 +576,65 @@ int main_flash_place_entries(void)
     return 0;
 }
 
-int main_flash_del_entry(int index)
+int main_flash_del_entry(easyflash_cart_t * cart, int index)
 {
     int ocean;
 
-    if (check_index(index)) {
+    if (check_index(cart, index)) {
         util_warning("(ignoring delete)");
         return 0;
     }
 
-    util_message("Deleting entry %i '%s'...", index, main_flash_efs[index].menuname);
+    util_message("Deleting entry %i '%s'...", index, cart->main_flash_efs[index].menuname);
 
-    ocean = efs_entry_type_ocean(main_flash_efs[index].type);
+    ocean = efs_entry_type_ocean(cart->main_flash_efs[index].type);
 
-    for (; index < (main_flash_efs_num - 1); ++index) {
-        swap_entry(index, index + 1);
+    for (; index < (cart->main_flash_efs_num - 1); ++index) {
+        swap_entry(cart, index, index + 1);
     }
 
-    del_from_menu_last();
+    del_from_menu_last(cart);
 
     if (ocean) {
-        main_flash_state &= ~MAIN_STATE_HAVE_OCEAN;
+        cart->main_flash_state &= ~MAIN_STATE_HAVE_OCEAN;
     }
 
-    if (clear_and_place_entries() < 0) {
+    if (clear_and_place_entries(cart) < 0) {
         return -1;
     }
 
     return 0;
 }
 
-int main_flash_ext_entry(int i, const char *filename)
+int main_flash_ext_entry(easyflash_cart_t * cart, int i, const char *filename)
 {
-    if (check_index(i)) {
+    if (check_index(cart, i)) {
         return -1;
     }
 
-    return efs_entry_save(filename, &main_flash_efs[i]);
+    return efs_entry_save(cart, filename, &cart->main_flash_efs[i]);
 }
 
 /* -------------------------------------------------------------------------- */
 
-void main_flash_display_space(void)
+void main_flash_display_space(easyflash_cart_t * cart)
 {
-    display_space(0);
+    display_space(cart, 0);
 }
 
-int main_flash_dump_all(int save_files, const char *prefix_in)
+int main_flash_dump_all(easyflash_cart_t * cart, int save_files, const char *prefix_in)
 {
     const char *prefix = prefix_in ? prefix_in : "ndefdump";
-    int ocean = main_flash_state & MAIN_STATE_HAVE_OCEAN;
-    int oldefs = main_flash_state & MAIN_STATE_HAVE_OLDEFS;
+    int ocean = cart->main_flash_state & MAIN_STATE_HAVE_OCEAN;
+    int oldefs = cart->main_flash_state & MAIN_STATE_HAVE_OLDEFS;
     char *fname = NULL;
 
     util_message("%sing cart '%s'; mode %s, EAPI %s, %i entries.",
                  save_files ? "Dump" : "List",
                  efname_get(),
                  ocean ? "Ocean" : "normal",
-                 (main_flash_state & MAIN_STATE_HAVE_EAPI) ? eapi_name_get() : "(none)",
-                 main_flash_efs_num
+                 (cart->main_flash_state & MAIN_STATE_HAVE_EAPI) ? eapi_name_get() : "(none)",
+                 cart->main_flash_efs_num
                 );
 
     if (save_files) {
@@ -658,32 +647,32 @@ int main_flash_dump_all(int save_files, const char *prefix_in)
 
         sprintf(fname, "%s_boot_%s.prg", prefix, ocean ? "ocm" : "nrm");
         if (0
-            || (!oldefs && boot_extract(ocean))
-            || (!oldefs && boot_save(fname, ocean))
+            || (!oldefs && boot_extract(cart, ocean))
+            || (!oldefs && boot_save(cart, fname, ocean))
             || lst_save_add(fname, "(boot)", ocean ? LST_TYPE_BOOTO : LST_TYPE_BOOTN, oldefs)) {
             return -1;
         }
 
         sprintf(fname, "%s_loader_%s.prg", prefix, ocean ? "ocm" : "nrm");
         if (0
-            || (!oldefs && loader_extract(ocean))
-            || (!oldefs && loader_save(fname, ocean))
+            || (!oldefs && loader_extract(cart, ocean))
+            || (!oldefs && loader_save(cart, fname, ocean))
             || lst_save_add(fname, "(loader)", ocean ? LST_TYPE_LOADERO : LST_TYPE_LOADERN, oldefs)) {
             return -1;
         }
 
-        if (main_flash_state & MAIN_STATE_HAVE_EAPI) {
+        if (cart->main_flash_state & MAIN_STATE_HAVE_EAPI) {
             sprintf(fname, "%s_eapi.prg", prefix);
             if (0
-                || eapi_extract()
-                || eapi_save(fname)
+                || eapi_extract(cart)
+                || eapi_save(cart, fname)
                 || lst_save_add(fname, "(eapi)", LST_TYPE_EAPI, 0)) {
                 return -1;
             }
         }
     }
 
-    if (efs_dump_all(verbosity > 2, save_files, prefix) < 0) {
+    if (efs_dump_all(cart, verbosity > 2, save_files, prefix) < 0) {
         goto fail;
     }
 
@@ -691,7 +680,7 @@ int main_flash_dump_all(int save_files, const char *prefix_in)
         lst_save_finish();
     }
 
-    display_space(1);
+    display_space(cart, 1);
 
     lib_free(fname);
     return 0;

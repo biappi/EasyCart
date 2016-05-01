@@ -27,13 +27,15 @@
 #ifndef EAPI_H
 #define EAPI_H
 
-extern int eapi_detect(void);
+#include "flash.h"
+
+extern int eapi_detect(easyflash_cart_t * cart);
 extern const char *eapi_name_get(void);
 
-extern int eapi_inject(int custom);
-extern int eapi_extract(void);
+extern int eapi_inject(easyflash_cart_t * cart, int custom);
+extern int eapi_extract(easyflash_cart_t * cart);
 
-extern int eapi_load(const char *filename);
-extern int eapi_save(const char *filename);
+extern int eapi_load(easyflash_cart_t * cart, const char *filename);
+extern int eapi_save(easyflash_cart_t * cart, const char *filename);
 
 #endif

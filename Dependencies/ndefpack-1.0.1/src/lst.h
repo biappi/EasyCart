@@ -27,6 +27,8 @@
 #ifndef LST_H
 #define LST_H
 
+#include "flash.h"
+
 enum lst_type_e {
     LST_TYPE_NORMAL = 0,
     LST_TYPE_HIDDEN,
@@ -42,8 +44,8 @@ typedef enum lst_type_e lst_type_t;
 
 #define LST_SEP_CHAR    ","
 
-extern int lst_parse_entry(const char *buf);
-extern int lst_load(const char *filename);
+extern int lst_parse_entry(easyflash_cart_t * cart, const char *buf);
+extern int lst_load(easyflash_cart_t * cart, const char *filename);
 
 extern int lst_save_begin(const char *filename);
 extern int lst_save_add(const char *filename, const char *menuname, lst_type_t type, int comment_only);

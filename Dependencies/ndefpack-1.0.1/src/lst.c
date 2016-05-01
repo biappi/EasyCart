@@ -68,7 +68,7 @@ static int lst_check_write_error(void)
 
 /* ------------------------------------------------------------------------- */
 
-int lst_parse_entry(const char *buf_in)
+int lst_parse_entry(easyflash_cart_t * cart, const char *buf_in)
 {
     int res = -1;
     char *filename = NULL;
@@ -105,21 +105,21 @@ int lst_parse_entry(const char *buf_in)
         case LST_TYPE_NORMAL:
         case LST_TYPE_HIDDEN:
         case LST_TYPE_ALIGN64K:
-            res = main_flash_add_file(filename, menuname, type == LST_TYPE_HIDDEN, type == LST_TYPE_ALIGN64K, 0);
+            res = main_flash_add_file(cart, filename, menuname, type == LST_TYPE_HIDDEN, type == LST_TYPE_ALIGN64K, 0);
             break;
 
         case LST_TYPE_EAPI:
-            res = eapi_load(filename) || eapi_inject(1);
+            res = eapi_load(cart, filename) || eapi_inject(cart, 1);
             break;
 
         case LST_TYPE_BOOTO:
         case LST_TYPE_BOOTN:
-            res = boot_load(filename, type == LST_TYPE_BOOTO);
+            res = boot_load(cart, filename, type == LST_TYPE_BOOTO);
             break;
 
         case LST_TYPE_LOADERO:
         case LST_TYPE_LOADERN:
-            res = loader_load(filename, type == LST_TYPE_LOADERO);
+            res = loader_load(cart, filename, type == LST_TYPE_LOADERO);
             break;
 
         default:
@@ -136,7 +136,7 @@ fail:
 
 #define BUFSIZE     2048
 
-int lst_load(const char *filename)
+int lst_load(easyflash_cart_t * cart, const char *filename)
 {
     FILE *fd = NULL;
     char buf[BUFSIZE];
@@ -168,7 +168,7 @@ int lst_load(const char *filename)
             }
 
             if (*buf != 0) {
-                if (lst_parse_entry(buf) < 0) {
+                if (lst_parse_entry(cart, buf) < 0) {
                     goto fail;
                 }
             }
@@ -176,7 +176,7 @@ int lst_load(const char *filename)
     } while (!feof(fd));
 
     fclose(fd);
-    return main_flash_place_entries();
+    return main_flash_place_entries(cart);
 
 fail:
     fclose(fd);

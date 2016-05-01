@@ -59,6 +59,8 @@ typedef enum efs_entry_type_e {
     EF_ENTRY_END
 } efs_entry_type_t;
 
+typedef struct easyflash_cart_s easyflash_cart_t;
+
 /* Returns the type as a string. */
 extern const char *efs_entry_type_string(efs_entry_type_t type);
 /* Returns the on-Flash "flags" field of the type. */
@@ -139,12 +141,12 @@ extern void efs_entry_clear_bank_used(efs_entry_t *entry_ptr);
 extern void efs_entry_init(efs_entry_t *entry_ptr);
 extern void efs_entry_shutdown(efs_entry_t *entry_ptr);
 
-extern int efs_entry_inject(efs_entry_t *entry_ptr, int index);
-extern int efs_entry_extract(efs_entry_t *entry_ptr);
-extern int efs_entry_save(const char *filename, efs_entry_t *entry_ptr);
-extern void efs_entry_delete(efs_entry_t *entry_ptr);
+extern int efs_entry_inject(easyflash_cart_t * cart, efs_entry_t *entry_ptr, int index);
+extern int efs_entry_extract(easyflash_cart_t * cart, efs_entry_t *entry_ptr);
+extern int efs_entry_save(easyflash_cart_t * cart, const char *filename, efs_entry_t *entry_ptr);
+extern void efs_entry_delete(easyflash_cart_t * cart, efs_entry_t *entry_ptr);
 
-extern int efs_dump_all(int show_banks, int save_files, const char *prefix);
-extern int efs_parse_all(void);
+extern int efs_dump_all(easyflash_cart_t * cart, int show_banks, int save_files, const char *prefix);
+extern int efs_parse_all(easyflash_cart_t * cart);
 
 #endif

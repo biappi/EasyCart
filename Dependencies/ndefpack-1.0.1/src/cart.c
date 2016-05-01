@@ -566,7 +566,7 @@ static int cart_ocean_save_crt(const char *filename, unsigned char *data, crt_in
 
 /* -------------------------------------------------------------------------- */
 
-int efcart_load(const char *filename)
+int efcart_load(easyflash_cart_t * cart, const char *filename)
 {
     FILE *fd = NULL;
     crt_info_t crt_info;
@@ -581,7 +581,7 @@ int efcart_load(const char *filename)
         return -1;
     }
 
-    if (efcart_load_crt(fd, main_flash_data, &crt_info) < 0) {
+    if (efcart_load_crt(fd, cart->main_flash_data, &crt_info) < 0) {
         util_error("problems reading file '%s'!", filename);
         fclose(fd);
         return -1;
@@ -591,11 +591,11 @@ int efcart_load(const char *filename)
     return 0;
 }
 
-int efcart_save(const char *filename)
+int efcart_save(easyflash_cart_t * cart, const char *filename)
 {
     util_message("Saving EasyFlash cart '%s'...", filename);
 
-    if (efcart_save_crt(filename, main_flash_data) < 0) {
+    if (efcart_save_crt(filename, cart->main_flash_data) < 0) {
         util_error("problems saving file '%s'!", filename);
         return -1;
     }
@@ -628,7 +628,7 @@ int detect_cart_type(const char *filename, int *crt_id_out, const char **cart_na
 
 /* -------------------------------------------------------------------------- */
 
-int anycart_load(const char *filename, struct efs_entry_s *entry_ptr)
+int anycart_load(easyflash_cart_t * cart, const char *filename, struct efs_entry_s *entry_ptr)
 {
     FILE *fd = NULL;
     const char *cart_name = "???";
@@ -844,7 +844,7 @@ int anycart_save(const char *filename, struct efs_entry_s *entry_ptr)
 
 /* -------------------------------------------------------------------------- */
 
-static void cart_copydata(struct efs_entry_s *entry_ptr, const int inject)
+static void cart_copydata(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr, const int inject)
 {
     unsigned int bank;
     unsigned int bank_l, bank_l_top, bank_l_off, bank_h, bank_h_top, bank_h_off;
@@ -868,7 +868,7 @@ static void cart_copydata(struct efs_entry_s *entry_ptr, const int inject)
         bank_l_off = entry_ptr->other_bank_off;
     }
 
-    cart_p = &main_flash_data[bank_l * 0x2000];
+    cart_p = &cart->main_flash_data[bank_l * 0x2000];
     data_p = &entry_ptr->data[bank_l_off * 0x2000];
 
     for (bank = bank_l; bank < bank_l_top; ++bank, cart_p += 0x2000, data_p += 0x2000) {
@@ -879,7 +879,7 @@ static void cart_copydata(struct efs_entry_s *entry_ptr, const int inject)
         }
     }
 
-    cart_p = &main_flash_data[bank_h * 0x2000 + (1 << 19)];
+    cart_p = &cart->main_flash_data[bank_h * 0x2000 + (1 << 19)];
 
     if (is_interleaved) {
         data_p = &(entry_ptr->data[bank_h_off * 0x2000 + (1 << 19)]);
@@ -894,13 +894,13 @@ static void cart_copydata(struct efs_entry_s *entry_ptr, const int inject)
     }
 }
 
-int anycart_inject(struct efs_entry_s *entry_ptr)
+int anycart_inject(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr)
 {
-    cart_copydata(entry_ptr, 1);
+    cart_copydata(cart, entry_ptr, 1);
     return 0;
 }
 
-int anycart_extract(struct efs_entry_s *entry_ptr)
+int anycart_extract(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr)
 {
     unsigned int size;
 
@@ -913,6 +913,6 @@ int anycart_extract(struct efs_entry_s *entry_ptr)
     entry_ptr->data = lib_realloc(entry_ptr->data, size);
     memset(entry_ptr->data, 0xff, size);
 
-    cart_copydata(entry_ptr, 0);
+    cart_copydata(cart, entry_ptr, 0);
     return 0;
 }

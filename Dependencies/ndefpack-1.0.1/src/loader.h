@@ -27,10 +27,12 @@
 #ifndef LOADER_H
 #define LOADER_H
 
-extern int loader_inject(int ocean, int custom);
-extern int loader_extract(int ocean);
+#include "flash.h"
 
-extern int loader_load(const char *filename, int ocean);
-extern int loader_save(const char *filename, int ocean);
+extern int loader_inject(easyflash_cart_t * cart, int ocean, int custom);
+extern int loader_extract(easyflash_cart_t * cart, int ocean);
+
+extern int loader_load(easyflash_cart_t * cart, const char *filename, int ocean);
+extern int loader_save(easyflash_cart_t * cart, const char *filename, int ocean);
 
 #endif

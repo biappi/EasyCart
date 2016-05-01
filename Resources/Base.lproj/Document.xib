@@ -16,6 +16,7 @@
         <customObject id="574-r2-obr" customClass="ViewController" customModule="EasyCart" customModuleProvider="target">
             <connections>
                 <outlet property="arrayController" destination="HxU-N8-MGk" id="3tY-51-qFq"/>
+                <outlet property="document" destination="-2" id="ZlS-A1-BIS"/>
                 <outlet property="entriesTable" destination="JGl-19-DOF" id="pau-v6-GGU"/>
                 <outlet property="spaceIndicator" destination="LeH-uR-LRD" id="ikn-dF-GCA"/>
             </connections>

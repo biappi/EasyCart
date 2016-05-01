@@ -45,9 +45,9 @@ static unsigned char loader_data_ocm[LOADER_SIZE];
 
 /* -------------------------------------------------------------------------- */
 
-static int loader_check(int ocean)
+static int loader_check(easyflash_cart_t * cart, int ocean)
 {
-    if (main_flash_state & (ocean ? MAIN_STATE_HAVE_LOADERO : MAIN_STATE_HAVE_LOADERN)) {
+    if (cart->main_flash_state & (ocean ? MAIN_STATE_HAVE_LOADERO : MAIN_STATE_HAVE_LOADERN)) {
         return 0;
     }
 
@@ -57,7 +57,7 @@ static int loader_check(int ocean)
 
 /* -------------------------------------------------------------------------- */
 
-int loader_load(const char* filename, int ocean)
+int loader_load(easyflash_cart_t * cart, const char* filename, int ocean)
 {
     unsigned char buf[LOADER_SIZE + 2];
     unsigned int load_addr = 0;
@@ -70,15 +70,15 @@ int loader_load(const char* filename, int ocean)
 
     memcpy(ocean ? loader_data_ocm : loader_data_nrm, buf, LOADER_SIZE);
 
-    main_flash_state |= (ocean ? MAIN_STATE_HAVE_LOADERO : MAIN_STATE_HAVE_LOADERN);
+    cart->main_flash_state |= (ocean ? MAIN_STATE_HAVE_LOADERO : MAIN_STATE_HAVE_LOADERN);
     return 0;
 }
 
-int loader_save(const char *filename, int ocean)
+int loader_save(easyflash_cart_t * cart, const char *filename, int ocean)
 {
     unsigned int load_addr = ocean ? LOADER_OCM_ADDR : LOADER_NRM_ADDR;
 
-    if (loader_check(ocean)) {
+    if (loader_check(cart, ocean)) {
         return -1;
     }
 
@@ -89,12 +89,12 @@ int loader_save(const char *filename, int ocean)
 
 /* -------------------------------------------------------------------------- */
 
-int loader_inject(int ocean, int custom)
+int loader_inject(easyflash_cart_t * cart, int ocean, int custom)
 {
     const unsigned char *p;
 
     if (custom) {
-        if (loader_check(ocean)) {
+        if (loader_check(cart, ocean)) {
             return -1;
         }
         p = ocean ? loader_data_ocm : loader_data_nrm;
@@ -102,16 +102,16 @@ int loader_inject(int ocean, int custom)
         p = ocean ? &easyloader_ocm_prg[2] : &easyloader_nrm_prg[2];
     }
 
-    memcpy(&main_flash_data[ocean ? LOADER_OCM_OFFSET : LOADER_NRM_OFFSET], p, LOADER_SIZE);
+    memcpy(&cart->main_flash_data[ocean ? LOADER_OCM_OFFSET : LOADER_NRM_OFFSET], p, LOADER_SIZE);
     return 0;
 }
 
-int loader_extract(int ocean)
+int loader_extract(easyflash_cart_t * cart, int ocean)
 {
-    if (loader_check(ocean)) {
+    if (loader_check(cart, ocean)) {
         return -1;
     }
 
-    memcpy(ocean ? loader_data_ocm : loader_data_nrm, &main_flash_data[ocean ? LOADER_OCM_OFFSET : LOADER_NRM_OFFSET], LOADER_SIZE);
+    memcpy(ocean ? loader_data_ocm : loader_data_nrm, &cart->main_flash_data[ocean ? LOADER_OCM_OFFSET : LOADER_NRM_OFFSET], LOADER_SIZE);
     return 0;
 }

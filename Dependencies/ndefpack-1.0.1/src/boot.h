@@ -27,10 +27,12 @@
 #ifndef BOOT_H
 #define BOOT_H
 
-extern int boot_inject(int ocean, int custom);
-extern int boot_extract(int ocean);
+#include "flash.h"
 
-extern int boot_load(const char *filename, int ocean);
-extern int boot_save(const char *filename, int ocean);
+extern int boot_inject(easyflash_cart_t * cart, int ocean, int custom);
+extern int boot_extract(easyflash_cart_t * cart, int ocean);
+
+extern int boot_load(easyflash_cart_t * cart, const char *filename, int ocean);
+extern int boot_save(easyflash_cart_t * cart, const char *filename, int ocean);
 
 #endif

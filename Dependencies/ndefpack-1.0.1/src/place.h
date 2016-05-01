@@ -27,9 +27,9 @@
 #ifndef PLACE_H
 #define PLACE_H
 
-extern void mark_places_of_old_entries(void);
-extern void clear_placements(void);
-extern int place_entries(void);
-extern int clear_and_place_entries(void);
+extern void mark_places_of_old_entries(easyflash_cart_t * cart);
+extern void clear_placements(easyflash_cart_t * cart);
+extern int place_entries(easyflash_cart_t * cart);
+extern int clear_and_place_entries(easyflash_cart_t * cart);
 
 #endif

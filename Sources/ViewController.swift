@@ -30,16 +30,16 @@ class Entry : NSObject {
     }
 }
 
-func buildEntriesList() -> [Entry] {
+func buildEntriesList(cart : Cart) -> [Entry] {
     var list : [Entry] = []
     
-    for i in 0 ..< main_flash_efs_num {
-        let entry = main_flash_efs_entry(i)
+    for i in 0 ..< cart.entryCount() {
+        let entry = cart.entryAt(i)
         
         list.append(Entry(
             idx:    Int(i + 1),
-            name:   String.fromCString(main_flash_efs_entry_menuname(i)) ?? "",
-            type:   String.fromCString(efs_entry_type_string(entry.type)) ?? "",
+            name:   String.fromCString(cart.menuNameAt(i)) ?? "",
+            type:   String.fromCString(cart.typeAt(i)) ?? "",
             bank:   Int(entry.bank),
             offset: Int(entry.offset),
             size:   Int(entry.size)
@@ -53,6 +53,7 @@ class ViewController : NSObject, NSTableViewDataSource {
     @IBOutlet      var arrayController: NSArrayController!
     @IBOutlet weak var spaceIndicator:  NSLevelIndicator!
     @IBOutlet weak var entriesTable:    NSTableView!
+    @IBOutlet weak var document: Document!
     
     override func awakeFromNib() {
         spaceIndicator.maxValue = Double(EasyFlashSize)
@@ -61,8 +62,8 @@ class ViewController : NSObject, NSTableViewDataSource {
     }
     
     func refreshUI() {
-        arrayController.content = buildEntriesList()
-        spaceIndicator.intValue = Int32(EasyFlashSize) - main_flash_space.total
+        arrayController.content = buildEntriesList(document.cart)
+        spaceIndicator.intValue = Int32(EasyFlashSize) - document.cart.main_flash_space.total
     }
     
     @IBAction func add(sender: AnyObject) {
@@ -82,7 +83,7 @@ class ViewController : NSObject, NSTableViewDataSource {
                 return
             }
             
-            let addResult = main_flash_add_file(filePath, nil, 0, 0, 1)
+            let addResult = self.document.cart.addFile(filePath)
             if  addResult < 0 {
                 let alert = NSAlert()
                 alert.messageText = "Error"
@@ -96,7 +97,7 @@ class ViewController : NSObject, NSTableViewDataSource {
     }
     
     @IBAction func remove(sender: AnyObject) {
-        main_flash_del_entry(Int32(arrayController.selectionIndex))
+        document.cart.removeEntryAt(arrayController.selectionIndex)
         refreshUI()
     }
     
@@ -119,12 +120,12 @@ class ViewController : NSObject, NSTableViewDataSource {
         let data : NSData = info.draggingPasteboard().dataForType(RowPasteboardType)!
         let rowIndexes : NSIndexSet = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSIndexSet
         
-        let from  : Int32 = Int32(rowIndexes.firstIndex)
-        var to    : Int32 = Int32(row)
+        let from  = rowIndexes.firstIndex
+        var to    = row
         
         if to > from { to -= 1 }
         
-        main_flash_entry_swap(from, to)
+        document.cart.swapEntriesAt(from, with: to)
         
         refreshUI()
         arrayController.setSelectionIndex(Int(to))

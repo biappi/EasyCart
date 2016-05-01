@@ -30,13 +30,13 @@
 #include "easyfs.h"
 #include "types.h"
 
-/* Raw 1MB Flash image. */
-extern unsigned char main_flash_data[EASYFLASH_SIZE];
-
-/* Table of EasyFS entries. */
-extern efs_entry_t main_flash_efs[EFS_ENTRIES_MAX + 1];
-/* Number of entries in the above table. */
-extern int main_flash_efs_num;
+#define MAIN_STATE_HAVE_BOOTN   (1 << 0)
+#define MAIN_STATE_HAVE_BOOTO   (1 << 1)
+#define MAIN_STATE_HAVE_LOADERN (1 << 2)
+#define MAIN_STATE_HAVE_LOADERO (1 << 3)
+#define MAIN_STATE_HAVE_EAPI    (1 << 4)
+#define MAIN_STATE_HAVE_OCEAN   (1 << 5)
+#define MAIN_STATE_HAVE_OLDEFS  (1 << 6)
 
 /* Free space on Flash. */
 typedef struct main_flash_space_s {
@@ -52,37 +52,41 @@ typedef struct main_flash_space_s {
     bank_used_t bank_used;
 } main_flash_space_t;
 
-extern main_flash_space_t main_flash_space;
+typedef struct easyflash_cart_s {
+    /* Raw 1MB Flash image. */
+    unsigned char main_flash_data[EASYFLASH_SIZE];
+    
+    /* Table of EasyFS entries. */
+    efs_entry_t main_flash_efs[EFS_ENTRIES_MAX + 1];
+    
+    /* Number of entries in the above table. */
+    int main_flash_efs_num;
+    
+    /* Free space on Flash. */
+    main_flash_space_t main_flash_space;
+    
+    int main_flash_state;
+} easyflash_cart_t;
 
-#define MAIN_STATE_HAVE_BOOTN   (1 << 0)
-#define MAIN_STATE_HAVE_BOOTO   (1 << 1)
-#define MAIN_STATE_HAVE_LOADERN (1 << 2)
-#define MAIN_STATE_HAVE_LOADERO (1 << 3)
-#define MAIN_STATE_HAVE_EAPI    (1 << 4)
-#define MAIN_STATE_HAVE_OCEAN   (1 << 5)
-#define MAIN_STATE_HAVE_OLDEFS  (1 << 6)
+extern void main_flash_init(easyflash_cart_t * cart);
+extern void main_flash_shutdown(easyflash_cart_t * cart);
 
-extern int main_flash_state;
+extern int main_flash_load(easyflash_cart_t * cart, const char *filename);
+extern int main_flash_save(easyflash_cart_t * cart, const char *filename);
 
-extern void main_flash_init(void);
-extern void main_flash_shutdown(void);
+extern int main_flash_dump_all(easyflash_cart_t * cart, int save_files, const char *prefix);
+extern void main_flash_display_space(easyflash_cart_t * cart);
 
-extern int main_flash_load(const char *filename);
-extern int main_flash_save(const char *filename);
+extern int main_flash_add_file(easyflash_cart_t * cart, const char *filename, const char *menuname, int hidden, int force_align, int place_now);
+extern int main_flash_place_entries(easyflash_cart_t * cart);
+extern int main_flash_del_entry(easyflash_cart_t * cart, int index);
+extern int main_flash_ext_entry(easyflash_cart_t * cart, int index, const char *filename);
 
-extern int main_flash_dump_all(int save_files, const char *prefix);
-extern void main_flash_display_space(void);
-
-extern int main_flash_add_file(const char *filename, const char *menuname, int hidden, int force_align, int place_now);
-extern int main_flash_place_entries(void);
-extern int main_flash_del_entry(int index);
-extern int main_flash_ext_entry(int index, const char *filename);
-
-extern int main_flash_entry_find(const char *name);
-extern int main_flash_entry_swap(int i, int j);
-extern int main_flash_entry_sort(void);
-extern int main_flash_entry_name(int i, const char *menuname);
-extern int main_flash_entry_hide(int i, int hidden);
-extern int main_flash_entry_a64k(int i, int align);
+extern int main_flash_entry_find(easyflash_cart_t * cart, const char *name);
+extern int main_flash_entry_swap(easyflash_cart_t * cart, int i, int j);
+extern int main_flash_entry_sort(easyflash_cart_t * cart);
+extern int main_flash_entry_name(easyflash_cart_t * cart, int i, const char *menuname);
+extern int main_flash_entry_hide(easyflash_cart_t * cart, int i, int hidden);
+extern int main_flash_entry_a64k(easyflash_cart_t * cart, int i, int align);
 
 #endif

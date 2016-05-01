@@ -129,22 +129,22 @@ static int calc_total_space(void)
     return EASYFLASH_SIZE - total_used;
 }
 
-static void update_space(void)
+static void update_space(easyflash_cart_t * cart)
 {
-    main_flash_space.total = calc_total_space();
-    main_flash_space.top = calc_top_space(NULL, NULL);
-    main_flash_space.rom_16k = calc_cart_space(&main_flash_space.rom_8k, &main_flash_space.rom_u8k);
-    memcpy(main_flash_space.bank_used, flash_bank_used, sizeof(flash_bank_used));
+    cart->main_flash_space.total = calc_total_space();
+    cart->main_flash_space.top = calc_top_space(NULL, NULL);
+    cart->main_flash_space.rom_16k = calc_cart_space(&cart->main_flash_space.rom_8k, &cart->main_flash_space.rom_u8k);
+    memcpy(cart->main_flash_space.bank_used, flash_bank_used, sizeof(flash_bank_used));
 }
 
 /* -------------------------------------------------------------------------- */
 
-static int check_range_placed(int low, int high)
+static int check_range_placed(easyflash_cart_t * cart, int low, int high)
 {
     int i;
 
     for (i = low; i < high; ++i) {
-        if (!(main_flash_efs[i].flags & EFS_FLAG_PLACED)) {
+        if (!(cart->main_flash_efs[i].flags & EFS_FLAG_PLACED)) {
             return 0;
         }
     }
@@ -152,18 +152,18 @@ static int check_range_placed(int low, int high)
     return 1;
 }
 
-static void shrink_range_placed(int *low_out, int *high_out)
+static void shrink_range_placed(easyflash_cart_t * cart, int *low_out, int *high_out)
 {
     int low = *low_out;
     int high = *high_out;
 
     /* find first unplaced */
-    while ((low < EFS_ENTRIES_MAX) && (main_flash_efs[placement_order[low]].flags & EFS_FLAG_PLACED)) {
+    while ((low < EFS_ENTRIES_MAX) && (cart->main_flash_efs[placement_order[low]].flags & EFS_FLAG_PLACED)) {
         ++low;
     }
 
     /* find last unplaced */
-    while ((high > 0) && (main_flash_efs[placement_order[high - 1]].flags & EFS_FLAG_PLACED)) {
+    while ((high > 0) && (cart->main_flash_efs[placement_order[high - 1]].flags & EFS_FLAG_PLACED)) {
         --high;
     }
 
@@ -307,27 +307,27 @@ static void mark_used_prg(efs_entry_t *e, int bank, int size, int romlh, unsigne
     }
 }
 
-static void mark_used_prg_update(int prg_i, int bank, int size, int romlh, int toggle)
+static void mark_used_prg_update(easyflash_cart_t * cart, int prg_i, int bank, int size, int romlh, int toggle)
 {
     unsigned int offset;
 
     offset = flash_bank_used[romlh][bank];
-    main_flash_efs[prg_i].offset = offset + romlh * 0x2000;
-    main_flash_efs[prg_i].bank = bank;
+    cart->main_flash_efs[prg_i].offset = offset + romlh * 0x2000;
+    cart->main_flash_efs[prg_i].bank = bank;
 
     if (toggle) {
-        main_flash_efs[prg_i].type = EF_ENTRY_PRG;
+        cart->main_flash_efs[prg_i].type = EF_ENTRY_PRG;
     } else {
-        main_flash_efs[prg_i].type = romlh ? EF_ENTRY_PRG_H : EF_ENTRY_PRG_L;
+        cart->main_flash_efs[prg_i].type = romlh ? EF_ENTRY_PRG_H : EF_ENTRY_PRG_L;
     }
 
-    mark_used_prg(&(main_flash_efs[prg_i]), bank, size, romlh, 0x2000 - flash_bank_used[romlh][bank], toggle);
-    main_flash_efs[prg_i].flags |= EFS_FLAG_PLACED;
+    mark_used_prg(&(cart->main_flash_efs[prg_i]), bank, size, romlh, 0x2000 - flash_bank_used[romlh][bank], toggle);
+    cart->main_flash_efs[prg_i].flags |= EFS_FLAG_PLACED;
 }
 
-static int place_prg_top(int prg_i)
+static int place_prg_top(easyflash_cart_t * cart, int prg_i)
 {
-    unsigned int size = main_flash_efs[prg_i].size;
+    unsigned int size = cart->main_flash_efs[prg_i].size;
     int bank = 0, romlh = 0;
     int top_space = calc_top_space(&bank, &romlh);
 
@@ -337,45 +337,45 @@ static int place_prg_top(int prg_i)
         return -1;
     }
 
-    mark_used_prg_update(prg_i, bank, size, romlh, 1);
+    mark_used_prg_update(cart, prg_i, bank, size, romlh, 1);
     return 0;
 }
 
-static int place_prg_gap(int prg_i, int bank, int romlh)
+static int place_prg_gap(easyflash_cart_t * cart, int prg_i, int bank, int romlh)
 {
-    unsigned int size = main_flash_efs[prg_i].size;
+    unsigned int size = cart->main_flash_efs[prg_i].size;
 
     util_dbg("prg %3i gap size %06x bank %04x lh %i", prg_i, size, bank, romlh);
 
-    mark_used_prg_update(prg_i, bank, size, romlh, 0);
+    mark_used_prg_update(cart, prg_i, bank, size, romlh, 0);
     return 0;
 }
 
-static int place_crt(int i)
+static int place_crt(easyflash_cart_t * cart, int i)
 {
     efs_entry_type_t type;
     unsigned int bank_l_off, bank_l_num, bank_h_off, bank_h_num;
     int bank, step;
 
-    if (main_flash_efs[i].flags & EFS_FLAG_PLACED) {
+    if (cart->main_flash_efs[i].flags & EFS_FLAG_PLACED) {
         return 0;
     }
 
-    type = main_flash_efs[i].type;
+    type = cart->main_flash_efs[i].type;
 
     if (efs_entry_type_other_is_romh(type)) {
         bank_l_off = 0;
-        bank_l_num = main_flash_efs[i].bank_num;
-        bank_h_off = main_flash_efs[i].other_bank_off;
-        bank_h_num = main_flash_efs[i].other_bank_num;
+        bank_l_num = cart->main_flash_efs[i].bank_num;
+        bank_h_off = cart->main_flash_efs[i].other_bank_off;
+        bank_h_num = cart->main_flash_efs[i].other_bank_num;
     } else {
         bank_h_off = 0;
-        bank_h_num = main_flash_efs[i].bank_num;
-        bank_l_off = main_flash_efs[i].other_bank_off;
-        bank_l_num = main_flash_efs[i].other_bank_num;
+        bank_h_num = cart->main_flash_efs[i].bank_num;
+        bank_l_off = cart->main_flash_efs[i].other_bank_off;
+        bank_l_num = cart->main_flash_efs[i].other_bank_num;
     }
 
-    if (main_flash_efs[i].flags & EFS_FLAG_ALIGN64K) {
+    if (cart->main_flash_efs[i].flags & EFS_FLAG_ALIGN64K) {
         step = 0x10000 / 0x2000;
     } else {
         step = 0x2000 / 0x2000;
@@ -389,22 +389,22 @@ static int place_crt(int i)
 
     /* As Ocean carts are placed first, the previous call should have placed it at bank 0. */
     if (efs_entry_type_ocean(type) && (bank != 0)) {
-        util_error("bug: bank %i for Ocean cart '%s'", bank, main_flash_efs[i].menuname);
+        util_error("bug: bank %i for Ocean cart '%s'", bank, cart->main_flash_efs[i].menuname);
         return -2;
     }
 
-    main_flash_efs[i].bank = bank;
+    cart->main_flash_efs[i].bank = bank;
 
     util_dbg("crt %3i bank %04x l+%02x ln %02x h+%02x hn %02x", i, bank, bank_l_off, bank_l_num, bank_h_off, bank_h_num);
 
-    mark_used_banks(&(main_flash_efs[i]), bank + bank_l_off, bank_l_num, bank + bank_h_off, bank_h_num);
+    mark_used_banks(&(cart->main_flash_efs[i]), bank + bank_l_off, bank_l_num, bank + bank_h_off, bank_h_num);
 
-    main_flash_efs[i].flags |= EFS_FLAG_PLACED;
+    cart->main_flash_efs[i].flags |= EFS_FLAG_PLACED;
 
     return 0;
 }
 
-static int place_all_prgs(int low, int high)
+static int place_all_prgs(easyflash_cart_t * cart, int low, int high)
 {
     int max_gap_bank = 0;
     int gap_bank = 0, gap_lh = 0;
@@ -412,20 +412,20 @@ static int place_all_prgs(int low, int high)
 
     calc_top_space(&max_gap_bank, &i);
 
-    shrink_range_placed(&low, &high);
+    shrink_range_placed(cart, &low, &high);
 
     while (low < high) {
         int smallest_size;
         int gap_size;
 
-        smallest_size = main_flash_efs[placement_order[high - 1]].size;
+        smallest_size = cart->main_flash_efs[placement_order[high - 1]].size;
         gap_size = find_free_gap(&gap_bank, &gap_lh, max_gap_bank, smallest_size);
 
         if (gap_size == 0) {
             /* no gaps left to fit the smallest, just use the space at top */
             i = placement_order[low];
 
-            if (place_prg_top(i)) {
+            if (place_prg_top(cart, i)) {
                 return -1;
             }
         } else {
@@ -435,10 +435,10 @@ static int place_all_prgs(int low, int high)
 
             for (j = low; j < high; ++j) {
                 i = placement_order[j];
-                size = main_flash_efs[i].size;
+                size = cart->main_flash_efs[i].size;
 
-                if ((size <= gap_size) && ((main_flash_efs[i].flags & EFS_FLAG_PLACED) == 0)) {
-                    place_prg_gap(i, gap_bank, gap_lh);
+                if ((size <= gap_size) && ((cart->main_flash_efs[i].flags & EFS_FLAG_PLACED) == 0)) {
+                    place_prg_gap(cart, i, gap_bank, gap_lh);
                     break;
                 }
             }
@@ -449,7 +449,7 @@ static int place_all_prgs(int low, int high)
             }
         }
 
-        shrink_range_placed(&low, &high);
+        shrink_range_placed(cart, &low, &high);
     }
 
     return 0;
@@ -459,12 +459,13 @@ static int place_all_prgs(int low, int high)
 /* -------------------------------------------------------------------------- */
 
 /* comparison function for qsort */
+static easyflash_cart_t * cart_for_qsort = NULL;
 static int weight_cmp(const void *p1, const void *p2)
 {
     int i1 = *(int *)p1;
     int i2 = *(int *)p2;
-    unsigned int w1 = main_flash_efs[i1].weight;
-    unsigned int w2 = main_flash_efs[i2].weight;
+    unsigned int w1 = cart_for_qsort->main_flash_efs[i1].weight;
+    unsigned int w2 = cart_for_qsort->main_flash_efs[i2].weight;
 
     if (w1 < w2) {
         return 1;
@@ -520,24 +521,26 @@ static void calc_weight(efs_entry_t *e)
     }
 }
 
-static int order_entries(void)
+static int order_entries(easyflash_cart_t * cart)
 {
     int i, num_crt = 0;
 
-    for (i = 0; i < main_flash_efs_num; ++i) {
-        calc_weight(&main_flash_efs[i]);
+    for (i = 0; i < cart->main_flash_efs_num; ++i) {
+        calc_weight(&cart->main_flash_efs[i]);
         placement_order[i] = i;
     }
 
     /* sort the (table of indices of) entries */
-    qsort(placement_order, main_flash_efs_num, sizeof(int), weight_cmp);
+    cart_for_qsort = cart;
+    qsort(placement_order, cart->main_flash_efs_num, sizeof(int), weight_cmp);
+    cart_for_qsort = NULL;
 
-    for (i = 0; i < main_flash_efs_num; ++i) {
+    for (i = 0; i < cart->main_flash_efs_num; ++i) {
         efs_entry_t *e;
         int j;
 
         j = placement_order[i];
-        e = &main_flash_efs[j];
+        e = &cart->main_flash_efs[j];
 
         if (!efs_entry_type_prg(e->type)) {
             ++num_crt;
@@ -551,27 +554,27 @@ static int order_entries(void)
 
 /* -------------------------------------------------------------------------- */
 
-int place_entries(void)
+int place_entries(easyflash_cart_t * cart)
 {
     int i, t_i, num_crt;
-    int low = 0, high = main_flash_efs_num;
+    int low = 0, high = cart->main_flash_efs_num;
 
-    if (check_range_placed(low, high)) {
+    if (check_range_placed(cart, low, high)) {
         /* all placed, nothing to do */
         /* update space in case the last item was deleted */
-        if (main_flash_efs_num == 0) {
-            update_space();
+        if (cart->main_flash_efs_num == 0) {
+            update_space(cart);
         }
         return 0;
     }
 
-    num_crt = order_entries();
+    num_crt = order_entries(cart);
 
     /* place carts */
     for (t_i = low; t_i < num_crt; ++t_i) {
         i = placement_order[t_i];
 
-        if (main_flash_efs[i].flags & EFS_FLAG_PLACED) {
+        if (cart->main_flash_efs[i].flags & EFS_FLAG_PLACED) {
             if (t_i == low) {
                 ++low;
             }
@@ -581,36 +584,36 @@ int place_entries(void)
             continue;
         }
 
-        if (place_crt(i) < 0) {
-            util_error("cartridge '%s' didn't fit in!", main_flash_efs[i].menuname);
+        if (place_crt(cart, i) < 0) {
+            util_error("cartridge '%s' didn't fit in!", cart->main_flash_efs[i].menuname);
             return -3;
         }
     }
 
     low = t_i;
 
-    if (place_all_prgs(low, high) < 0) {
+    if (place_all_prgs(cart, low, high) < 0) {
         util_error("programs didn't fit in!");
         return -4;
     }
 
-    update_space();
+    update_space(cart);
 
     return 0;
 }
 
-void mark_places_of_old_entries(void)
+void mark_places_of_old_entries(easyflash_cart_t * cart)
 {
     int i;
 
-    for (i = 0; i < main_flash_efs_num; ++i) {
-        efs_entry_type_t type = main_flash_efs[i].type;
+    for (i = 0; i < cart->main_flash_efs_num; ++i) {
+        efs_entry_type_t type = cart->main_flash_efs[i].type;
 
         if (efs_entry_type_prg(type)) {
             /* special case: PRG */
-            int bank = main_flash_efs[i].bank;
-            int offset = main_flash_efs[i].offset;
-            int size = main_flash_efs[i].size;
+            int bank = cart->main_flash_efs[i].bank;
+            int offset = cart->main_flash_efs[i].offset;
+            int size = cart->main_flash_efs[i].size;
             int toggle_romh = (type == EF_ENTRY_PRG) ? 1 : 0;
             int romh = (offset & 0x2000) ? 1 : 0;
 
@@ -618,33 +621,33 @@ void mark_places_of_old_entries(void)
 
             offset &= 0x1fff;
 
-            mark_used_prg(&(main_flash_efs[i]), bank, size, romh, 0x2000 - offset, toggle_romh);
+            mark_used_prg(&(cart->main_flash_efs[i]), bank, size, romh, 0x2000 - offset, toggle_romh);
         } else {
             unsigned int bank_l, bank_l_num, bank_h, bank_h_num;
 
             if (efs_entry_type_other_is_romh(type)) {
-                bank_l = main_flash_efs[i].bank;
-                bank_l_num = main_flash_efs[i].bank_num;
-                bank_h = main_flash_efs[i].bank + main_flash_efs[i].other_bank_off;
-                bank_h_num = main_flash_efs[i].other_bank_num;
+                bank_l = cart->main_flash_efs[i].bank;
+                bank_l_num = cart->main_flash_efs[i].bank_num;
+                bank_h = cart->main_flash_efs[i].bank + cart->main_flash_efs[i].other_bank_off;
+                bank_h_num = cart->main_flash_efs[i].other_bank_num;
             } else {
-                bank_h = main_flash_efs[i].bank;
-                bank_h_num = main_flash_efs[i].bank_num;
-                bank_l = main_flash_efs[i].bank + main_flash_efs[i].other_bank_off;
-                bank_l_num = main_flash_efs[i].other_bank_num;
+                bank_h = cart->main_flash_efs[i].bank;
+                bank_h_num = cart->main_flash_efs[i].bank_num;
+                bank_l = cart->main_flash_efs[i].bank + cart->main_flash_efs[i].other_bank_off;
+                bank_l_num = cart->main_flash_efs[i].other_bank_num;
             }
             util_dbg("crt %3i bank l %04x ln %02x h %04x hn %02x", i, bank_l, bank_l_num, bank_h, bank_h_num);
 
-            mark_used_banks(&(main_flash_efs[i]), bank_l, bank_l_num, bank_h, bank_h_num);
+            mark_used_banks(&(cart->main_flash_efs[i]), bank_l, bank_l_num, bank_h, bank_h_num);
         }
 
-        main_flash_efs[i].flags |= EFS_FLAG_PLACED;
+        cart->main_flash_efs[i].flags |= EFS_FLAG_PLACED;
     }
 
-    update_space();
+    update_space(cart);
 }
 
-void clear_placements(void)
+void clear_placements(easyflash_cart_t * cart)
 {
     int i;
 
@@ -654,19 +657,19 @@ void clear_placements(void)
     mark_used_banks(NULL, 0, 0, 0, 1);
 
     /* reserve loader bank */
-    if (main_flash_state & MAIN_STATE_HAVE_OCEAN) {
+    if (cart->main_flash_state & MAIN_STATE_HAVE_OCEAN) {
         mark_used_banks(NULL, 0, 0, 1, 1);
     } else {
         mark_used_banks(NULL, 0, 1, 0, 0);
     }
 
-    for (i = 0; i < main_flash_efs_num; ++i) {
-        main_flash_efs[i].flags &= ~EFS_FLAG_PLACED;
+    for (i = 0; i < cart->main_flash_efs_num; ++i) {
+        cart->main_flash_efs[i].flags &= ~EFS_FLAG_PLACED;
     }
 }
 
-int clear_and_place_entries(void)
+int clear_and_place_entries(easyflash_cart_t * cart)
 {
-    clear_placements();
-    return place_entries();
+    clear_placements(cart);
+    return place_entries(cart);
 }

@@ -27,11 +27,13 @@
 #ifndef PRG_H
 #define PRG_H
 
+#include "flash.h"
+
 struct efs_entry_s;
 extern int prg_load(const char* filename, struct efs_entry_s *entry_ptr);
-extern int prg_save(const char* filename, struct efs_entry_s *entry_ptr);
+extern int prg_save(easyflash_cart_t * cart, const char* filename, struct efs_entry_s *entry_ptr);
 
-extern int prg_inject(struct efs_entry_s *entry_ptr);
-extern int prg_extract(struct efs_entry_s *entry_ptr);
+extern int prg_inject(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr);
+extern int prg_extract(easyflash_cart_t * cart, struct efs_entry_s *entry_ptr);
 
 #endif
