@@ -84,4 +84,11 @@
     efname_set(&cart, efname);
 }
 
+- (BOOL)canRunEntryAt:(NSInteger)i;
+{
+    const char * type = [self typeAt:i];
+    const size_t len  = strlen(type);
+    return strncmp(type, "PRG", len) == 0;
+}
+
 @end

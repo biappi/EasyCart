@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="EasyCart" customModuleProvider="target">
@@ -20,6 +20,7 @@
                 <outlet property="entriesTable" destination="JGl-19-DOF" id="pau-v6-GGU"/>
                 <outlet property="nameTextField" destination="Se5-ca-Rpi" id="xHQ-yc-dhk"/>
                 <outlet property="spaceIndicator" destination="LeH-uR-LRD" id="ikn-dF-GCA"/>
+                <outlet property="uploadButton" destination="sce-lS-KgO" id="oap-wI-quv"/>
             </connections>
         </customObject>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="vh6-Dl-66y">
@@ -167,6 +168,7 @@
                                     </tableColumns>
                                     <connections>
                                         <outlet property="dataSource" destination="574-r2-obr" id="EGO-eF-rWj"/>
+                                        <outlet property="delegate" destination="574-r2-obr" id="o8p-fa-vyq"/>
                                     </connections>
                                 </tableView>
                             </subviews>
@@ -238,10 +240,10 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="D87B0AE6-D7C5-4F92-845F-85C2CA1B9A21" label="Custom View" paletteLabel="Custom View" id="U4A-Rb-etj">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="127" height="25"/>
+                        <size key="minSize" width="75" height="25"/>
                         <size key="maxSize" width="127" height="25"/>
                         <button key="view" verticalHuggingPriority="750" id="eTx-Ud-ge2">
-                            <rect key="frame" x="0.0" y="14" width="127" height="25"/>
+                            <rect key="frame" x="1" y="14" width="75" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="roundTextured" title="Add" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lMA-7W-GbU">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -254,10 +256,10 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="6C463F83-C9D1-4017-A0AD-EA978A1C3420" label="Custom View" paletteLabel="Custom View" id="gAS-FC-qOd">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="127" height="25"/>
+                        <size key="minSize" width="75" height="25"/>
                         <size key="maxSize" width="127" height="25"/>
                         <button key="view" verticalHuggingPriority="750" id="u7t-gR-8AC">
-                            <rect key="frame" x="0.0" y="14" width="127" height="25"/>
+                            <rect key="frame" x="1" y="14" width="75" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="roundTextured" title="Remove" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wKq-Yr-htG">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -269,6 +271,22 @@
                         </button>
                         <connections>
                             <action selector="remove:" target="574-r2-obr" id="LwP-mU-72h"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="FF59DEA0-E5BD-49C1-BF44-EB0D043EC0FF" label="Custom View" paletteLabel="Custom View" id="Fc8-Kx-9OG">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="127" height="25"/>
+                        <size key="maxSize" width="148" height="25"/>
+                        <button key="view" verticalHuggingPriority="750" id="sce-lS-KgO">
+                            <rect key="frame" x="0.0" y="14" width="148" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="Upload PRG to C64" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tCS-Au-PF3">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="remove:" target="574-r2-obr" id="KHc-Hx-Ehv"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="bwQ-SJ-h7o"/>
@@ -290,6 +308,7 @@
                 <defaultToolbarItems>
                     <toolbarItem reference="U4A-Rb-etj"/>
                     <toolbarItem reference="gAS-FC-qOd"/>
+                    <toolbarItem reference="Fc8-Kx-9OG"/>
                     <toolbarItem reference="bwQ-SJ-h7o"/>
                     <toolbarItem reference="r9n-Zh-8yZ"/>
                 </defaultToolbarItems>

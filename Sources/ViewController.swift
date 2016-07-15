@@ -50,9 +50,7 @@ func buildEntriesList(cart : Cart) -> [Entry] {
 }
 
 func getViceAppUrl() -> NSURL? {
-    let maybePaths = LSCopyApplicationURLsForBundleIdentifier("org.viceteam.x64", nil)
-    
-    guard let pathsCFArray = maybePaths else {
+    guard let pathsCFArray = LSCopyApplicationURLsForBundleIdentifier("org.viceteam.x64", nil) else {
         return nil
     }
     
@@ -60,12 +58,13 @@ func getViceAppUrl() -> NSURL? {
     return pathsArray.first as? NSURL
 }
 
-class ViewController : NSObject, NSTableViewDataSource {
+class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet      var arrayController: NSArrayController!
     @IBOutlet weak var spaceIndicator:  NSLevelIndicator!
     @IBOutlet weak var entriesTable:    NSTableView!
     @IBOutlet weak var document:        Document!
     @IBOutlet weak var nameTextField:   NSTextField!
+    @IBOutlet weak var uploadButton:    NSButton!
     
     override func awakeFromNib() {
         spaceIndicator.maxValue = Double(EasyFlashSize)
@@ -208,6 +207,21 @@ class ViewController : NSObject, NSTableViewDataSource {
     {
         aTableView.setDropRow(row, dropOperation:.Above)
         return .Move
+    }
+    
+    func canRunSelection() -> Bool {
+        let indexes = entriesTable.selectedRowIndexes
+        
+        if indexes.count != 1 {
+            return false
+        }
+        else {
+            return document.cart.canRunEntryAt(indexes.firstIndex)
+        }
+    }
+    
+    func tableViewSelectionDidChange(notification: NSNotification) {
+        uploadButton.enabled = canRunSelection()
     }
 }
 
