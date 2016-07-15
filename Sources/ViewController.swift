@@ -120,27 +120,18 @@ class ViewController : NSObject, NSTableViewDataSource {
    
     @IBAction func test(sender: AnyObject) {
         guard let viceUrl = getViceAppUrl() else {
-            let alert = NSAlert()
-            alert.messageText = "Cannot find VICE"
-            alert.informativeText = "Make sure you have the VICE C64 emulator"
-            alert.runModal()
+            showAlert("Cannot find VICE", "Make sure you have the VICE C64 emulator")
             return
         }
         
         document.autosaveWithImplicitCancellability(false) { (error) in
             if let error = error {
-                let alert = NSAlert()
-                alert.messageText = "Error saving a preview file"
-                alert.informativeText = error.description
-                alert.runModal()
+                showAlert("Error saving a preview file", error.description)
                 return
             }
             
             guard let autosavedUrl = self.document.autosavedContentsFileURL else {
-                let alert = NSAlert()
-                alert.messageText = "Error saving a preview file"
-                alert.informativeText = "Couldn't get the autosaved file location"
-                alert.runModal()
+                showAlert("Error saving a preview file", "Couldn't get the autosaved file location")
                 return
             }
             
@@ -154,18 +145,12 @@ class ViewController : NSObject, NSTableViewDataSource {
     @IBAction func flash(sender: AnyObject) {
         document.autosaveWithImplicitCancellability(false) { (error) in
             if let error = error {
-                let alert = NSAlert()
-                alert.messageText = "Error saving a preview file"
-                alert.informativeText = error.description
-                alert.runModal()
+                showAlert("Error saving a preview file", error.description)
                 return
             }
             
             guard let autosavedUrl = self.document.autosavedContentsFileURL else {
-                let alert = NSAlert()
-                alert.messageText = "Error saving a preview file"
-                alert.informativeText = "Couldn't get the autosaved file location"
-                alert.runModal()
+                showAlert("Error saving a preview file", "Couldn't get the autosaved file location")
                 return
             }
             
@@ -224,4 +209,11 @@ class ViewController : NSObject, NSTableViewDataSource {
         aTableView.setDropRow(row, dropOperation:.Above)
         return .Move
     }
+}
+
+func showAlert(message : String, _ info : String) {
+    let alert = NSAlert()
+    alert.messageText = message
+    alert.informativeText = info
+    alert.runModal()
 }
