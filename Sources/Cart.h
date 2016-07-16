@@ -48,6 +48,4 @@ char * main_flash_efs_entry_menuname(int i);
 
 @property char * efname;
 
-- (BOOL)canRunEntryAt:(NSInteger)i;
-
 @end

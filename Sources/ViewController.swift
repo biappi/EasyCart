@@ -167,6 +167,28 @@ class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
         }
     }
     
+    @IBAction func uploadProgram(sender: AnyObject) {
+        guard let entry = self.selectedProgramEntry() else {
+            return
+        }
+        
+        if entry.type != EF_ENTRY_PRG {
+            return
+        }
+        
+        ef3xfer_set_callbacks(
+            { (str) in
+                print(String.fromCString(str))
+            },
+            
+            { (percent, guiOnly) in
+                print("percent \(percent)")
+            }
+        )
+        
+        ef3xfer_transfer_prg_mem(entry.data, Int32(entry.size))
+    }
+    
     // - //
     
     func tableView(aTableView: NSTableView,
@@ -209,14 +231,23 @@ class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
         return .Move
     }
     
-    func canRunSelection() -> Bool {
+    func selectedProgramEntry() -> efs_entry_t? {
         let indexes = entriesTable.selectedRowIndexes
         
         if indexes.count != 1 {
-            return false
+            return nil
         }
         else {
-            return document.cart.canRunEntryAt(indexes.firstIndex)
+            return document.cart.entryAt(indexes.firstIndex)
+        }
+    }
+    
+    func canRunSelection() -> Bool {
+        if let entry = selectedProgramEntry() {
+            return entry.type == EF_ENTRY_PRG
+        }
+        else {
+            return false;
         }
     }
     

@@ -284,6 +284,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="uploadProgram:" target="574-r2-obr" id="FEc-Fi-62y"/>
+                            </connections>
                         </button>
                         <connections>
                             <action selector="remove:" target="574-r2-obr" id="KHc-Hx-Ehv"/>
