@@ -176,17 +176,53 @@ class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
             return
         }
         
-        ef3xfer_set_callbacks(
-            { (str) in
-                print(String.fromCString(str))
-            },
-            
-            { (percent, guiOnly) in
-                print("percent \(percent)")
-            }
-        )
         
-        ef3xfer_transfer_prg_mem(entry.data, Int32(entry.size))
+        let dataToSend = Array<UInt8>(UnsafeBufferPointer<UInt8>(start: UnsafePointer(entry.data), count: Int(entry.size)))
+        
+        do {
+            let f = FTDIContext()
+            
+            try f.open(vendor: 0x0403, product: 0x8738)
+            print("opened")
+            
+            var waiting = false
+            repeat {
+                try f.write("EFSTART:PRG\0".toBytes())
+                print("wrote")
+                
+                let x = try f.read(5)
+                let s = String(bytes: x, encoding: NSUTF8StringEncoding)
+                print("read \(s)")
+                
+                waiting = s == "WAIT\0"
+            } while waiting == true
+            
+            var sent = 0
+            
+            
+            repeat {
+                let s = try f.read(2)
+                let requestedSize = Int(s[0]) + Int(s[1]) << 8
+                print("requested size \(requestedSize)")
+                
+                let lengthToSend = min(dataToSend.count, requestedSize)
+                try f.write([UInt8(lengthToSend & 0xff), UInt8(lengthToSend >> 8)])
+                print("wrote size")
+                
+                try f.write(Array(dataToSend[sent..<sent+lengthToSend]))
+                sent += lengthToSend
+                
+                print("wrote data")
+                print("sent \(sent) - tosend \(dataToSend.count)")
+            } while sent < dataToSend.count
+            
+        }
+        catch let err as FTDIError {
+            print("ftdi err: \(err)")
+        }
+        catch {
+            print("no err")
+        }
     }
     
     // - //
@@ -261,4 +297,11 @@ func showAlert(message : String, _ info : String) {
     alert.messageText = message
     alert.informativeText = info
     alert.runModal()
+}
+
+extension String {
+    func toBytes() -> [UInt8] {
+        let data = self.dataUsingEncoding(NSUTF8StringEncoding)!
+        return Array(UnsafeBufferPointer(start: UnsafePointer<UInt8>(data.bytes), count: data.length))
+    }
 }

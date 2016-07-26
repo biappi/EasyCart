@@ -41,6 +41,7 @@
 		3F0194181CD6A69B00499869 /* ef3xfer_usb_test.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01940E1CD6A69B00499869 /* ef3xfer_usb_test.c */; };
 		3F0194191CD6A69B00499869 /* str_to_key.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0194101CD6A69B00499869 /* str_to_key.c */; };
 		3F01941D1CD6A6D200499869 /* liblibftdi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0192531CD6A42D00499869 /* liblibftdi.a */; };
+		3F1462E91D3981240070CE5D /* USBTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1462E81D3981240070CE5D /* USBTransfer.swift */; };
 		3F1552A71CD556A90013F166 /* NdefpackUiCallbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */; };
 		3F1552A91CD557030013F166 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1552A81CD557030013F166 /* ViewController.swift */; };
 		3F333A571CD5574100422F41 /* boot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F3339FA1CD5574100422F41 /* boot.c */; };
@@ -114,6 +115,7 @@
 		3F01940F1CD6A69B00499869 /* ef3xfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ef3xfer.h; sourceTree = "<group>"; };
 		3F0194101CD6A69B00499869 /* str_to_key.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = str_to_key.c; sourceTree = "<group>"; };
 		3F0194111CD6A69B00499869 /* str_to_key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = str_to_key.h; sourceTree = "<group>"; };
+		3F1462E81D3981240070CE5D /* USBTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USBTransfer.swift; sourceTree = "<group>"; };
 		3F1552A51CD556990013F166 /* EasyCart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyCart-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NdefpackUiCallbacks.c; sourceTree = "<group>"; };
 		3F1552A81CD557030013F166 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				3FF554CE1CD54F1D00BA8460 /* AppDelegate.swift */,
 				3FF554CF1CD54F1D00BA8460 /* Document.swift */,
 				3F1552A81CD557030013F166 /* ViewController.swift */,
+				3F1462E81D3981240070CE5D /* USBTransfer.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				3F333A631CD5574100422F41 /* easyfw.c in Sources */,
 				3F0194141CD6A69B00499869 /* ef3xfer_file.c in Sources */,
 				3F333A5D1CD5574100422F41 /* flash.c in Sources */,
+				3F1462E91D3981240070CE5D /* USBTransfer.swift in Sources */,
 				3F0194131CD6A69B00499869 /* ef3xfer_d64.c in Sources */,
 				3F0194151CD6A69B00499869 /* ef3xfer_log.c in Sources */,
 				3F333A5A1CD5574100422F41 /* eapi.c in Sources */,
@@ -733,6 +737,7 @@
 				3F01925A1CD6A42D00499869 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FF554B31CD54ED300BA8460 /* Build configuration list for PBXProject "EasyCart" */ = {
 			isa = XCConfigurationList;
