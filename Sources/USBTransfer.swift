@@ -59,7 +59,7 @@ class FTDIContext {
             if read == 0 {
                 usleep(10000)
                 retryTimes -= 1
-            } else  { print("read \(read)") }
+            }
             
             if retryTimes == 0 {
                 throw FTDIError(code: -1, description: "read timeout")
@@ -77,4 +77,47 @@ class FTDIContext {
             return ret
         }
     }
+}
+
+enum UploadType : String {
+    case PRG = "EFSTART:PRG\0"
+    case CRT = "EFSTART:CRT\0"
+}
+
+func uploadFile(type: UploadType, data: [UInt8]) throws {
+    let f = FTDIContext()
+    
+    try f.open(vendor: 0x0403, product: 0x8738)
+    print("opened")
+    
+    var waiting = false
+    repeat {
+        try f.write(type.rawValue.toBytes())
+        print("wrote")
+        
+        let x = try f.read(5)
+        let s = String(bytes: x, encoding: NSUTF8StringEncoding)
+        print("read \(s)")
+        
+        waiting = s == "WAIT\0"
+    } while waiting == true
+    
+    var sent = 0
+    
+    
+    repeat {
+        let s = try f.read(2)
+        let requestedSize = Int(s[0]) + Int(s[1]) << 8
+        print("requested size \(requestedSize)")
+        
+        let lengthToSend = min(data.count, requestedSize)
+        try f.write([UInt8(lengthToSend & 0xff), UInt8(lengthToSend >> 8)])
+        print("wrote size")
+        
+        try f.write(Array(data[sent..<sent+lengthToSend]))
+        sent += lengthToSend
+        
+        print("wrote data")
+        print("sent \(sent) - tosend \(data.count)")
+    } while sent < data.count
 }
