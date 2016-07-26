@@ -18,8 +18,12 @@
                 <outlet property="arrayController" destination="HxU-N8-MGk" id="3tY-51-qFq"/>
                 <outlet property="document" destination="-2" id="ZlS-A1-BIS"/>
                 <outlet property="entriesTable" destination="JGl-19-DOF" id="pau-v6-GGU"/>
+                <outlet property="mainWindow" destination="vh6-Dl-66y" id="jg2-vp-q5y"/>
                 <outlet property="nameTextField" destination="Se5-ca-Rpi" id="xHQ-yc-dhk"/>
                 <outlet property="spaceIndicator" destination="LeH-uR-LRD" id="ikn-dF-GCA"/>
+                <outlet property="transferringButton" destination="aJw-us-sQC" id="4su-Iw-Jvu"/>
+                <outlet property="transferringLabel" destination="qyN-Tm-1br" id="1rj-Sr-anI"/>
+                <outlet property="transferringSheet" destination="PA3-pe-3bE" id="p8b-y8-KcN"/>
                 <outlet property="uploadButton" destination="sce-lS-KgO" id="oap-wI-quv"/>
             </connections>
         </customObject>
@@ -317,6 +321,60 @@
                 </defaultToolbarItems>
             </toolbar>
             <point key="canvasLocation" x="442" y="590.5"/>
+        </window>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="PA3-pe-3bE">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="276" height="102"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="ZjN-IB-ZYp">
+                <rect key="frame" x="0.0" y="0.0" width="276" height="102"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qyN-Tm-1br">
+                        <rect key="frame" x="18" y="43" width="119" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Doing this and that" id="cNT-aa-0hJ">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJw-us-sQC">
+                        <rect key="frame" x="187" y="7" width="75" height="32"/>
+                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" enabled="NO" state="on" borderStyle="border" inset="2" id="IoN-aX-qyP">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                            <connections>
+                                <action selector="closeTransferringSheet:" target="574-r2-obr" id="VIE-TJ-OPi"/>
+                            </connections>
+                        </buttonCell>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I7j-IE-iMY">
+                        <rect key="frame" x="18" y="65" width="170" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Transferring to EasyFlash" id="YgX-8v-uFr">
+                            <font key="font" metaFont="systemBold"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aJw-us-sQC" firstAttribute="top" secondItem="qyN-Tm-1br" secondAttribute="bottom" constant="8" id="5Uj-3h-hjB"/>
+                    <constraint firstAttribute="bottom" secondItem="aJw-us-sQC" secondAttribute="bottom" constant="14" id="7fT-iI-JUz"/>
+                    <constraint firstItem="I7j-IE-iMY" firstAttribute="top" secondItem="ZjN-IB-ZYp" secondAttribute="top" constant="20" id="CwC-JT-kSS"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="I7j-IE-iMY" secondAttribute="trailing" constant="20" id="EJ5-yA-fLb"/>
+                    <constraint firstItem="qyN-Tm-1br" firstAttribute="top" secondItem="I7j-IE-iMY" secondAttribute="bottom" constant="5" id="J7w-EX-YRU"/>
+                    <constraint firstItem="qyN-Tm-1br" firstAttribute="top" secondItem="I7j-IE-iMY" secondAttribute="bottom" constant="5" id="SXp-LN-XBu"/>
+                    <constraint firstItem="qyN-Tm-1br" firstAttribute="leading" secondItem="ZjN-IB-ZYp" secondAttribute="leading" constant="20" id="b2B-fQ-VTc"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qyN-Tm-1br" secondAttribute="trailing" constant="20" id="dLd-wX-ogv"/>
+                    <constraint firstAttribute="trailing" secondItem="aJw-us-sQC" secondAttribute="trailing" constant="20" id="mfY-jR-bJM"/>
+                    <constraint firstItem="I7j-IE-iMY" firstAttribute="leading" secondItem="ZjN-IB-ZYp" secondAttribute="leading" constant="20" id="trd-k9-HJW"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="442" y="900"/>
         </window>
     </objects>
 </document>

@@ -59,12 +59,17 @@ func getViceAppUrl() -> NSURL? {
 }
 
 class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
-    @IBOutlet      var arrayController: NSArrayController!
-    @IBOutlet weak var spaceIndicator:  NSLevelIndicator!
-    @IBOutlet weak var entriesTable:    NSTableView!
-    @IBOutlet weak var document:        Document!
-    @IBOutlet weak var nameTextField:   NSTextField!
-    @IBOutlet weak var uploadButton:    NSButton!
+    @IBOutlet      var arrayController:    NSArrayController!
+    @IBOutlet weak var spaceIndicator:     NSLevelIndicator!
+    @IBOutlet weak var entriesTable:       NSTableView!
+    @IBOutlet weak var document:           Document!
+    @IBOutlet weak var nameTextField:      NSTextField!
+    @IBOutlet weak var uploadButton:       NSButton!
+    @IBOutlet weak var mainWindow:         NSWindow!
+    @IBOutlet      var transferringSheet:  NSWindow!
+    @IBOutlet weak var transferringLabel:  NSTextField!
+    @IBOutlet weak var transferringButton: NSButton!
+    
     
     override func awakeFromNib() {
         spaceIndicator.maxValue = Double(EasyFlashSize)
@@ -153,15 +158,7 @@ class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
                 return
             }
             
-            do {
-                try uploadFile(.CRT, data: NSData(contentsOfURL: autosavedUrl)!.toBytes())
-            }
-            catch let err as FTDIError {
-                print("ftdi err: \(err)")
-            }
-            catch {
-                print("no err")
-            }
+            self.startUpload(.CRT, data: NSData(contentsOfURL: autosavedUrl)!.toBytes())
         }
     }
     
@@ -174,16 +171,25 @@ class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
             return
         }
         
-        let dataToSend = Array<UInt8>(UnsafeBufferPointer<UInt8>(start: UnsafePointer(entry.data), count: Int(entry.size)))
+        let data = Array<UInt8>(UnsafeBufferPointer(start: UnsafePointer(entry.data),
+                                                    count: Int(entry.size)))
+        startUpload(.PRG, data: data)
+    }
+    
+    @IBAction func closeTransferringSheet(sender: AnyObject) {
+        mainWindow.endSheet(transferringSheet)
+    }
+    
+    func startUpload(type: UploadType, data: [UInt8]) {
+        mainWindow.beginSheet(transferringSheet) { _ in }
         
-        do {
-            try uploadFile(.PRG, data: dataToSend)
-        }
-        catch let err as FTDIError {
-            print("ftdi err: \(err)")
-        }
-        catch {
-            print("no err")
+        uploadFileInBackground(type, data: data) { (event) in
+            switch event {
+            case .Message(let msg):
+                self.transferringLabel.stringValue = msg
+            case .Completion:
+                self.transferringButton.enabled = true
+            }
         }
     }
     

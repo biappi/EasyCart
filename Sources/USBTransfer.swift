@@ -22,19 +22,16 @@ extension ftdi_context {
 class FTDIContext {
     var context = ftdi_context()
     
-    init () {
+    init (vendor: UInt16, product: UInt16) throws {
         ftdi_init(&context)
+        try wrapError(ftdi_usb_open(&context, Int32(vendor), Int32(product)))
+        try wrapError(ftdi_usb_reset(&context))
+        try wrapError(ftdi_usb_purge_buffers(&context))
     }
     
     deinit {
         ftdi_usb_close(&context)
         ftdi_deinit(&context)
-    }
-    
-    func open(vendor vendor: UInt16, product: UInt16) throws {
-        try wrapError(ftdi_usb_open(&context, Int32(vendor), Int32(product)))
-        try wrapError(ftdi_usb_reset(&context))
-        try wrapError(ftdi_usb_purge_buffers(&context))
     }
     
     func write(data: [UInt8]) throws {
@@ -84,40 +81,73 @@ enum UploadType : String {
     case CRT = "EFSTART:CRT\0"
 }
 
-func uploadFile(type: UploadType, data: [UInt8]) throws {
-    let f = FTDIContext()
-    
-    try f.open(vendor: 0x0403, product: 0x8738)
-    print("opened")
-    
-    var waiting = false
-    repeat {
-        try f.write(type.rawValue.toBytes())
-        print("wrote")
+enum UploadFileEvent {
+    case Message(String)
+    case Completion
+}
+
+typealias FileEventObserver = (UploadFileEvent) -> ()
+
+func uploadFileInBackground(type: UploadType, data: [UInt8], observer: FileEventObserver) {
+    Thread() {
+        uploadFile(type, data: data) { event in
+            dispatch_async(dispatch_get_main_queue(), { observer(event) })
+        }
+    }.start()
+}
+
+func uploadFile(type: UploadType, data: [UInt8], observer: FileEventObserver) {
+    do {
+        observer(.Message("Opening USB Interface"))
         
-        let x = try f.read(5)
-        let s = String(bytes: x, encoding: NSUTF8StringEncoding)
-        print("read \(s)")
+        let f = try FTDIContext(vendor: 0x0403, product: 0x8738)
         
-        waiting = s == "WAIT\0"
-    } while waiting == true
+        observer(.Message("Waiting for the cartridge to respond"))
+        
+        var waiting = false
+        repeat {
+            try f.write(type.rawValue.toBytes())
+            
+            let x = try f.read(5)
+            let s = String(bytes: x, encoding: NSUTF8StringEncoding)
+            
+            waiting = s == "WAIT\0"
+        } while waiting == true
+        
+        observer(.Message("Sending data"))
+        
+        var sent = 0
+        repeat {
+            let s = try f.read(2)
+            let requestedSize = Int(s[0]) + Int(s[1]) << 8
+            
+            let lengthToSend = min(data.count, requestedSize)
+            try f.write([UInt8(lengthToSend & 0xff), UInt8(lengthToSend >> 8)])
+            
+            try f.write(Array(data[sent..<sent+lengthToSend]))
+            sent += lengthToSend
+        } while sent < data.count
+        
+        observer(.Message("Transfer completed"))
+    }
+    catch let err as FTDIError {
+        observer(.Message("Error during transfer: \(err)"))
+    }
+    catch {
+        observer(.Message("Unknown error during transfer"))
+    }
     
-    var sent = 0
+    observer(.Completion)
+}
+
+class Thread : NSThread {
+    let callback: () -> ()
     
+    init(aCallback: ()->()) {
+        callback = aCallback
+    }
     
-    repeat {
-        let s = try f.read(2)
-        let requestedSize = Int(s[0]) + Int(s[1]) << 8
-        print("requested size \(requestedSize)")
-        
-        let lengthToSend = min(data.count, requestedSize)
-        try f.write([UInt8(lengthToSend & 0xff), UInt8(lengthToSend >> 8)])
-        print("wrote size")
-        
-        try f.write(Array(data[sent..<sent+lengthToSend]))
-        sent += lengthToSend
-        
-        print("wrote data")
-        print("sent \(sent) - tosend \(data.count)")
-    } while sent < data.count
+    override func main() {
+        callback()
+    }
 }
