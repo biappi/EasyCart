@@ -1,0 +1,20 @@
+language: swift
+
+os: osx
+osx_image: xcode8.3
+
+script: xcodebuild
+
+before_deploy:
+  - pushd build/Release && zip -r EasyCart.zip EasyCart.app && popd && pwd
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: odY7L+6hsC3jHnBe/gmhc0q3SXPehHFxpLNmjz4m5Xr56o1m9+GmWUhjARpe66GDAcP/vAy6+kY4xpnt+D79Rr426BNvHC3Y5qEyAJi/x492kHxP2R9cynt4CYxhyb3psvSgRhu47kBMnkSqIDT1LWlrlKJHuwo0nMC6u2WoYgik0iVZn/Z6ORsTT5RtyBSAeTN5aTDhohj7O24fGf3Br5VjDPnlmTpk8Wgg2R3fVO10wBg+8mIqPvOk3BDg3IUkCf4IKVMLt+fTto4+cLX7qaGtWbGS5mpNHuLLy6SjLhesuHpZBdOHFbCzWI44DxTIpfNimK3REHKBrikZDxo+QDnEzbub6seS3atoHJNO3GPB7CJ5MukE8mnK07BtvL6hUquXJdwtHrtFrqS787NeZYqoC8r/hHPmElfHpr4W/T7UF9Ms562siDNE7DLePTlEiHvI7XxWTuEkKJyXtbJnCXsuE44v7ARbYdbTt2WLfFtvK4tkIR96PL2qUXQv1G6a5XXiVINASA70iV1asI6GEblvt3UQnPGa/TOGuedD9iGdeJM6DiVPJzd5JpOPaiViagh3OtKHP4R8BS6tU7dDuEIE+ZNTPptx+dDp/J2LK4cXPHFiPvGopkk8MDuUW8MvRDKNL2EKeGItaa3Dts4xBDHBZi4OaSu8hfR71SawYx4=
+  file: 'build/Release/EasyCart.zip'
+  on:
+    repo: biappi/EasyCart
+    tags: true
+
