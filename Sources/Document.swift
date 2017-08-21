@@ -13,7 +13,7 @@ class Document: NSDocument {
     
     override init() {
         super.init()
-        updateChangeCount(.ChangeDone)
+        updateChangeCount(.changeDone)
     }
     
     override class func autosavesInPlace() -> Bool {
@@ -26,16 +26,12 @@ class Document: NSDocument {
         return "Document"
     }
     
-    override func writeToURL(url: NSURL, ofType typeName: String) throws {
-        if !url.fileURL {
+    override func write(to url: URL, ofType typeName: String) throws {
+        if !url.isFileURL {
             throw NSError(domain: "SaveError", code: 1, userInfo: nil)
         }
         
-        guard let path = url.path else {
-            throw NSError(domain: "SaveError", code: 2, userInfo: nil)
-        }
-        
-        try path.withCString {
+        try url.path.withCString {
             let result = cart.save($0)
             if result < 0 {
                 throw NSError(domain: "NdefpackSaveError", code: Int(result), userInfo: nil)
@@ -43,16 +39,12 @@ class Document: NSDocument {
         }
     }
     
-    override func readFromURL(url: NSURL, ofType typeName: String) throws {
-        if !url.fileURL {
+    override func read(from url: URL, ofType typeName: String) throws {
+        if !url.isFileURL {
             throw NSError(domain: "LoadError", code: 1, userInfo: nil)
         }
         
-        guard let path = url.path else {
-            throw NSError(domain: "LoadError", code: 2, userInfo: nil)
-        }
-        
-        try path.withCString {
+        try url.path.withCString {
             let result = cart.load($0)
             if result < 0 {
                 throw NSError(domain: "NdefpackLoadError", code: Int(result), userInfo: nil)
