@@ -47,10 +47,13 @@ class FTDIContext {
         var retryTimes = timeout * 100
         
         repeat {
-            var data = buffer[received..<buffer.count]
+            var data = Array(buffer[received..<buffer.count])
+            
             let read = try data.withUnsafeMutableBufferPointer {
                 return try wrapError(ftdi_read_data(&context, $0.baseAddress, Int32($0.count)))
             }
+            
+            buffer.replaceSubrange(received..<buffer.count, with: data)
             
             received += Int(read)
             
