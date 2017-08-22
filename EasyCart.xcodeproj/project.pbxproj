@@ -32,14 +32,6 @@
 		3F0193EE1CD6A45500499869 /* usbi.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0193951CD6A45500499869 /* usbi.h */; };
 		3F0194031CD6A4B000499869 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0194021CD6A4B000499869 /* config.h */; };
 		3F0194051CD6A4C100499869 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0194041CD6A4C100499869 /* config.h */; };
-		3F0194121CD6A69B00499869 /* d64writer.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0194071CD6A69B00499869 /* d64writer.c */; };
-		3F0194131CD6A69B00499869 /* ef3xfer_d64.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0194081CD6A69B00499869 /* ef3xfer_d64.c */; };
-		3F0194141CD6A69B00499869 /* ef3xfer_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0194091CD6A69B00499869 /* ef3xfer_file.c */; };
-		3F0194151CD6A69B00499869 /* ef3xfer_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01940B1CD6A69B00499869 /* ef3xfer_log.c */; };
-		3F0194161CD6A69B00499869 /* ef3xfer_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01940C1CD6A69B00499869 /* ef3xfer_main.c */; };
-		3F0194171CD6A69B00499869 /* ef3xfer_transport.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01940D1CD6A69B00499869 /* ef3xfer_transport.c */; };
-		3F0194181CD6A69B00499869 /* ef3xfer_usb_test.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F01940E1CD6A69B00499869 /* ef3xfer_usb_test.c */; };
-		3F0194191CD6A69B00499869 /* str_to_key.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F0194101CD6A69B00499869 /* str_to_key.c */; };
 		3F01941D1CD6A6D200499869 /* liblibftdi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0192531CD6A42D00499869 /* liblibftdi.a */; };
 		3F1462E91D3981240070CE5D /* USBTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1462E81D3981240070CE5D /* USBTransfer.swift */; };
 		3F1552A71CD556A90013F166 /* NdefpackUiCallbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */; };
@@ -104,17 +96,6 @@
 		3F0193951CD6A45500499869 /* usbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usbi.h; sourceTree = "<group>"; };
 		3F0194021CD6A4B000499869 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		3F0194041CD6A4C100499869 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		3F0194071CD6A69B00499869 /* d64writer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = d64writer.c; sourceTree = "<group>"; };
-		3F0194081CD6A69B00499869 /* ef3xfer_d64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ef3xfer_d64.c; sourceTree = "<group>"; };
-		3F0194091CD6A69B00499869 /* ef3xfer_file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ef3xfer_file.c; sourceTree = "<group>"; };
-		3F01940A1CD6A69B00499869 /* ef3xfer_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ef3xfer_internal.h; sourceTree = "<group>"; };
-		3F01940B1CD6A69B00499869 /* ef3xfer_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ef3xfer_log.c; sourceTree = "<group>"; };
-		3F01940C1CD6A69B00499869 /* ef3xfer_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ef3xfer_main.c; sourceTree = "<group>"; };
-		3F01940D1CD6A69B00499869 /* ef3xfer_transport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ef3xfer_transport.c; sourceTree = "<group>"; };
-		3F01940E1CD6A69B00499869 /* ef3xfer_usb_test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ef3xfer_usb_test.c; sourceTree = "<group>"; };
-		3F01940F1CD6A69B00499869 /* ef3xfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ef3xfer.h; sourceTree = "<group>"; };
-		3F0194101CD6A69B00499869 /* str_to_key.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = str_to_key.c; sourceTree = "<group>"; };
-		3F0194111CD6A69B00499869 /* str_to_key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = str_to_key.h; sourceTree = "<group>"; };
 		3F1462E81D3981240070CE5D /* USBTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USBTransfer.swift; sourceTree = "<group>"; };
 		3F1552A51CD556990013F166 /* EasyCart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyCart-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F1552A61CD556A90013F166 /* NdefpackUiCallbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NdefpackUiCallbacks.c; sourceTree = "<group>"; };
@@ -264,28 +245,9 @@
 			path = libusb;
 			sourceTree = "<group>";
 		};
-		3F0194061CD6A68500499869 /* easyflash-handpicked-files */ = {
-			isa = PBXGroup;
-			children = (
-				3F0194071CD6A69B00499869 /* d64writer.c */,
-				3F0194081CD6A69B00499869 /* ef3xfer_d64.c */,
-				3F0194091CD6A69B00499869 /* ef3xfer_file.c */,
-				3F01940A1CD6A69B00499869 /* ef3xfer_internal.h */,
-				3F01940B1CD6A69B00499869 /* ef3xfer_log.c */,
-				3F01940C1CD6A69B00499869 /* ef3xfer_main.c */,
-				3F01940D1CD6A69B00499869 /* ef3xfer_transport.c */,
-				3F01940E1CD6A69B00499869 /* ef3xfer_usb_test.c */,
-				3F01940F1CD6A69B00499869 /* ef3xfer.h */,
-				3F0194101CD6A69B00499869 /* str_to_key.c */,
-				3F0194111CD6A69B00499869 /* str_to_key.h */,
-			);
-			path = "easyflash-handpicked-files";
-			sourceTree = "<group>";
-		};
 		3F3339DC1CD5574100422F41 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				3F0194061CD6A68500499869 /* easyflash-handpicked-files */,
 				3F01925C1CD6A45500499869 /* libftdi-0.20 */,
 				3F0192A41CD6A45500499869 /* libusb-1.0.20 */,
 				3F0193781CD6A45500499869 /* libusb-compat-0.1.5 */,
@@ -539,27 +501,19 @@
 			files = (
 				3F333A7A1CD5574100422F41 /* loader.c in Sources */,
 				3F333A7E1CD5574100422F41 /* place.c in Sources */,
-				3F0194121CD6A69B00499869 /* d64writer.c in Sources */,
 				3F333A821CD5574100422F41 /* util.c in Sources */,
 				3F333A571CD5574100422F41 /* boot.c in Sources */,
 				3F333A581CD5574100422F41 /* cart.c in Sources */,
 				3F333A631CD5574100422F41 /* easyfw.c in Sources */,
-				3F0194141CD6A69B00499869 /* ef3xfer_file.c in Sources */,
 				3F333A5D1CD5574100422F41 /* flash.c in Sources */,
 				3F1462E91D3981240070CE5D /* USBTransfer.swift in Sources */,
-				3F0194131CD6A69B00499869 /* ef3xfer_d64.c in Sources */,
-				3F0194151CD6A69B00499869 /* ef3xfer_log.c in Sources */,
 				3F333A5A1CD5574100422F41 /* eapi.c in Sources */,
 				3FF554D11CD54F1D00BA8460 /* Document.swift in Sources */,
 				3F333A7F1CD5574100422F41 /* prg.c in Sources */,
 				3F333A7B1CD5574100422F41 /* lst.c in Sources */,
 				3F333A5C1CD5574100422F41 /* efname.c in Sources */,
-				3F0194181CD6A69B00499869 /* ef3xfer_usb_test.c in Sources */,
-				3F0194161CD6A69B00499869 /* ef3xfer_main.c in Sources */,
 				3F333A5B1CD5574100422F41 /* easyfs.c in Sources */,
 				3F333A7D1CD5574100422F41 /* petscii.c in Sources */,
-				3F0194191CD6A69B00499869 /* str_to_key.c in Sources */,
-				3F0194171CD6A69B00499869 /* ef3xfer_transport.c in Sources */,
 				3F1552A71CD556A90013F166 /* NdefpackUiCallbacks.c in Sources */,
 				3F018FEC1CD61FCD00499869 /* Cart.m in Sources */,
 				3F1552A91CD557030013F166 /* ViewController.swift in Sources */,
