@@ -239,21 +239,13 @@ class ViewController : NSObject, NSTableViewDataSource, NSTableViewDelegate {
     func selectedProgramEntry() -> efs_entry_t? {
         let indexes = entriesTable.selectedRowIndexes
         
-        if indexes.count != 1 {
-            return nil
-        }
-        else {
-            return document.cart.entry(at: indexes.first!)
-        }
+        return indexes.count == 1
+            ? document.cart.entry(at: indexes.first!)
+            : nil
     }
     
     func canRunSelection() -> Bool {
-        if let entry = selectedProgramEntry() {
-            return entry.type == EF_ENTRY_PRG
-        }
-        else {
-            return false;
-        }
+        return selectedProgramEntry()?.type == EF_ENTRY_PRG
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
