@@ -18,8 +18,8 @@ cartridge ROM image to be used with
 ## Download
 
 The project is hosted on GitHub:
-- [Source Code](https://github.com/biappi/EasySynth)
-- [Latest Release](https://github.com/biappi/EasySynth/releases/latest)
+- [Source Code](https://github.com/biappi/EasyCart)
+- [Latest Release](https://github.com/biappi/EasyCart/releases/latest)
 
 ## Acknowledgements
 
